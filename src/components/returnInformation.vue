@@ -10,6 +10,10 @@
 		<input name="equipment" type="radio" id="Moving" value="Moving" v-model="picked">
 		<label for="Moving">Moving</label>
 		<br>
+
+		<div v-if="vm.picked === vm.Cancelling">
+			Kek!
+		</div>
 	</form>
 	</div>
 </template>
