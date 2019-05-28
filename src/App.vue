@@ -1,15 +1,22 @@
 <template>
   <div id="app">
+    <h1 class="text-2xl">HBC Return Exchange Form</h1>
     <customerInformation />
+    <equipment-input />
+    <notes />
   </div>
 </template>
 
 <script>
   import customerInformation from './components/customerInformation'
+  import EquipmentInput from "./components/equipmentInput";
+  import Notes from "./components/notes";
 
 export default {
   name: 'app',
   components: {
+    Notes,
+    EquipmentInput,
     customerInformation,
   }
 }
