@@ -1,29 +1,8 @@
-# equipment-returns
+# HBC Equipment Return App
 
-## Project setup
-```
-npm install
-```
+##What the Hell is this
+This is a small Vue.js app to take in customer information and export it as a PDF as to 
+eliminate the need for paper hand receipts. This will standardize the way HBC takes in returned equipment leading
+to less confusion and hassle for the customer and business.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
