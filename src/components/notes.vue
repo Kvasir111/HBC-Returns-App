@@ -3,12 +3,19 @@
 	<span>Notes</span>
 	<br>
 	<textarea v-model="message" placeholder="Enter notes here"></textarea>
+		{{message}}
 	</form>
+
 </template>
 
 <script>
 	export default {
-		name: "notes"
+		name: "message",
+		data(){
+			return{
+				message: '',
+			}
+		}
 	}
 </script>
 
