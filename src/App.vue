@@ -27,9 +27,10 @@
   },
   methods:{
     exportPDF(){
-      let doc = new jsPDF('p', `pt`);
-      doc.save("return.pdf");
-      console.log("SAVED!")
+    	let test = customerInformation.customerData();
+    	console.log(test);
+      //let doc = new jsPDF('p', `pt`);
+      //doc.save("return.pdf");
     }
   }
 }
