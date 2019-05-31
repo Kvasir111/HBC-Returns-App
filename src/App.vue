@@ -5,6 +5,7 @@
     <equipment-input />
     <return-information />
     <notes />
+    <button @click="exportPDF">Export</button>
   </div>
 </template>
 
@@ -13,14 +14,23 @@
   import EquipmentInput from "./components/equipmentInput";
   import Notes from "./components/notes";
   import ReturnInformation from "./components/returnInformation";
+  import jsPDF from 'jspdf'
 
-export default {
+
+  export default {
   name: 'app',
   components: {
     ReturnInformation,
     Notes,
     EquipmentInput,
     customerInformation,
+  },
+  methods:{
+    exportPDF(){
+      let doc = new jsPDF('p', `pt`);
+      doc.save("return.pdf");
+      console.log("SAVED!")
+    }
   }
 }
 </script>
