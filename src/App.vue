@@ -33,7 +33,7 @@
 		methods:{
 			updateCustomerData(e){
 				this.customerData.push(e);
-				console.log(e);
+				console.log(customerData);
 			},
 			exportPDF(){
 				console.log();
