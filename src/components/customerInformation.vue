@@ -15,10 +15,13 @@
 	export default {
 		data(){
 			return{
+				form: {
 					customerName: null,
 					customerPhoneNumber: null,
 					customerAddress: null,
 					customerAccount: null,
+				},
+
 			}
 		},
 		methods : {
