@@ -32,7 +32,7 @@
 					address : this.customerAddress,
 					account : this.customerAccount
 				};
-				this.$emit('customer-data-entered', customerData);
+				this.$emit('updateCustomerData', customerData);
 			}
 		}
 	}

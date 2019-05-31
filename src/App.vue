@@ -1,11 +1,11 @@
 <template>
-	<div id="app" @customer-data-entered="test">
+	<div id="app">
 		<h1 class="text-2xl">HBC Return Exchange Form</h1>
 		<customerInformation />
 		<equipment-input />
 		<return-information />
 		<notes />
-		<button @click="exportPDF">Export</button>
+		<button type="submit" @click="updateCustomerData">Export</button>
 	</div>
 </template>
 
@@ -18,6 +18,11 @@
 
 
 	export default {
+		data(){
+			return{
+				customerData: []
+			}
+		},
 		name: 'app',
 		components: {
 			ReturnInformation,
@@ -26,8 +31,12 @@
 			customerInformation,
 		},
 		methods:{
+			updateCustomerData(e){
+				this.customerData.push(e);
+				console.log(e);
+			},
 			exportPDF(){
-				console.log(customerInformation.data());
+				console.log();
 				//let doc = new jsPDF('p', `pt`);
 				//doc.save("return.pdf");
 			}
