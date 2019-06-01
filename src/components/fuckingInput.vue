@@ -1,30 +1,18 @@
 <template>
+	<div>
 	<h1 class="text-2xl">HBC Return Exchange Form</h1>
-	<form @submit.prevent="exportPDF" id="main-form">
-		<customerInformation/>
-		<equipment-input/>
-		<return-information/>
-		<notes/>
-	</form>
+	</div>
 </template>
 
 <script>
-	import customerInformation from './components/customerInformation'
-	import EquipmentInput from "./components/equipmentInput";
-	import Notes from "./components/notes";
-	import ReturnInformation from "./components/returnInformation";
+	import customerInformation from "customerInformation"
 	import jsPDF from 'jspdf'
 
 	export default {
 		data() {
 		},
-		name: 'app',
 		components: {
-			FuckingInput,
-			ReturnInformation,
-			Notes,
-			EquipmentInput,
-			customerInformation,
+
 		},
 		methods: {
 			exportPDF() {
@@ -33,6 +21,7 @@
 				//doc.save("return.pdf");
 			}
 		}
+	}
 
 </script>
 

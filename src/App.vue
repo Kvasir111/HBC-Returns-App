@@ -5,12 +5,16 @@
 </template>
 
 <script>
-	import fuckingInput from "./components/fuckingInput"
+	import fuckingInput from './components/fuckingInput'
 	export default {
+		data(){
 
+		},
+		components:{
+			fuckingInput
+		}
 	}
 </script>
-
 <style>
 
 </style>
