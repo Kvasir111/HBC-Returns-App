@@ -1,5 +1,5 @@
 <template>
-	<form @submit.prevent="onSubmit" id="customer-information" class="bg-blue-400 py-4 px-4">
+	<div id="customer-information">
 		<input type="text" v-model="form.customerName" id="customerName" placeholder="Customer Name" class="px-4 py-2 m-2">
 		<br>
 		<input type="tel" v-model.number="form.customerPhoneNumber" id="Phone Number" placeholder="Phone Number" class="px-4 py-2 m-2">
@@ -8,7 +8,7 @@
 		<br>
 		<input type="number" v-model.number="form.customerAccount" id="customer-account" placeholder="Account #" class=" px-4 py-2 m-2">
 		<br>
-	</form>
+	</div>
 </template>
 
 <script>

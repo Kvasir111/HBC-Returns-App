@@ -1,11 +1,9 @@
 <template>
-	<form class="bg-blue-500">
+	<div id="notes">
 	<span>Notes</span>
 	<br>
 	<textarea v-model="message" placeholder="Enter notes here"></textarea>
-		{{message}}
-	</form>
-
+	</div>
 </template>
 
 <script>
