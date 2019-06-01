@@ -2,11 +2,11 @@
 	<div id="app">
 		<h1 class="text-2xl">HBC Return Exchange Form</h1>
 		<form @submit.prevent="exportPDF" id="main-form">
-		<customerInformation />
-		<equipment-input />
-		<return-information />
-		<notes />
-		<button>Submit</button>
+			<customerInformation/>
+			<equipment-input/>
+			<return-information/>
+			<notes/>
+			<button>Submit</button>
 			<br>
 		</form>
 	</div>
@@ -21,13 +21,8 @@
 
 
 	export default {
-		data(){
-			return{
-					customerName: null,
-					customerPhoneNumber: null,
-					customerAddress: null,
-					customerAccount: null,
-			}
+		data() {
+
 		},
 		name: 'app',
 		components: {
@@ -36,12 +31,8 @@
 			EquipmentInput,
 			customerInformation,
 		},
-		methods:{
-			updateCustomerData(e){
-				this.customerData.push(e);
-				console.log(customerData);
-			},
-			exportPDF(){
+		methods: {
+			exportPDF() {
 				console.log(customerInformation.data());
 				//let doc = new jsPDF('p', `pt`);
 				//doc.save("return.pdf");
