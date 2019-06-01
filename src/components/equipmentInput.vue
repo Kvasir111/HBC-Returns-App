@@ -15,7 +15,17 @@
 </template>
 
 <script>
+	export default {
+		data(){
+			return{
+				equipmentType: null,
+				equipmentNum: null,
+				powerCord: null,
+				remote: null
 
+			}
+		}
+	}
 </script>
 
 <style scoped>
