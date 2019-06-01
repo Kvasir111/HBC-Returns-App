@@ -21,6 +21,17 @@
 					customerAccount: null,
 			}
 		},
+		methods:{
+			getData(){
+				let cInfo = [
+					this.customerName,
+					this.customerAddress,
+					this.customerAccount,
+					this.customerPhoneNumber
+				];
+				return cInfo;
+			}
+		}
 	}
 </script>
 
