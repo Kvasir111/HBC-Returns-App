@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<img v-bind:src="image" v-bind:alt="logoAlt">
-		<form id="information input" @submit="exportPDF" class="mx-auto" v-model="shit">
+		<form id="information input" @submit.prevent="exportPDF" class="mx-auto" v-model="shit">
 			<div id="customerInformation" class="mx-auto">
 			<input type="text" v-model="customerName" placeholder="Customer Name">
 				<input type="number" v-model="customerAccount" placeholder="Account Number">
@@ -34,14 +34,15 @@
 			<div id="notes">
 				<span>Notes</span>
 				<br>
-				<textarea v-model="message" placeholder="Enter notes here"></textarea>
+				<textarea v-model="notes" placeholder="Enter notes here"></textarea>
 			</div>
+			<input type="submit" value="Submit">
 		</form>
 	</div>
 </template>
 
 <script>
-
+	import jspdf from 'jspdf'
 	export default {
 		component:{
 		},
@@ -61,20 +62,35 @@
 				
 				notes: null,
 				
-				
-				
 				shit: null,
 				image: "https://bloximages.chicago2.vip.townnews.com/winonadailynews.com/content/tncms/assets/v3/editorial/4/44/4444c7a3-8473-5f32-be6e-c72a804dc6ee/59d7d6ed20146.image.jpg",
 				logoAlt: "Hiwatha Broadband Communications"
 			}
 		},
 		methods:{
-			exportPDF(){
-			let data = collateData();
-			},
 			collateData(){
+				return data;
+			},
+			exportPDF(){
+				let name = this.customerName;
+				let phone = this.customerPhoneNumber;
+				let address = this.customerAddress;
+				let account = this.customerAccount;
+				let returnType = this.returnType;
+				let notes = this.notes;
+				let data = [customerName, phone, address, account, returnType, notes];
+			let doc = new jspdf({
+				orientation: 'p',
+				unit:        'in',
+				format:      'a4'
+				
+			});
+			console.log(data)
+			//doc.text(data, 2, 2);
+			//doc.save("return.pdf")
 			
-			}
+			},
+
 		}
 	}
 </script>
