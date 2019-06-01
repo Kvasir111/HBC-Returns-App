@@ -10,6 +10,7 @@
 		<input class="p-2 m-2" v-model="equipmentNum" type="text" placeholder="CMAC/SN">
 		<input class="p-2 m-2" type="checkbox" v-model="powerCord" true-value="Power Cord" false-value="">Power Cord?
 		<input class="p-2 m-2" type="checkbox" v-model="remote" true-value="Remote" false-value="">Remote?
+		
 	</div>
 
 </template>
