@@ -1,26 +1,27 @@
 <template>
 	<div id="app" class="">
 		<img v-bind:src="image" v-bind:alt="logoAlt" class="mx-auto">
-		<form id="information input" @submit.prevent="exportPDF" class="bg-gray-200 mx-auto">
+		<h1 class="text-center text-2xl">Enter Information for return</h1>
+		<form id="information input" @submit.prevent="exportPDF" class="bg-white shadow-md w-2/3 mx-auto p-2">
 			<div id="customerInformation" class="p-2">
 				<input type="text" v-model="customerName" placeholder="Customer Name"
-				       v-bind:aria-valuemax="customerName" class="block px-4 py-2 mx-auto m-1">
+				       v-bind:aria-valuemax="customerName" class="cardInput mx-auto">
 				<input type="number" v-model="customerAccount" placeholder="Account Number"
-				       v-bind:aria-valuemax="customerAccount" class="block px-4 py-2 mx-auto m-1">
+				       v-bind:aria-valuemax="customerAccount" class="cardInput mx-auto">
 				<input type="tel" v-model="customerPhoneNumber" placeholder="Phone number"
-				       v-bind:aria-valuemax="customerPhoneNumber" class="block px-4 py-2 mx-auto m-1">
+				       v-bind:aria-valuemax="customerPhoneNumber" class="cardInput mx-auto">
 				<input type="text" v-model="customerAddress" placeholder="Service Address"
-				       v-bind:aria-valuemax="customerAddress" class="block px-4 py-2 mx-auto m-1">
+				       v-bind:aria-valuemax="customerAddress" class="cardInput mx-auto">
 			</div>
-			<div id="equipment-type" class="text-center bg-blue-400">
-				<select v-model="equipmentType" class="p-2 m-2" v-bind:aria-valuemax="equipmentType">
+			<div id="equipment-type" class="text-center">
+				<select v-model="equipmentType" class="p-2 m-2 bg-gray-200" v-bind:aria-valuemax="equipmentType">
 					<option disabled>Select Equipment Type</option>
 					<option value="DVR/Set-Top Box">DVR/Set-Top Box</option>
 					<option value="Gateway/Modem">Gateway/Modem</option>
 					<option value="Wireless Router">Wireless Router</option>
 					<option value="DTA">DTA</option>
 				</select>
-				<input class="p-2 m-2" v-model="equipmentNum" type="text" placeholder="CMAC/SN"
+				<input class="equipmentInput" v-model="equipmentNum" type="text" placeholder="CMAC/SN"
 				       v-bind:aria-valuemax="equipmentNum">
 				<input class="p-2 m-2" type="checkbox" v-model="powerCord" true-value="Power Cord" false-value=""
 				       v-bind:aria-valuemax="powerCord">Power Cord?
@@ -28,20 +29,18 @@
 				       v-bind:aria-valuemax="remote">Remote?
 			</div>
 			<div id="return-information" class="text-center">
-				<input name="equipment" type="radio" id="Swap" value="Swap"
-				       v-model="returnType" class="inline-block">
-				<label for="Swap">Swapping Equipment</label>
-				<input name="equipment" type="radio" id="Cancelling" value="Cancelling"
-				       v-model="returnType" class="inline-block">
-				<label for="Cancelling">Cancelling Service</label>
-				<input name="equipment" type="radio" id="Moving" value="Moving"
-				       v-model="returnType" class="inline-block">
-				<label for="Moving">Moving</label>
+				<select v-model="returnType" class="py-2 m-2 bg-gray-200">
+					<option disabled>Select a reason for return</option>
+					<option value="Exchange/Defective Equipment">Exchange/Defective Equipment</option>
+					<option value="Cancelling Service">Cancelling Service</option>
+					<option value="Moving">Moving</option>
+					<option value="Other">Other, please leave notes!</option>
+				</select>
 			</div>
 			<div id="notes" class="mx-auto block">
-				<textarea rows="4" cols="50" placeholder="Enter notes here" v-model="notes" class="mx-auto block"></textarea>
+				<textarea rows="4" cols="50" placeholder="Enter notes here" v-model="notes" class="mx-auto block bg-gray-200 p-2"></textarea>
 			</div>
-			<input type="submit" value="Submit" class="mx-auto block px-4 py-2 mt-2 mb-2">
+			<input type="submit" value="Submit" class="mx-auto block px-4 py-2 m-2 rounded hover:bg-blue-300">
 		</form>
 	</div>
 </template>
