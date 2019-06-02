@@ -12,7 +12,7 @@
 				<input type="text" v-model="customerAddress" placeholder="Service Address"
 				       v-bind:aria-valuemax="customerAddress" class="block px-4 py-2 mx-auto m-1">
 			</div>
-			<div id="equipment-type" class="block bg-blue-400">
+			<div id="equipment-type" class="text-center bg-blue-400">
 				<select v-model="equipmentType" class="p-2 m-2" v-bind:aria-valuemax="equipmentType">
 					<option disabled>Select Equipment Type</option>
 					<option value="DVR/Set-Top Box">DVR/Set-Top Box</option>
