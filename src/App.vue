@@ -1,10 +1,10 @@
 <template>
 	<div id="app" class="">
-		<img v-bind:src="image" v-bind:alt="logoAlt" class="mx-auto">
-		<h1 class="text-center text-2xl">Enter Information for return</h1>
+		<img v-bind:src="image" v-bind:alt="logoAlt" class="mx-auto " width="200px">
+		<h1 class="text-center text-2xl font-bold p-2">Enter Information for Equipment Return</h1>
 		<form id="information input" @submit.prevent="exportPDF" class="bg-white shadow-md w-2/3 mx-auto p-2">
 			<div id="customerInformation" class="p-2">
-				<input type="text" required v-model="customerName" placeholder="Customer Name"
+				<input type="text" autocomplete="no" required v-model="customerName" placeholder="Customer Name"
 				       v-bind:aria-valuemax="customerName" class="cardInput mx-auto">
 				<input type="number" min="0" v-model="customerAccount" placeholder="Account Number"
 				       v-bind:aria-valuemax="customerAccount" class="cardInput mx-auto">
@@ -118,7 +118,7 @@
 </script>
 <style>
 body{
-	background-color: black;
+	background-color: #4a5568;
 	
 }
 input[type=number]::-webkit-inner-spin-button,
