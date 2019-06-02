@@ -81,7 +81,7 @@
 				let address = "Service Address: " + this.customerAddress + "\n";
 				let account = "Account #: " + this.customerAccount + "\n";
 				
-				let equipmentType = "Type of Equipment: " + this.equipmentType + "\n";
+				let equipmentType = "Type of Equipment: " + this.equipmentType + "\n\n";
 				let equipmentNum = "CMAC/SN:" + this.equipmentNum + "\n";
 				let hasRemote = this.remote + "\n";
 				let hasPwrCord = this.powerCord + "\n";
@@ -92,6 +92,10 @@
 				let customerData = [heading, name, phone, address, account];
 				let equipmentData = [equipmentType, equipmentNum, hasRemote, hasPwrCord];
 				let returnData = [returnType, notes];
+				
+				customerData = customerData.join();
+				equipmentData = equipmentData.join();
+				returnData = returnData.join();
 				
 				console.log(customerData);
 				console.log(equipmentData);
