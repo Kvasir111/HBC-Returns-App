@@ -68,7 +68,7 @@
 				notes: null,
 				
 				image: "https://bloximages.chicago2.vip.townnews.com/winonadailynews.com/content/tncms/assets/v3/editorial/4/44/4444c7a3-8473-5f32-be6e-c72a804dc6ee/59d7d6ed20146.image.jpg",
-				logoAlt: "Hiwatha Broadband Communications"
+				logoAlt: "Hiawatha Broadband Communications"
 			}
 		},
 		methods: {
