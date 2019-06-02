@@ -8,7 +8,7 @@
 				       v-bind:aria-valuemax="customerName" class="cardInput mx-auto">
 				<input type="number" min="0" v-model="customerAccount" placeholder="Account Number"
 				       v-bind:aria-valuemax="customerAccount" class="cardInput mx-auto">
-				<input type="tel" required minlength="11" maxlength="10" v-model="customerPhoneNumber" placeholder="Phone number"
+				<input type="tel" required minlength="10" maxlength="11" v-model="customerPhoneNumber" placeholder="Phone number"
 				       v-bind:aria-valuemax="customerPhoneNumber" class="cardInput mx-auto">
 				<input type="text" required v-model="customerAddress" placeholder="Service Address"
 				       v-bind:aria-valuemax="customerAddress" class="cardInput mx-auto">
