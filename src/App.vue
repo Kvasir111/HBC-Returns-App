@@ -4,18 +4,18 @@
 		<h1 class="text-center text-2xl">Enter Information for return</h1>
 		<form id="information input" @submit.prevent="exportPDF" class="bg-white shadow-md w-2/3 mx-auto p-2">
 			<div id="customerInformation" class="p-2">
-				<input type="text" v-model="customerName" placeholder="Customer Name"
+				<input type="text" required v-model="customerName" placeholder="Customer Name"
 				       v-bind:aria-valuemax="customerName" class="cardInput mx-auto">
-				<input type="number" v-model="customerAccount" placeholder="Account Number"
+				<input type="number" min="0" v-model="customerAccount" placeholder="Account Number"
 				       v-bind:aria-valuemax="customerAccount" class="cardInput mx-auto">
-				<input type="tel" v-model="customerPhoneNumber" placeholder="Phone number"
+				<input type="tel" required minlength="11" maxlength="10" v-model="customerPhoneNumber" placeholder="Phone number"
 				       v-bind:aria-valuemax="customerPhoneNumber" class="cardInput mx-auto">
-				<input type="text" v-model="customerAddress" placeholder="Service Address"
+				<input type="text" required v-model="customerAddress" placeholder="Service Address"
 				       v-bind:aria-valuemax="customerAddress" class="cardInput mx-auto">
 			</div>
 			<div id="equipment-type" class="text-center">
 				<select v-model="equipmentType" class="p-2 m-2 bg-gray-200" v-bind:aria-valuemax="equipmentType">
-					<option disabled>Select Equipment Type</option>
+					<option selected disabled class="text-black">Select Equipment Type</option>
 					<option value="DVR/Set-Top Box">DVR/Set-Top Box</option>
 					<option value="Gateway/Modem">Gateway/Modem</option>
 					<option value="Wireless Router">Wireless Router</option>
@@ -30,7 +30,7 @@
 			</div>
 			<div id="return-information" class="text-center">
 				<select v-model="returnType" class="py-2 m-2 bg-gray-200">
-					<option disabled>Select a reason for return</option>
+					<option selected disabled>Select a reason for return</option>
 					<option value="Exchange/Defective Equipment">Exchange/Defective Equipment</option>
 					<option value="Cancelling Service">Cancelling Service</option>
 					<option value="Moving">Moving</option>
@@ -66,7 +66,7 @@
 
 				notes: null,
 				
-				image: "https://bloximages.chicago2.vip.townnews.com/winonadailynews.com/content/tncms/assets/v3/editorial/4/44/4444c7a3-8473-5f32-be6e-c72a804dc6ee/59d7d6ed20146.image.jpg",
+				image: "https://www.hbci.com/wp-content/uploads/footer-logo.png",
 				logoAlt: "Hiawatha Broadband Communications"
 			}
 		},
@@ -75,21 +75,21 @@
 				return data;
 			},
 			exportPDF() {
+				let heading = "Customer Information";
 				let name = this.customerName;
 				let phone = this.customerPhoneNumber;
 				let address = this.customerAddress;
 				let account = this.customerAccount;
 				
-				let equipmentType = this.equipmentType;
-				let equipmentNum = this.equipmentNum;
-				let hasRemote = this.remote;
-				let hasPwrCord = this.powerCord;
+				let equipmentType = "Type of Equipment" + this.equipmentType + "\n";
+				let equipmentNum = "CMAC/SN:" + this.equipmentNum + "\n";
+				let hasRemote = this.remote + "\n";
+				let hasPwrCord = this.powerCord + "\n";
 				
-				let returnType = this.returnType;
-				let notes = this.notes;
-				let k = this.shit;
+				let returnType = "Type of Return: " + this.returnType + "\n";
+				let notes = "Notes: " + this.notes + "\n";
 				
-				let customerData = [name, phone, address, account];
+				let customerData = [heading, name, phone, address, account];
 				let equipmentData = [equipmentType, equipmentNum, hasRemote, hasPwrCord];
 				let returnData = [returnType, notes];
 				
@@ -118,6 +118,12 @@
 </script>
 <style>
 body{
-	background-color: #f7fafc;
+	background-color: black;
+	
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }
 </style>
