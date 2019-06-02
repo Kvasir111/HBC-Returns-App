@@ -75,13 +75,13 @@
 				return data;
 			},
 			exportPDF() {
-				let heading = "Customer Information";
-				let name = this.customerName;
-				let phone = this.customerPhoneNumber;
-				let address = this.customerAddress;
-				let account = this.customerAccount;
+				let heading = "Customer Information: \n";
+				let name = "Customer Name: " + this.customerName + "\n";
+				let phone = "Contact Number: " + this.customerPhoneNumber + "\n";
+				let address = "Service Address: " + this.customerAddress + "\n";
+				let account = "Account #: " + this.customerAccount + "\n";
 				
-				let equipmentType = "Type of Equipment" + this.equipmentType + "\n";
+				let equipmentType = "Type of Equipment: " + this.equipmentType + "\n";
 				let equipmentNum = "CMAC/SN:" + this.equipmentNum + "\n";
 				let hasRemote = this.remote + "\n";
 				let hasPwrCord = this.powerCord + "\n";
