@@ -21,7 +21,7 @@
 			<div id="eDiv" ref="ediv">
 			<EquipmentInput></EquipmentInput>
 			</div>
-			<button class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold" v-on:click.prevent="addEquipmentLine">+</button>
+			<button class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold" v-on:click.prevent="addEquipmentLine">Add More Equipment +</button>
 			<div class="text-center" id="return-information">
 				<label for="returnType">Select Reason for return</label>
 				<select id="returnType" class="form-multiselect m-2 bg-gray-200 text-black" v-model="returnType">
