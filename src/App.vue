@@ -83,6 +83,7 @@
 
 				image: "https://www.hbci.com/wp-content/uploads/footer-logo.png",
 				logoAlt: "Hiawatha Broadband Communications"
+
 			}
 		},
 		methods: {
