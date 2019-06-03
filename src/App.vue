@@ -18,26 +18,13 @@
 					       v-bind:aria-valuemax="customerAddress" v-model="customerAddress">
 				</div>
 			</div>
-			<div class="text-center" id="equipment-type">
-				<label for="equipmentDropdown" invisible></label>
-				<select class="form-multiselect bg-gray-200 m-2" id="equipmentDropdown" v-bind:aria-valuemax="equipmentType"
-				        v-model="equipmentType">
-					<option class="" disabled selected>Select Equipment Type</option>
-					<option value="DVR/Set-Top Box">DVR/Set-Top Box</option>
-					<option value="Gateway/Modem">Gateway/Modem</option>
-					<option value="Wireless Router">Wireless Router</option>
-					<option value="DTA">DTA</option>
-				</select>
-				<input class="form-input inline" placeholder="CMAC/SN" type="text" v-bind:aria-valuemax="equipmentNum"
-				       v-model="equipmentNum" id="CMAC/SN input">
-				<input class="p-2 m-2 form-checkbox" false-value="" true-value="Power Cord" type="checkbox"
-				       v-bind:aria-valuemax="powerCord"
-				       v-model="powerCord">Power Cord?
-				<input class="p-2 m-2 form-checkbox" false-value="" true-value="Remote" type="checkbox" v-bind:aria-valuemax="remote"
-				       v-model="remote">Remote?
+			<div id="eDiv">
+			<EquipmentInput></EquipmentInput>
+				<button class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold" v-on:click.prevent="addEquipmentLine">+</button>
 			</div>
 			<div class="text-center" id="return-information">
-				<select class="form-multiselect m-2 bg-gray-200" v-model="returnType">
+				<label for="returnType">Select Reason for return</label>
+				<select id="returnType" class="form-multiselect m-2 bg-gray-200 text-black" v-model="returnType">
 					<option disabled selected>Select a reason for return</option>
 					<option value="Exchange/Defective Equipment">Exchange/Defective Equipment</option>
 					<option value="Cancelling Service">Cancelling Service</option>
@@ -70,9 +57,13 @@
 
 <script>
 	import jspdf from 'jspdf'
+	import EquipmentInput from './components/equipment-input'
 
 	export default {
-		component: {},
+		components: {EquipmentInput},
+		component: {
+			EquipmentInput
+		},
 		data() {
 			return {
 				customerName: null,
@@ -94,8 +85,9 @@
 			}
 		},
 		methods: {
-			collateData() {
-				return data;
+			addEquipmentLine(){
+			let eDiv = document.getElementById('eDiv');
+			eDiv.append(EquipmentInput);
 			},
 			exportPDF() {
 				let heading = "Customer Information: \n";
@@ -104,7 +96,7 @@
 				let address = "Service Address: " + this.customerAddress + "\n";
 				let account = "Account #: " + this.customerAccount + "\n";
 
-				let equipmentType = "Type of Equipment: " + this.equipmentType + "\n\n";
+				let equipmentType = "Type of Equipment: " + document.EquipmentInput.equipmentType + "\n\n";
 				let equipmentNum = "CMAC/SN:" + this.equipmentNum + "\n";
 				let hasRemote = this.remote + "\n";
 				let hasPwrCord = this.powerCord + "\n";
