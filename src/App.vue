@@ -29,7 +29,7 @@
 					<option value="DTA">DTA</option>
 				</select>
 				<input class="form-input inline" placeholder="CMAC/SN" type="text" v-bind:aria-valuemax="equipmentNum"
-				       v-model="equipmentNum">
+				       v-model="equipmentNum" id="CMAC/SN input">
 				<input class="p-2 m-2 form-checkbox" false-value="" true-value="Power Cord" type="checkbox"
 				       v-bind:aria-valuemax="powerCord"
 				       v-model="powerCord">Power Cord?
