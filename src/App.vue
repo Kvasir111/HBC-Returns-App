@@ -18,10 +18,10 @@
 					       v-bind:aria-valuemax="customerAddress" v-model="customerAddress">
 				</div>
 			</div>
-			<div id="eDiv">
+			<div id="eDiv" ref="ediv">
 			<EquipmentInput></EquipmentInput>
-				<button class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold" v-on:click.prevent="addEquipmentLine">+</button>
 			</div>
+			<button class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold" v-on:click.prevent="addEquipmentLine">+</button>
 			<div class="text-center" id="return-information">
 				<label for="returnType">Select Reason for return</label>
 				<select id="returnType" class="form-multiselect m-2 bg-gray-200 text-black" v-model="returnType">
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+	import vue from 'vue'
 	import jspdf from 'jspdf'
 	import EquipmentInput from './components/equipment-input'
 
@@ -86,8 +87,10 @@
 		},
 		methods: {
 			addEquipmentLine(){
-			let eDiv = document.getElementById('eDiv');
-			eDiv.append(EquipmentInput);
+				var ComponentClass = vue.extend(EquipmentInput);
+				var instance = new ComponentClass();
+				instance.$mount();
+				this.$refs.ediv.appendChild(instance.$el);
 			},
 			exportPDF() {
 				let heading = "Customer Information: \n";
