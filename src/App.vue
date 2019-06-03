@@ -43,9 +43,9 @@
 				</select>
 			</div>
 			<div id="notes" class="mx-auto block">
-				<textarea rows="4" cols="50" placeholder="Enter notes here" v-model="notes" class="mx-auto block bg-gray-200 p-2"></textarea>
+				<textarea rows="4" cols="50" placeholder="Enter notes here" v-model="notes" class="mx-auto block bg-gray-200 p-2 "></textarea>
 			</div>
-			<input type="submit" value="Submit" class="mx-auto newInput">
+			<input type="submit" value="Submit" class="mx-auto newInput hover:bg-blue-300">
 		</form>
 	</div>
 </template>
