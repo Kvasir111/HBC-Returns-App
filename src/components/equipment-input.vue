@@ -47,10 +47,10 @@
 		name: "equipment-input",
 		data: function () {
 			return {
-				equipmentType: null,
-				equipmentNum: null,
-				powerCord: null,
-				remote: null,
+				equipmentType: '',
+				equipmentNum: '',
+				powerCord: '',
+				remote: '',
 				rows: [],
 			}
 		},
