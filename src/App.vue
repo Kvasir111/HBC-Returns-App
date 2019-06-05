@@ -28,10 +28,14 @@
 
 	export default {
 		components: {CustomerInformation, EquipmentInput, ReturnInformation},
-		data() {
+		data(){
 			return {
+				customerShit: [],
+				returnInformation: [],
+				equipmentInformation: [],
+
 				image: "https://www.hbci.com/wp-content/uploads/footer-logo.png",
-				logoAlt: "Hiawatha Broadband Communications"
+				logoAlt: "Hiawatha Broadband Communications",
 			};
 		},
 		methods: {
@@ -77,8 +81,7 @@
 				doc.save("return.pdf");
 			},
 			printInputs(){
-				let c = document.getElementById("cInfo");
-				console.log(c)
+				console.log(customerShit.valueOf());
 			}
 		}
 	};

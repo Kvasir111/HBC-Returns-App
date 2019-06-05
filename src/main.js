@@ -5,16 +5,10 @@ import '@/css/tailwind.css'
 Vue.config.productionTip = false;
 
 new Vue({
-  data: {
-    customerInformation: [{
-      firstName: "",
-      lastName: "",
-      address: "",
-      phone: "",
-      account: "",
-      email: "",
+  data: function(){
+    return {
+
     }
-    ],
   },
   render: function (h) { return h(App) },
 }).$mount('#app');

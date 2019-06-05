@@ -5,7 +5,6 @@
 					autocomplete="no"
 					class="form-input m-2"
 					placeholder="First Name"
-					required
 					type="text"
 					v-model="firstName"
 			>
@@ -13,7 +12,6 @@
 					autocomplete="no"
 					class="form-input m-2"
 					placeholder="Last Name"
-					required
 					type="text"
 					v-model="lastName"
 			>
@@ -31,21 +29,18 @@
 					maxlength="11"
 					minlength="10"
 					placeholder="Phone number"
-					required
 					type="tel"
 					v-model="phone"
 			>
 			<input
 					class="form-input m-2"
 					placeholder="Service Address"
-					required
 					type="text"
 					v-model="address"
 			>
 			<input
 			class="form-input m-2"
 			placeholder="Customer Email"
-			required
 			type="email"
 			v-model="email"
 			>
@@ -56,8 +51,7 @@
 <script>
 	export default {
 		name: "customer-information",
-
-		data(){
+		data: function(){
 			return{
 				firstName: "",
 				lastName: "",
@@ -65,7 +59,6 @@
 				phone: "",
 				account: "",
 				email: "",
-
 			}
 		},
 		methods:{
