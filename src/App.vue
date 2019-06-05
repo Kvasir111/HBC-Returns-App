@@ -11,10 +11,10 @@
 				<customer-information id="cInfo"></customer-information>
 			</div>
 			<div id="eDiv">
-				<equipment-input></equipment-input>
+				<equipment-input id="eInfo"></equipment-input>
 			</div>
 			<div id="rDiv">
-				<return-information></return-information>
+				<return-information id="rInfo"></return-information>
 			</div>
 		</form>
 	</div>
@@ -30,18 +30,6 @@
 		components: {CustomerInformation, EquipmentInput, ReturnInformation},
 		data() {
 			return {
-
-				equipmentType: '',
-				equipmentNum: '',
-				powerCord: '',
-				remote: '',
-
-
-
-				//   returnType: null,
-
-				notes: null,
-
 				image: "https://www.hbci.com/wp-content/uploads/footer-logo.png",
 				logoAlt: "Hiawatha Broadband Communications"
 			};
@@ -90,7 +78,7 @@
 			},
 			printInputs(){
 				let c = document.getElementById("cInfo");
-				console.log(c.getData());
+				console.log(c)
 			}
 		}
 	};

@@ -7,7 +7,6 @@
 					placeholder="First Name"
 					required
 					type="text"
-					v-bind:aria-valuemax="firstName"
 					v-model="firstName"
 			>
 			<input
@@ -16,7 +15,6 @@
 					placeholder="Last Name"
 					required
 					type="text"
-					v-bind:aria-valuemax="lastName"
 					v-model="lastName"
 			>
 			<input
@@ -24,8 +22,7 @@
 					min="0"
 					placeholder="Account Number"
 					type="number"
-					v-bind:aria-valuemax="customerAccount"
-					v-model="customerAccount"
+					v-model="account"
 			>
 		</div>
 		<div class="text-center">
@@ -36,24 +33,22 @@
 					placeholder="Phone number"
 					required
 					type="tel"
-					v-bind:aria-valuemax="customerPhoneNumber"
-					v-model="customerPhoneNumber"
+					v-model="phone"
 			>
 			<input
 					class="form-input m-2"
 					placeholder="Service Address"
 					required
 					type="text"
-					v-bind:aria-valuemax="customerAddress"
-					v-model="customerAddress"
+					v-model="address"
 			>
 			<input
 			class="form-input m-2"
 			placeholder="Customer Email"
 			required
 			type="email"
-			v-bind:aria-valuemax="email"
-			v-model="email">
+			v-model="email"
+			>
 		</div>
 	</div>
 </template>
@@ -64,6 +59,12 @@
 
 		data(){
 			return{
+				firstName: "",
+				lastName: "",
+				address: "",
+				phone: "",
+				account: "",
+				email: "",
 
 			}
 		},

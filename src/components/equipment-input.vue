@@ -9,7 +9,7 @@
 			<tbody>
 			<tr v-for="(row, index) in rows">
 				<td><select class="form-multiselect bg-gray-200 m-2" id="equipmentDropdown"
-				            v-bind:aria-valuemax="equipmentType"
+				            v-bind:value="equipmentType"
 				            v-model="equipmentType">
 					<option class="" disabled selected>Select Equipment Type</option>
 					<option value="DVR/Set-Top Box">DVR/Set-Top Box</option>
@@ -18,13 +18,13 @@
 					<option value="DTA">DTA</option>
 				</select></td>
 				<td><input class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text"
-				           v-bind:aria-valuemax="equipmentNum" v-model="equipmentNum"></td>
+				           v-bind:equipmentNumber.value="equipmentNum" v-model="equipmentNum"></td>
 				<td>
 					<input class="p-2 m-2 form-checkbox" value="Power Cord" type="checkbox"
-				           v-bind:aria-valuemax="powerCord"
+				           v-bind:accessories.value="powerCord"
 				           v-model="powerCord">Power Cord?
 					<input class="p-2 m-2 form-checkbox" value="Remote" type="checkbox"
-					       v-bind:aria-valuemax="remote"
+					       v-bind:accessories.value="remote"
 					       v-model="remote">Remote?
 				</td>
 				<td><a class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold"
@@ -48,7 +48,10 @@
 			return {
 				equipmentType: '',
 				equipmentNum: '',
-				accessories: [],
+				accessories: [
+					{text: "Power Cord", value: "powerCord"},
+					{text: "Remote", value: "remote"}
+				],
 				rows: [],
 			}
 		},

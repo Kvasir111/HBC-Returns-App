@@ -8,7 +8,6 @@
 				{{ returnOption.text }}
 			</option>
 		</select>
-		<input class="mx-auto newInput hover:bg-blue-300" type="submit" value="Submit">
 	</div>
 		<div id="notes" class="mx-auto">
 			<textarea v-if="returnType === 'Exchange/Defective Equipment'" placeholder="Enter CMAC/SN of Returned Equipment" rows="4" cols="50" class="mx-auto bg-gray-200 text-center"></textarea>
@@ -16,6 +15,7 @@
 			<textarea v-if="returnType === 'Moving'" placeholder="Enter new Address" rows="4" cols="50" class="mx-auto bg-gray-200 text-center"></textarea>
 			<textarea v-if="returnType === 'Other'" placeholder="Enter notes" rows="4" cols="50" class="mx-auto bg-gray-200 text-center"></textarea>
 		</div>
+		<input class="mx-auto newInput hover:bg-blue-300" type="submit" value="Submit">
 	</div>
 </template>
 
