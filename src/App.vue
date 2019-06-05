@@ -81,7 +81,7 @@
 				doc.save("return.pdf");
 			},
 			printInputs(){
-				console.log(customerShit.valueOf());
+				console.log(CustomerInformation.data().firstName);
 			}
 		}
 	};

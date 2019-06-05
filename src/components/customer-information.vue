@@ -62,7 +62,9 @@
 			}
 		},
 		methods:{
-
+			getName(){
+				return this.firstName;
+			}
 		}
 	}
 </script>
