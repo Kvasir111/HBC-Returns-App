@@ -18,10 +18,8 @@
 				           v-bind:equipmentNumber.value="equipmentNum" v-model="equipmentNum"></td>
 				<td>
 					<input class="p-2 m-2 form-checkbox" value="Power Cord" type="checkbox"
-				           v-bind:accessories.value="powerCord"
 				           v-model="powerCord">Power Cord?
 					<input class="p-2 m-2 form-checkbox" value="Remote" type="checkbox"
-					       v-bind:accessories.value="remote"
 					       v-model="remote">Remote?
 				</td>
 				<td><a class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold"
@@ -50,6 +48,8 @@
 					{text: "DVR/STB", value: "DVT/STB"}
 				],
 				equipmentNum: '',
+				powerCord: '',
+				remote: '',
 				
 				rows: [],
 			}
