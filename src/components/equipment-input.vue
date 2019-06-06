@@ -8,14 +8,11 @@
 				</tr>
 			<tbody>
 			<tr v-for="(row, index) in rows">
-				<td><select class="form-multiselect bg-gray-200 m-2" id="equipmentDropdown"
-				            v-bind:value="equipmentType"
-				            v-model="equipmentType">
-					<option class="" disabled selected>Select Equipment Type</option>
-					<option value="DVR/Set-Top Box">DVR/Set-Top Box</option>
-					<option value="Gateway/Modem">Gateway/Modem</option>
-					<option value="Wireless Router">Wireless Router</option>
-					<option value="DTA">DTA</option>
+				<td><select class="form-select bg-gray-200 m-2" id="equipmentType" v-model="equipmentType">
+					<option disabled selected>Select a device type</option>
+					<option :key="index" v-bind:value="equipmentType.value" v-for="(equipmentType,index) in equipmentTypes">
+						{{ equipmentType.text }}
+					</option>
 				</select></td>
 				<td><input class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text"
 				           v-bind:equipmentNumber.value="equipmentNum" v-model="equipmentNum"></td>
@@ -43,15 +40,17 @@
 
 <script>
 	export default {
-		name: "equipment-input",
 		data: function () {
 			return {
-				equipmentType: '',
-				equipmentNum: '',
-				accessories: [
-					{text: "Power Cord", value: "powerCord"},
-					{text: "Remote", value: "remote"}
+				equipmentType: "Select a Device Type",
+				equipmentTypes: [
+					{text: "Modem/Router", value: "Modem/Router"},
+					{text: "DTA", value: "DTA"},
+					{text: "Gateway", value: "Gateway"},
+					{text: "DVR/STB", value: "DVT/STB"}
 				],
+				equipmentNum: '',
+				
 				rows: [],
 			}
 		},
