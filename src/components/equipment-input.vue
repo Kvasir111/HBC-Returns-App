@@ -8,7 +8,7 @@
 				</tr>
 			<tbody>
 			<tr v-for="(row, index) in rows">
-				<td><select class="form-select bg-gray-200 m-2" id="equipmentType" v-model="equipmentType">
+				<td><select class="form-select bg-gray-200 m-2" id="equipmentType" >
 					<option disabled selected>Select a device type</option>
 					<option :key="index" v-bind:value="equipmentType.value" v-for="(equipmentType,index) in equipmentTypes">
 						{{ equipmentType.text }}
@@ -18,9 +18,9 @@
 				           v-bind:equipmentNumber.value="equipmentNum" v-model="equipmentNum"></td>
 				<td>
 					<input class="p-2 m-2 form-checkbox" value="Power Cord" type="checkbox"
-				           v-model="powerCord">Power Cord?
+				           v-bind:value="powerCord">Power Cord?
 					<input class="p-2 m-2 form-checkbox" value="Remote" type="checkbox"
-					       v-model="remote">Remote?
+					       v-bind:value="remote">Remote?
 				</td>
 				<td><a class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold"
 				       style="cursor: pointer" v-on:click="removeElement(index)">Remove</a></td>
