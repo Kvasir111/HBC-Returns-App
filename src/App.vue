@@ -66,18 +66,18 @@
 						</tr>
 						<tbody>
 						<tr v-for="(row, index) in rows">
-							<td><select class="form-select bg-gray-200 m-2" id="equipmentType" v-model="equipmentType">
+							<td><select class="form-select bg-gray-200 m-2" id="equipmentType" v-model="rows[index].device">
 								<option disabled selected>Select a device type</option>
 								<option :key="index" v-for="(equipmentType,index) in equipmentTypes">
 									{{ equipmentType.text }}
 								</option>
 							</select></td>
-							<td><input class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="equipmentNum"></td>
+							<td><input class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="rows[index].equipmentNum"></td>
 							<td>
 								<label for="powerCord">Power Cord</label>
-								<input id="powerCord" class="p-2 m-2 form-checkbox" type="checkbox" v-model="powerCord">
+								<input id="powerCord" class="p-2 m-2 form-checkbox" type="checkbox" v-model="rows[index].powerCord">
 								<label for="remote">Remote</label>
-								<input id="remote" class="p-2 m-2 form-checkbox" type="checkbox" v-model="remote">
+								<input id="remote" class="p-2 m-2 form-checkbox" type="checkbox" v-model="rows[index].remote">
 							</td>
 							<td>
 								<a class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold"
@@ -118,12 +118,9 @@
 
 <script>
 	import jspdf from "jspdf";
-	import CustomerInformation from './components/customerInformation'
-	import EquipmentInput from "./components/equipmentInput";
-	import ReturnInformation from "./components/returnInformation"
 
 	export default {
-		components: {CustomerInformation, EquipmentInput, ReturnInformation},
+
 		data: function () {
 			return {
 				//data for customer information
@@ -149,10 +146,13 @@
 					{text: "Gateway", value: "Gateway"},
 					{text: "DVR/STB", value: "DVT/STB"}
 				],
-				powerCord: "",
-				remote: "",
-				equipmentNum: "",
-				rows: [],
+
+				rows: [
+					{device: ""},
+					{powerCord: ""},
+					{remote: ""},
+					{equipmentNum: "",}
+				],
 				equipmentItem: [],
 
 				//data for headings
