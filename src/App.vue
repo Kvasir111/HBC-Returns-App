@@ -22,6 +22,7 @@
 
 <script>
 	import jspdf from "jspdf";
+	import Vue from "vue";
 	import CustomerInformation from './components/customerInformation'
 	import EquipmentInput from "./components/equipmentInput";
 	import ReturnInformation from "./components/returnInformation"
@@ -30,7 +31,6 @@
 		components: {CustomerInformation, EquipmentInput, ReturnInformation},
 		data(){
 			return {
-				firstName: "Ryan",
 				image: "https://www.hbci.com/wp-content/uploads/footer-logo.png",
 				logoAlt: "Hiawatha Broadband Communications",
 			};
@@ -47,6 +47,7 @@
 				doc.save("return.pdf");
 			},
 			printInputs(){
+			
 			}
 		}
 	};
