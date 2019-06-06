@@ -3,7 +3,7 @@
 		<img class="mx-auto" v-bind:alt="logoAlt" v-bind:src="image" width="200px">
 		<h1 class="text-center text-2xl font-bold text-white p-2">Enter Information for Equipment Return</h1>
 		<form
-				@submit.prevent="printInputs"
+				@submit.prevent="printRows"
 				class="bg-white shadow-md w-2/3 mx-auto p-2"
 				id="information input"
 		>
@@ -66,22 +66,22 @@
 						</tr>
 						<tbody>
 						<tr v-for="(row, index) in rows">
-							<td><select class="form-select bg-gray-200 m-2" id="equipmentType" >
+							<td><select class="form-select bg-gray-200 m-2" id="equipmentType" v-model="equipmentType">
 								<option disabled selected>Select a device type</option>
-								<option :key="index" v-bind:value="equipmentType.value" v-for="(equipmentType,index) in equipmentTypes">
+								<option :key="index" v-for="(equipmentType,index) in equipmentTypes">
 									{{ equipmentType.text }}
 								</option>
 							</select></td>
-							<td><input class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text"
-							           v-bind:equipmentNumber.value="equipmentNum" v-model="equipmentNum"></td>
+							<td><input class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="equipmentNum"></td>
 							<td>
-								<input class="p-2 m-2 form-checkbox" value="Power Cord" type="checkbox"
-								       v-bind:value="powerCord">Power Cord?
-								<input class="p-2 m-2 form-checkbox" value="Remote" type="checkbox"
-								       v-bind:value="remote">Remote?
+								<label for="powerCord">Power Cord</label>
+								<input id="powerCord" class="p-2 m-2 form-checkbox" type="checkbox" v-model="powerCord">
+								<label for="remote">Remote</label>
+								<input id="remote" class="p-2 m-2 form-checkbox" type="checkbox" v-model="remote">
 							</td>
-							<td><a class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold"
-							       style="cursor: pointer" v-on:click="removeElement(index)">Remove</a></td>
+							<td>
+								<a class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold"
+								   style="cursor: pointer" v-on:click="removeElement(index)">Remove</a></td>
 
 						</tr>
 						</tbody>
@@ -99,13 +99,15 @@
 						<label for="returnType">Select Reason for return</label>
 						<select class="form-select m-2 bg-gray-200 text-black" id="returnType" v-model="returnType">
 							<option disabled selected>Select Reason</option>
-							<option :key="index" v-bind:value="returnOption.value" v-for="(returnOption,index) in returnOptions">
+							<option :key="index" v-bind:value="returnOption.value"
+							        v-for="(returnOption,index) in returnOptions">
 								{{ returnOption.text }}
 							</option>
 						</select>
 					</div>
-					<div id="notes" class="text-center">
-						<textarea  rows="4" cols="50" v-bind:placeholder="returnType" class="mx-auto bg-gray-200 text-center"></textarea>
+					<div class="text-center" id="notes">
+						<textarea class="mx-auto bg-gray-200 text-center" cols="50" rows="4"
+						          v-bind:placeholder="returnType"></textarea>
 					</div>
 					<input class="mx-auto newInput hover:bg-blue-300" type="submit" value="Submit">
 				</div>
@@ -122,7 +124,7 @@
 
 	export default {
 		components: {CustomerInformation, EquipmentInput, ReturnInformation},
-		data(){
+		data: function () {
 			return {
 				//data for customer information
 				firstName: "",
@@ -147,10 +149,11 @@
 					{text: "Gateway", value: "Gateway"},
 					{text: "DVR/STB", value: "DVT/STB"}
 				],
-				equipmentNum: '',
-				powerCord: '',
-				remote: '',
+				powerCord: "",
+				remote: "",
+				equipmentNum: "",
 				rows: [],
+				equipmentItem: [],
 
 				//data for headings
 				image: "https://www.hbci.com/wp-content/uploads/footer-logo.png",
@@ -167,12 +170,11 @@
 					'Accessories': ""
 				});
 			},
-			//removes a row from the equipment table
 			removeElement(index) {
 				this.rows.splice(index, 1);
 			},
 			exportPDF() {
-				
+
 				let doc = new jspdf({
 					orientation: "p",
 					unit: "in",
@@ -181,8 +183,7 @@
 				doc.text(data, 2, 2);
 				doc.save("return.pdf");
 			},
-			printInputs(){
-			
+			printRows() {
 			}
 		}
 	};
