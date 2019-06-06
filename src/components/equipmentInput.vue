@@ -38,6 +38,7 @@
 
 <script>
 	export default {
+		name: "equipmentInput",
 		data: function () {
 			return {
 				equipmentType: "Select a Device Type",

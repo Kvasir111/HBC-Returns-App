@@ -18,6 +18,7 @@
 
 <script>
 	export default {
+		name: "returnInformation",
 		data() {
 			return {
 				returnType: 'Select Reason',

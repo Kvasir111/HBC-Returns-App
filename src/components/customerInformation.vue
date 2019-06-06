@@ -50,7 +50,7 @@
 
 <script>
 	export default {
-		name: "customer-information",
+		name: "customerInformation",
 		data: function(){
 			return{
 				firstName: "",
