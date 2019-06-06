@@ -9,11 +9,8 @@
 			</option>
 		</select>
 	</div>
-		<div id="notes" class="mx-auto">
-			<textarea v-if="returnType === 'Exchange/Defective Equipment'" placeholder="Enter CMAC/SN of Returned Equipment" rows="4" cols="50" class="mx-auto bg-gray-200 text-center"></textarea>
-			<textarea v-if="returnType === 'Cancelling Service'" placeholder="Enter Reason and Forwarding Address" rows="4" cols="50" class="mx-auto bg-gray-200 text-center"></textarea>
-			<textarea v-if="returnType === 'Moving'" placeholder="Enter new Address" rows="4" cols="50" class="mx-auto bg-gray-200 text-center"></textarea>
-			<textarea v-if="returnType === 'Other'" placeholder="Enter notes" rows="4" cols="50" class="mx-auto bg-gray-200 text-center"></textarea>
+		<div id="notes" class="text-center">
+			<textarea  rows="4" cols="50" v-bind:placeholder="returnType" class="mx-auto bg-gray-200 text-center"></textarea>
 		</div>
 		<input class="mx-auto newInput hover:bg-blue-300" type="submit" value="Submit">
 	</div>
@@ -25,10 +22,10 @@
 			return {
 				returnType: 'Select Reason',
 				returnOptions: [
-					{text: 'Exchange/Defective Equipment', value: 'Exchange/Defective Equipment'},
-					{text: 'Cancelling Service', value: 'Cancelling Service'},
-					{text: 'Moving', value: 'Moving'},
-					{text: 'Other', value: 'Other'}
+					{text: 'Exchange/Defective Equipment', value: 'Enter CMAC/SN of device being exchanged'},
+					{text: 'Cancelling Service', value: 'Enter Reason'},
+					{text: 'Moving', value: 'Enter Forwarding Address'},
+					{text: 'Other', value: 'Enter Notes'}
 				],
 			}
 
