@@ -3,7 +3,7 @@
 		<img class="mx-auto" v-bind:alt="logoAlt" v-bind:src="image" width="200px">
 		<h1 class="text-center text-2xl font-bold text-white p-2">Enter Information for Equipment Return</h1>
 		<form
-				@submit.prevent="printRows"
+				@submit.prevent="sendEmail"
 				class="bg-white shadow-md w-2/3 mx-auto p-2"
 				id="information input"
 		>
@@ -80,7 +80,7 @@
 								<input id="remote" class="p-2 m-2 form-checkbox" type="checkbox" v-model="rows[index].remote">
 							</td>
 							<td>
-								<a class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold"
+								<a class="block mx-auto px-4 py-2 rounded-full bg-gray-200"
 								   style="cursor: pointer" v-on:click="removeElement(index)">Remove</a></td>
 
 						</tr>
@@ -118,6 +118,7 @@
 
 <script>
 	import jspdf from "jspdf";
+	import nodemailer from "nodemailer";
 
 	export default {
 
@@ -174,7 +175,6 @@
 				this.rows.splice(index, 1);
 			},
 			exportPDF() {
-
 				let doc = new jspdf({
 					orientation: "p",
 					unit: "in",
@@ -183,7 +183,30 @@
 				doc.text(data, 2, 2);
 				doc.save("return.pdf");
 			},
-			printRows() {
+			sendEmail() {
+				let nodemailer = require('nodemailer');
+				let jasonStatham = nodemailer.createTransport({
+					host: "email.hbci.com",
+					port: 587,
+					auth: {
+						user: "returns@hbci.com",
+						pass: "",
+						port: 587
+					}
+				});
+				let mailOptions = {
+					from: "returns@hbci.com",
+					to: this.email,
+					subject: "Nodemail Test",
+					text: "👌"
+				};
+				jasonStatham.sendMail(mailOptions, function (error, info) {
+					if (error){
+						console.log(error);
+					} else{
+						console.log("Email sent: " + info.response);
+					}
+				});
 			}
 		}
 	};
