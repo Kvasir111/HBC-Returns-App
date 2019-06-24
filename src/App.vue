@@ -106,7 +106,7 @@
 						</select>
 					</div>
 					<div class="text-center" id="notes">
-						<textarea class="mx-auto bg-gray-200 text-center" cols="50" rows="4"
+						<textarea id="explanation" class="mx-auto bg-gray-200 text-center" cols="50" rows="4"
 						          v-bind:placeholder="returnType"></textarea>
 					</div>
 					<input class="mx-auto newInput hover:bg-blue-300" type="submit" value="Submit">
@@ -188,13 +188,16 @@
 					str += "\n";
 					str += "CMAC/SN: " + this.rows[i].equipmentNum;
 					str += "\n";
-					str += "Accessories " + "Remote: " + this.rows[i].remote + "Power Cord: " + this.rows[i].powerCord;
+					str += "Accessories " + "Remote: " + this.rows[i].remote + " " +"Power Cord: " + this.rows[i].powerCord;
 					str += "\n";
 				}
 				data += str;
 
-				data += "Reason for Return: " + this.returnOptions.text;
-				data += "Notes: " + this.returnOptions.value;
+				let temp = document.getElementById("returnType");
+				temp = temp.options[temp.selectedIndex].text;
+				data += "Reason for Return: " + temp;
+				data += "\n";
+				data += "Notes: " + document.getElementById("explanation").value;
 				let doc = new jspdf({
 					orientation: "p",
 					unit: "in",
@@ -204,25 +207,8 @@
 				doc.save("return.pdf");
 			},
 			echoTest(){
-				let data = [
-					"Name: " + this.firstName + " " + this.lastName + "\n"
-					+ "Service Address: " + this.address + "\n"
-					+ "Account: " + this.account + "\n"
-					+ "Contact Number : " + this.phone + "\n"
-					+ "Email: " + this.email + "\n"
-				];
-				data += "\n";
-				let str = "";
-				for (let i = 0 ; i < this.rows.length ; i++){
-					str += "Device: " + this.rows[i].device;
-					str += "\n";
-					str += "CMAC/SN: " + this.rows[i].equipmentNum;
-					str += "\n";
-					str += "Accessories " + this.rows[i].remote + this.rows[i].powerCord;
-					str += "\n";
-				}
-				data += str;
-				console.log(data)
+				let data = document.getElementById("returnType");
+				console.log(data.options[data.selectedIndex].text)
 			}
 		}
 	};
