@@ -188,7 +188,13 @@
 					str += "\n";
 					str += "CMAC/SN: " + this.rows[i].equipmentNum;
 					str += "\n";
-					str += "Accessories " + "Remote: " + this.rows[i].remote + " " +"Power Cord: " + this.rows[i].powerCord;
+					str += "Accessories: ";
+					if (this.rows[i].remote){
+						str += "Remote Included ";
+					}
+					if (this.rows[i].powerCord){
+						str += "Power Cord included";
+					}
 					str += "\n";
 				}
 				data += str;
