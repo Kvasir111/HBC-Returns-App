@@ -16,6 +16,7 @@
 								placeholder="First Name"
 								type="text"
 								v-model="firstName"
+								required
 						>
 						<input
 								autocomplete="no"
@@ -23,6 +24,7 @@
 								placeholder="Last Name"
 								type="text"
 								v-model="lastName"
+								required
 						>
 						<input
 								class="form-input m-2"
@@ -40,12 +42,14 @@
 								placeholder="Phone number"
 								type="tel"
 								v-model="phone"
+								required
 						>
 						<input
 								class="form-input m-2"
 								placeholder="Service Address"
 								type="text"
 								v-model="address"
+								required
 						>
 						<input
 								class="form-input m-2"
@@ -66,13 +70,13 @@
 						</tr>
 						<tbody>
 						<tr v-for="(row, index) in rows">
-							<td><select class="form-select bg-gray-200 m-2" id="equipmentType" v-model="rows[index].device">
+							<td><select required class="form-select bg-gray-200 m-2" id="equipmentType" v-model="rows[index].device">
 								<option disabled selected>Select a device type</option>
 								<option :key="index" v-for="(equipmentType,index) in equipmentTypes">
 									{{ equipmentType.text }}
 								</option>
 							</select></td>
-							<td><input class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="rows[index].equipmentNum"></td>
+							<td><input autocomplete="off" class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="rows[index].equipmentNum"></td>
 							<td>
 								<label for="powerCord">Power Cord</label>
 								<input id="powerCord" class="p-2 m-2 form-checkbox" type="checkbox" v-model="rows[index].powerCord">
@@ -97,7 +101,7 @@
 				<div>
 					<div class="text-center" id="return-information">
 						<label for="returnType">Select Reason for return</label>
-						<select class="form-select m-2 bg-gray-200 text-black" id="returnType" v-model="returnType">
+						<select required class="form-select m-2 bg-gray-200 text-black" id="returnType" v-model="returnType">
 							<option disabled selected>Select Reason</option>
 							<option :key="index" v-bind:value="returnOption.value"
 							        v-for="(returnOption,index) in returnOptions">
@@ -106,7 +110,7 @@
 						</select>
 					</div>
 					<div class="text-center" id="notes">
-						<textarea id="explanation" class="mx-auto bg-gray-200 text-center" cols="50" rows="4"
+						<textarea required id="explanation" class="mx-auto bg-gray-200 text-center" cols="50" rows="4"
 						          v-bind:placeholder="returnType"></textarea>
 					</div>
 					<input class="mx-auto newInput hover:bg-blue-300" type="submit" value="Submit">
@@ -188,7 +192,13 @@
 					str += "\n";
 					str += "CMAC/SN: " + this.rows[i].equipmentNum;
 					str += "\n";
-					str += "Accessories " + "Remote: " + this.rows[i].remote + " " +"Power Cord: " + this.rows[i].powerCord;
+					str += "Accessories: ";
+					if (this.rows[i].remote){
+						str += "Remote Included ";
+					}
+					if (this.rows[i].powerCord){
+						str += "Power Cord included";
+					}
 					str += "\n";
 				}
 				data += str;
