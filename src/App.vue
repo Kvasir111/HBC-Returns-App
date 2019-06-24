@@ -76,7 +76,7 @@
 									{{ equipmentType.text }}
 								</option>
 							</select></td>
-							<td><input class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="rows[index].equipmentNum"></td>
+							<td><input autocomplete="off" class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="rows[index].equipmentNum"></td>
 							<td>
 								<label for="powerCord">Power Cord</label>
 								<input id="powerCord" class="p-2 m-2 form-checkbox" type="checkbox" v-model="rows[index].powerCord">
