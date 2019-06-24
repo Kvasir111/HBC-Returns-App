@@ -192,7 +192,7 @@
 					str += "\n";
 				}
 				data += str;
-
+				data += "\n";
 				let temp = document.getElementById("returnType");
 				temp = temp.options[temp.selectedIndex].text;
 				data += "Reason for Return: " + temp;
