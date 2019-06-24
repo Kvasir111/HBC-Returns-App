@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@tailwindcss/custom-forms": "^0.1.4",
+    "node-mandrill": "^1.0.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
