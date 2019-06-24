@@ -4,10 +4,10 @@ import '@/css/tailwind.css'
 Vue.config.productionTip = false;
 
 new Vue({
-  data: function(){
-    return {
+	data: function(){
+		return {
 
-    }
-  },
-  render: function (h) { return h(App) },
+		}
+	},
+	render: function (h) { return h(App) },
 }).$mount('#app');

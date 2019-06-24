@@ -3,7 +3,7 @@
 		<img class="mx-auto" v-bind:alt="logoAlt" v-bind:src="image" width="200px">
 		<h1 class="text-center text-2xl font-bold text-white p-2">Enter Information for Equipment Return</h1>
 		<form
-				@submit.prevent="sendEmail"
+				@submit.prevent="exportPDF"
 				class="bg-white shadow-md w-2/3 mx-auto p-2"
 				id="information input"
 		>
@@ -118,7 +118,6 @@
 
 <script>
 	import jspdf from "jspdf";
-	import nodemailer from "nodemailer";
 
 	export default {
 
@@ -175,6 +174,27 @@
 				this.rows.splice(index, 1);
 			},
 			exportPDF() {
+				let data = [
+					"Name: " + this.firstName + " " + this.lastName + "\n"
+					+ "Service Address: " + this.address + "\n"
+					+ "Account: " + this.account + "\n"
+					+ "Contact Number : " + this.phone + "\n"
+					+ "Email: " + this.email + "\n"
+				];
+				data += "\n";
+				let str = "";
+				for (let i = 0 ; i < this.rows.length ; i++){
+					str += "Device: " + this.rows[i].device;
+					str += "\n";
+					str += "CMAC/SN: " + this.rows[i].equipmentNum;
+					str += "\n";
+					str += "Accessories " + "Remote: " + this.rows[i].remote + "Power Cord: " + this.rows[i].powerCord;
+					str += "\n";
+				}
+				data += str;
+
+				data += "Reason for Return: " + this.returnOptions.text;
+				data += "Notes: " + this.returnOptions.value;
 				let doc = new jspdf({
 					orientation: "p",
 					unit: "in",
@@ -183,30 +203,26 @@
 				doc.text(data, 2, 2);
 				doc.save("return.pdf");
 			},
-			sendEmail() {
-				let nodemailer = require('nodemailer');
-				let jasonStatham = nodemailer.createTransport({
-					host: "email.hbci.com",
-					port: 587,
-					auth: {
-						user: "returns@hbci.com",
-						pass: "",
-						port: 587
-					}
-				});
-				let mailOptions = {
-					from: "returns@hbci.com",
-					to: this.email,
-					subject: "Nodemail Test",
-					text: "👌"
-				};
-				jasonStatham.sendMail(mailOptions, function (error, info) {
-					if (error){
-						console.log(error);
-					} else{
-						console.log("Email sent: " + info.response);
-					}
-				});
+			echoTest(){
+				let data = [
+					"Name: " + this.firstName + " " + this.lastName + "\n"
+					+ "Service Address: " + this.address + "\n"
+					+ "Account: " + this.account + "\n"
+					+ "Contact Number : " + this.phone + "\n"
+					+ "Email: " + this.email + "\n"
+				];
+				data += "\n";
+				let str = "";
+				for (let i = 0 ; i < this.rows.length ; i++){
+					str += "Device: " + this.rows[i].device;
+					str += "\n";
+					str += "CMAC/SN: " + this.rows[i].equipmentNum;
+					str += "\n";
+					str += "Accessories " + this.rows[i].remote + this.rows[i].powerCord;
+					str += "\n";
+				}
+				data += str;
+				console.log(data)
 			}
 		}
 	};
