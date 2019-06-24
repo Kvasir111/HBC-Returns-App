@@ -56,9 +56,9 @@
 					</div>
 				</div>
 			</div>
-			<div id="eDiv">
-				<div class="text-center">
-					<table>
+			<div id="eDiv" class="">
+				<div class="text-center block">
+					<table class="mx-auto">
 						<tr>
 							<td>Equipment Type</td>
 							<td>CMAC/SN</td>
