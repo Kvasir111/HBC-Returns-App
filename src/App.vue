@@ -62,7 +62,7 @@
 			</div>
 			<div id="equipmentInformationDiv" class="">
 				<div class="text-center block">
-					<table class="mx-auto max-w-full">
+					<table class="mx-auto max-w-full sm:text-center">
 						<tr class="sm:invisible">
 							<td>Equipment Type</td>
 							<td>CMAC/SN</td>
@@ -121,11 +121,13 @@
 </template>
 
 <script>
+	
 	import jspdf from "jspdf";
 
 	export default {
 
 		data: function () {
+
 			return {
 				//data for customer information
 				firstName: "",
