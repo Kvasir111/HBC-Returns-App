@@ -27,7 +27,7 @@
 </script>
 <style>
 	body {
-		background-color: #4a5568;
+		background-color: rgb(45,52,64);
 	}
 
 	input[type="number"]::-webkit-inner-spin-button,

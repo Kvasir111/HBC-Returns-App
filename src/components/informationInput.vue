@@ -81,14 +81,14 @@
 							<input id="remote" class="p-2 m-2 form-checkbox" type="checkbox" v-model="rows[index].remote">
 						</td>
 						<td class="sm:block">
-							<a class="block mx-auto px-4 py-2 rounded-full bg-gray-200 m-2"
+							<a class="newInput"
 							   style="cursor: pointer" v-on:click="removeElement(index)">Remove</a></td>
 
 					</tr>
 					</tbody>
 				</table>
 				<div>
-					<button class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold m-2"
+					<button class="addEquipmentButton"
 					        v-on:click.prevent="addRow">Add More Equipment +
 					</button>
 				</div>
@@ -110,7 +110,7 @@
 						<textarea required id="explanation" class="mx-auto bg-gray-200 text-center m-4 max-w-full" cols="50" rows="4"
 						          v-bind:placeholder="returnType"></textarea>
 				</div>
-				<input class="mx-auto newInput hover:bg-blue-300" type="submit" value="Submit">
+				<input class="newInput" type="submit" value="Submit">
 			</div>
 		</div>
 	</form>
