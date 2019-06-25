@@ -8,6 +8,12 @@
 
 <script>
 	import InformationInput from "./components/informationInput"
+	import Vue from 'vue'
+	import VueRouter from 'vue-router'
+	import VueHead from 'vue-head'
+
+	Vue.use(VueHead);
+	Vue.use(VueRouter);
 	export default {
 		components: {InformationInput},
 		data : function () {
@@ -15,7 +21,14 @@
 				image: "https://www.hbci.com/wp-content/uploads/footer-logo.png",
 				logoAlt: "Hiawatha Broadband Communications",
 			}
-
+		},
+		head: {
+			title: {
+				inner: "HBC Returns"
+			},
+			link:[
+				{rel: 'manifest', href: "./manifest.json"}
+			]
 		}
 	}
 
