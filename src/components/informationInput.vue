@@ -88,7 +88,7 @@
 						</td>
 						<td class="sm:block">
 							<input type="button"
-							       class="removeEquipmentButton"
+							       class="removeEquipmentButton "
 							       style="cursor: pointer"
 							       v-on:click="removeElement(index)"
 							       value="X">
