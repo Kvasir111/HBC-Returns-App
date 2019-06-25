@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
+@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -644,7 +646,10 @@ html{
 }
 
 .removeEquipmentButton{
-  background-color: #EF424C;
+  color: #EF424C;
+  background-color: transparent;
+  font-weight: 900;
+  font-family: 'Rubik Mono One', sans-serif;
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -653,7 +658,8 @@ html{
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: 0.25rem;
-  color: #fff
+  font-weight: 700;
+  font-size: 1.5rem
 }
 
 .submitButton{
@@ -670,7 +676,7 @@ html{
 }
 
 .addEquipmentButton{
-  background-color: #71eeb8;
+  background-color: #9C27B0;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -678,7 +684,9 @@ html{
   padding-right: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  border-radius: 0.25rem
+  border-radius: 0.25rem;
+  font-weight: 700;
+  color: #fff
 }
 
 .customerInformationInput{
