@@ -22,7 +22,7 @@ html{
     @apply block mx-auto px-4 py-2 rounded
 }
 .customerInformationInput{
-    @apply border-b-2 border-teal-300 m-4 px-2
+    @apply border-b-2 border-blue-500 m-4 px-2
 }
 @tailwind components;
 @tailwind utilities;

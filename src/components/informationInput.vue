@@ -67,13 +67,13 @@
 					</tr>
 					<tbody class="sm:block">
 					<tr class="sm:block" v-for="(row, index) in rows">
-						<td class="sm:block"><select required class="border-b-2 border-teal-300 px-2 py-2 m-2 focus:outline-none" id="equipmentType" v-model="rows[index].device">
+						<td class="sm:block"><select required class="border-b-2 border-blue-500 px-2 py-2 m-2 focus:outline-none" id="equipmentType" v-model="rows[index].device">
 							<option disabled selected>Select a device type</option>
 							<option :key="index" v-for="(equipmentType,index) in equipmentTypes">
 								{{ equipmentType.text }}
 							</option>
 						</select></td>
-						<td class="sm:block"><input autocomplete="off" class="border-b-2 border-teal-300 m-2 p-2 focus:outline-none inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="rows[index].equipmentNum"></td>
+						<td class="sm:block"><input autocomplete="off" class="border-b-2 border-blue-500 m-2 p-2 focus:outline-none inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="rows[index].equipmentNum"></td>
 						<td class="block m-2 p-2 align-text-bottom">
 							<label for="powerCord">Power Cord</label>
 							<input id="powerCord" class="form-checkbox m-2" type="checkbox" v-model="rows[index].powerCord">
@@ -100,7 +100,7 @@
 		<div id="returnInformationDiv">
 			<div>
 				<div class="text-center" id="return-information">
-					<select required class="border-b-2 border-teal-300 p-2 focus:outline-none" id="returnType" v-model="returnType">
+					<select required class="border-b-2 border-blue-500 p-2 focus:outline-none" id="returnType" v-model="returnType">
 						<option disabled selected>Select Reason</option>
 						<option :key="index" v-bind:value="returnOption.value"
 						        v-for="(returnOption,index) in returnOptions">
@@ -109,7 +109,7 @@
 					</select>
 				</div>
 				<div class="text-center" id="notes">
-						<textarea required id="explanation" class="mx-auto border-2 border-teal-300 text-center  p-2 m-4 max-w-full" cols="50" rows="4"
+						<textarea required id="explanation" class="mx-auto border-2 border-blue-500 text-center  p-2 m-4 max-w-full" cols="50" rows="4"
 						          v-bind:placeholder="returnType"></textarea>
 				</div>
 				<input class="submitButton hover:cursor-pointer" type="submit" value="Submit">
