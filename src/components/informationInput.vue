@@ -85,14 +85,14 @@
 							       class="removeEquipmentButton"
 							        style="cursor: pointer"
 							       v-on:click="removeElement(index)"
-							value="-">
+							value="X">
 						</td>
 					</tr>
 					</tbody>
 				</table>
 				<div>
 					<button class="addEquipmentButton"
-					        v-on:click.prevent="addRow">Add More Equipment +
+					        v-on:click.prevent="addRow">Add +
 					</button>
 				</div>
 			</div>

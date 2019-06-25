@@ -1,7 +1,10 @@
 <template>
 	<div class id="app">
-		<img class="mx-auto" v-bind:alt="logoAlt" v-bind:src="image" width="200px">
-		<h1 class="text-center text-2xl font-bold text-white p-2">Enter Information for Equipment Return</h1>
+		<img class="mx-auto mb-2" v-bind:alt="logoAlt" v-bind:src="image" width="200px">
+		<div class="text-left text-black  p-4 bg-gray-300 w-2/3 mx-auto">
+		<h1 class="text-2xl font-bold">HBC Equipment Return</h1>
+		<h2 class="font-bold text-gray-600">Enter Information below to complete form</h2>
+		</div>
 		<InformationInput></InformationInput>
 	</div>
 </template>
