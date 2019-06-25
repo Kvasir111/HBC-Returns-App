@@ -62,36 +62,36 @@
 			</div>
 			<div id="equipmentInformationDiv" class="">
 				<div class="text-center block">
-					<table class="mx-auto">
-						<tr>
+					<table class="mx-auto max-w-full">
+						<tr class="sm:invisible">
 							<td>Equipment Type</td>
 							<td>CMAC/SN</td>
 							<td>Accessories</td>
 						</tr>
-						<tbody>
-						<tr v-for="(row, index) in rows">
-							<td><select required class="form-select bg-gray-200 m-2" id="equipmentType" v-model="rows[index].device">
+						<tbody class="sm:block">
+						<tr class="sm:block" v-for="(row, index) in rows">
+							<td class="sm:block"><select required class="form-select bg-gray-200 m-2" id="equipmentType" v-model="rows[index].device">
 								<option disabled selected>Select a device type</option>
 								<option :key="index" v-for="(equipmentType,index) in equipmentTypes">
 									{{ equipmentType.text }}
 								</option>
 							</select></td>
-							<td><input autocomplete="off" class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="rows[index].equipmentNum"></td>
+							<td class="sm:block"><input autocomplete="off" class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="rows[index].equipmentNum"></td>
 							<td>
 								<label for="powerCord">Power Cord</label>
 								<input id="powerCord" class="p-2 m-2 form-checkbox" type="checkbox" v-model="rows[index].powerCord">
 								<label for="remote">Remote</label>
 								<input id="remote" class="p-2 m-2 form-checkbox" type="checkbox" v-model="rows[index].remote">
 							</td>
-							<td>
-								<a class="block mx-auto px-4 py-2 rounded-full bg-gray-200"
+							<td class="sm:block">
+								<a class="block mx-auto px-4 py-2 rounded-full bg-gray-200 m-2"
 								   style="cursor: pointer" v-on:click="removeElement(index)">Remove</a></td>
 
 						</tr>
 						</tbody>
 					</table>
 					<div>
-						<button class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold"
+						<button class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold m-2"
 						        v-on:click.prevent="addRow">Add More Equipment +
 						</button>
 					</div>
@@ -100,7 +100,7 @@
 			<div id="returnInformationDiv">
 				<div>
 					<div class="text-center" id="return-information">
-						<label for="returnType">Select Reason for return</label>
+						<label for="returnType" class="block mt-4">Select Reason for return</label>
 						<select required class="form-select m-2 bg-gray-200 text-black" id="returnType" v-model="returnType">
 							<option disabled selected>Select Reason</option>
 							<option :key="index" v-bind:value="returnOption.value"
@@ -110,7 +110,7 @@
 						</select>
 					</div>
 					<div class="text-center" id="notes">
-						<textarea required id="explanation" class="mx-auto bg-gray-200 text-center" cols="50" rows="4"
+						<textarea required id="explanation" class="mx-auto bg-gray-200 text-center m-4 max-w-full" cols="50" rows="4"
 						          v-bind:placeholder="returnType"></textarea>
 					</div>
 					<input class="mx-auto newInput hover:bg-blue-300" type="submit" value="Submit">
