@@ -59,7 +59,7 @@
 		</div>
 		<div id="equipmentInformationDiv" class="">
 			<div class="text-center block">
-				<table class="mx-auto max-w-full sm:text-center">
+				<table class="mx-auto max-w-full sm:text-center px-4">
 					<tr class="sm:invisible border-b-2">
 						<td>Equipment Type</td>
 						<td>CMAC/SN</td>
@@ -81,9 +81,12 @@
 							<input id="remote" class="form-checkbox m-2" type="checkbox" v-model="rows[index].remote">
 						</td>
 						<td class="sm:block">
-							<a class="removeEquipmentButton"
-							   style="cursor: pointer" v-on:click="removeElement(index)">Remove</a></td>
-
+							<input type="button"
+							       class="removeEquipmentButton"
+							        style="cursor: pointer"
+							       v-on:click="removeElement(index)"
+							value="-">
+						</td>
 					</tr>
 					</tbody>
 				</table>
