@@ -22,14 +22,6 @@
 				logoAlt: "Hiawatha Broadband Communications",
 			}
 		},
-		head: {
-			title: {
-				inner: "HBC Returns"
-			},
-			link:[
-				{rel: 'manifest', href: "./manifest.json"}
-			]
-		}
 	}
 
 </script>
