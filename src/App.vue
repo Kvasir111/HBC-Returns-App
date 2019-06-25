@@ -7,7 +7,7 @@
 				class="bg-white shadow-md w-2/3 mx-auto p-2"
 				id="information input"
 		>
-			<div id="cDiv">
+			<div id="customerInformationDiv">
 				<div class="p-2" id="customerInformation">
 					<div class="text-center">
 						<input
@@ -60,7 +60,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="eDiv" class="">
+			<div id="equipmentInformationDiv" class="">
 				<div class="text-center block">
 					<table class="mx-auto">
 						<tr>
@@ -97,7 +97,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="rDiv">
+			<div id="returnInformationDiv">
 				<div>
 					<div class="text-center" id="return-information">
 						<label for="returnType">Select Reason for return</label>
