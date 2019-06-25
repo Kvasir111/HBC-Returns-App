@@ -9,7 +9,9 @@
   "dependencies": {
     "@tailwindcss/custom-forms": "^0.1.4",
     "node-mandrill": "^1.0.1",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-head": "^2.1.1",
+    "vue-router": "^3.0.6"
   },
   "devDependencies": {
     "@vue/cli-service": "^3.7.0",

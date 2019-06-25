@@ -1,0 +1,17 @@
+{
+  "app": {
+    "background":{
+    }
+  },
+  "manifest_version": 2,
+  "name": "HBC Equipment Returns",
+  "version" : "1.0b",
+  "default_locale": "en",
+  "description": "WebApp for HBC Equipment Returns",
+  "short_name": "HBC Returns",
+  "start_url": "/App.vue",
+  "display": "standalone",
+  "background_color": "#4a5568",
+  "theme_color": "#d0dd28",
+  "orientation": "portrait-primary"
+}
