@@ -1,14 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 @tailwind base;
+html{
+    font-family: 'Open Sans', sans-serif;
+}
 .cardInput{
     @apply block px-4 py-2 mx-auto m-1 border border-gray-400 rounded mx-auto text-center
 }
 .equipmentInput{
     @apply px-4 py-2 mx-auto m-1 border border-gray-400 rounded mx-auto text-center
 }
-.newInput{
-    @apply mx-auto block px-4 py-2 m-2 text-blue-800 bg-transparent border-blue-800 border-2
+.removeEquipmentButton{
+    background-color: #EF424C;
+    @apply mx-auto block py-2 px-4 rounded text-white
 }
-.customerInput{
+.submitButton{
+    background-color: #28BFDB;
+    @apply mx-auto block py-2 px-4 rounded text-white
+}
+.addEquipmentButton{
+    background-color: #71eeb8;
+    @apply block mx-auto px-4 py-2 rounded
+}
+.customerInformationInput{
+    @apply border-b-2 border-blue-500 m-4 px-2
 }
 @tailwind components;
 @tailwind utilities;

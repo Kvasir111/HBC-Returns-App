@@ -9,7 +9,7 @@
 				<div class="text-center">
 					<input
 							autocomplete="no"
-							class="form-input m-2"
+							class="customerInformationInput focus:outline-none"
 							placeholder="First Name"
 							type="text"
 							v-model="firstName"
@@ -17,14 +17,14 @@
 					>
 					<input
 							autocomplete="no"
-							class="form-input m-2"
+							class="customerInformationInput focus:outline-none"
 							placeholder="Last Name"
 							type="text"
 							v-model="lastName"
 							required
 					>
 					<input
-							class="form-input m-2"
+							class="customerInformationInput focus:outline-none"
 							min="0"
 							placeholder="Account Number"
 							type="number"
@@ -33,7 +33,7 @@
 				</div>
 				<div class="text-center">
 					<input
-							class="form-input m-2"
+							class="customerInformationInput focus:outline-none"
 							maxlength="11"
 							minlength="10"
 							placeholder="Phone number"
@@ -42,14 +42,14 @@
 							required
 					>
 					<input
-							class="form-input m-2"
+							class="customerInformationInput focus:outline-none"
 							placeholder="Service Address"
 							type="text"
 							v-model="address"
 							required
 					>
 					<input
-							class="form-input m-2"
+							class="customerInformationInput focus:outline-none"
 							placeholder="Customer Email"
 							type="email"
 							v-model="email"
@@ -59,36 +59,39 @@
 		</div>
 		<div id="equipmentInformationDiv" class="">
 			<div class="text-center block">
-				<table class="mx-auto max-w-full sm:text-center">
-					<tr class="sm:invisible">
+				<table class="mx-auto max-w-full sm:text-center px-4">
+					<tr class="sm:invisible border-b-2">
 						<td>Equipment Type</td>
 						<td>CMAC/SN</td>
 						<td>Accessories</td>
 					</tr>
 					<tbody class="sm:block">
 					<tr class="sm:block" v-for="(row, index) in rows">
-						<td class="sm:block"><select required class="form-select bg-gray-200 m-2" id="equipmentType" v-model="rows[index].device">
+						<td class="sm:block"><select required class="border-b-2 border-blue-500 px-2 py-2 m-2 focus:outline-none" id="equipmentType" v-model="rows[index].device">
 							<option disabled selected>Select a device type</option>
 							<option :key="index" v-for="(equipmentType,index) in equipmentTypes">
 								{{ equipmentType.text }}
 							</option>
 						</select></td>
-						<td class="sm:block"><input autocomplete="off" class="form-input inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="rows[index].equipmentNum"></td>
-						<td>
+						<td class="sm:block"><input autocomplete="off" class="border-b-2 border-blue-500 m-2 p-2 focus:outline-none inline" id="CMAC/SN input" placeholder="CMAC/SN" type="text" v-model="rows[index].equipmentNum"></td>
+						<td class="block m-2 p-2 align-text-bottom">
 							<label for="powerCord">Power Cord</label>
-							<input id="powerCord" class="p-2 m-2 form-checkbox" type="checkbox" v-model="rows[index].powerCord">
+							<input id="powerCord" class="form-checkbox m-2" type="checkbox" v-model="rows[index].powerCord">
 							<label for="remote">Remote</label>
-							<input id="remote" class="p-2 m-2 form-checkbox" type="checkbox" v-model="rows[index].remote">
+							<input id="remote" class="form-checkbox m-2" type="checkbox" v-model="rows[index].remote">
 						</td>
 						<td class="sm:block">
-							<a class="block mx-auto px-4 py-2 rounded-full bg-gray-200 m-2"
-							   style="cursor: pointer" v-on:click="removeElement(index)">Remove</a></td>
-
+							<input type="button"
+							       class="removeEquipmentButton"
+							        style="cursor: pointer"
+							       v-on:click="removeElement(index)"
+							value="-">
+						</td>
 					</tr>
 					</tbody>
 				</table>
 				<div>
-					<button class="block mx-auto px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-300 hover:font-bold m-2"
+					<button class="addEquipmentButton"
 					        v-on:click.prevent="addRow">Add More Equipment +
 					</button>
 				</div>
@@ -97,8 +100,7 @@
 		<div id="returnInformationDiv">
 			<div>
 				<div class="text-center" id="return-information">
-					<label for="returnType" class="block mt-4">Select Reason for return</label>
-					<select required class="form-select m-2 bg-gray-200 text-black" id="returnType" v-model="returnType">
+					<select required class="border-b-2 border-blue-500 p-2 focus:outline-none" id="returnType" v-model="returnType">
 						<option disabled selected>Select Reason</option>
 						<option :key="index" v-bind:value="returnOption.value"
 						        v-for="(returnOption,index) in returnOptions">
@@ -107,10 +109,10 @@
 					</select>
 				</div>
 				<div class="text-center" id="notes">
-						<textarea required id="explanation" class="mx-auto bg-gray-200 text-center m-4 max-w-full" cols="50" rows="4"
+						<textarea required id="explanation" class="mx-auto border-2 border-blue-500 text-center  p-2 m-4 max-w-full" cols="50" rows="4"
 						          v-bind:placeholder="returnType"></textarea>
 				</div>
-				<input class="mx-auto newInput hover:bg-blue-300" type="submit" value="Submit">
+				<input class="submitButton hover:cursor-pointer" type="submit" value="Submit">
 			</div>
 		</div>
 	</form>
