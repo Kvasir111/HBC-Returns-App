@@ -6,10 +6,10 @@
 	>
 		<div id="customerInformationDiv">
 			<div class="p-2" id="customerInformation">
-				<div class="text-center">
+				<div class="text-center lg:block">
 					<input
 							autocomplete="no"
-							class="customerInformationInput focus:outline-none"
+							class="customerInformationInput focus:outline-none lg:block"
 							placeholder="First Name"
 							type="text"
 							v-model="firstName"
@@ -17,23 +17,23 @@
 					>
 					<input
 							autocomplete="no"
-							class="customerInformationInput focus:outline-none"
+							class="customerInformationInput focus:outline-none lg:block"
 							placeholder="Last Name"
 							type="text"
 							v-model="lastName"
 							required
 					>
 					<input
-							class="customerInformationInput focus:outline-none"
+							class="customerInformationInput focus:outline-none lg:block"
 							min="0"
 							placeholder="Account Number"
 							type="number"
 							v-model="account"
 					>
 				</div>
-				<div class="text-center">
+				<div class="text-center lg:block">
 					<input
-							class="customerInformationInput focus:outline-none"
+							class="customerInformationInput focus:outline-none lg:block"
 							maxlength="11"
 							minlength="10"
 							placeholder="Phone number"
@@ -42,14 +42,14 @@
 							required
 					>
 					<input
-							class="customerInformationInput focus:outline-none"
+							class="customerInformationInput focus:outline-none lg:block"
 							placeholder="Service Address"
 							type="text"
 							v-model="address"
 							required
 					>
 					<input
-							class="customerInformationInput focus:outline-none"
+							class="customerInformationInput focus:outline-none lg:block"
 							placeholder="Customer Email"
 							type="email"
 							v-model="email"
@@ -59,8 +59,8 @@
 		</div>
 		<div id="equipmentInformationDiv" class="">
 			<div class="text-center block">
-				<table class="mx-auto max-w-full sm:text-center px-4">
-					<tr class="sm:invisible border-b-2">
+				<table class="mx-auto max-w-full md:text-center px-4">
+					<tr class="lg:invisible border-b-2 lg:border-transparent">
 						<td>Equipment Type</td>
 						<td>CMAC/SN</td>
 						<td>Accessories</td>
@@ -68,7 +68,7 @@
 					<tbody class="sm:block">
 					<tr class="sm:block" v-for="(row, index) in rows">
 						<td class="sm:block"><select required
-						                             class="border-b-2 border-blue-500 px-2 py-2 m-2 focus:outline-none"
+						                             class="border-b-2 border-blue-500 px-2 py-2 m-2 focus:outline-none lg:block"
 						                             id="equipmentType" v-model="rows[index].device">
 							<option disabled selected>Select a device type</option>
 							<option :key="index" v-for="(equipmentType,index) in equipmentTypes">
@@ -76,15 +76,15 @@
 							</option>
 						</select></td>
 						<td class="sm:block"><input autocomplete="off"
-						                            class="border-b-2 border-blue-500 m-2 p-2 focus:outline-none inline"
+						                            class="border-b-2 border-blue-500 m-2 p-2 focus:outline-none inline lg:block"
 						                            id="CMAC/SN input" placeholder="CMAC/SN" type="text"
 						                            v-model="rows[index].equipmentNum"></td>
 						<td class="block m-2 p-2 align-text-bottom">
-							<label for="powerCord">Power Cord</label>
-							<input id="powerCord" class="form-checkbox m-2" type="checkbox"
+							<label for="powerCord" class="sm:block">Power Cord</label>
+							<input id="powerCord" class="form-checkbox m-2 sm:inline-block" type="checkbox"
 							       v-model="rows[index].powerCord">
 							<label for="remote">Remote</label>
-							<input id="remote" class="form-checkbox m-2" type="checkbox" v-model="rows[index].remote">
+							<input id="remote" class="form-checkbox m-2 sm:inline-block" type="checkbox" v-model="rows[index].remote">
 						</td>
 						<td class="sm:block">
 							<input type="button"
