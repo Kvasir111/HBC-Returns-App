@@ -80,11 +80,11 @@
 						                            id="CMAC/SN input" placeholder="CMAC/SN" type="text"
 						                            v-model="rows[index].equipmentNum"></td>
 						<td class="block m-2 p-2 align-text-bottom">
-							<label for="powerCord">Power Cord</label>
-							<input id="powerCord" class="form-checkbox m-2" type="checkbox"
+							<label for="powerCord" class="sm:block">Power Cord</label>
+							<input id="powerCord" class="form-checkbox m-2 sm:inline-block" type="checkbox"
 							       v-model="rows[index].powerCord">
 							<label for="remote">Remote</label>
-							<input id="remote" class="form-checkbox m-2" type="checkbox" v-model="rows[index].remote">
+							<input id="remote" class="form-checkbox m-2 sm:inline-block" type="checkbox" v-model="rows[index].remote">
 						</td>
 						<td class="sm:block">
 							<input type="button"
