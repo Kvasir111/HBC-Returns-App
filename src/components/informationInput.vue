@@ -1,6 +1,6 @@
 <template>
 	<form
-			@submit.prevent="exportPDF"
+			@submit.prevent="toJSON"
 			class="bg-white shadow-md w-2/3 mx-auto p-2"
 			id="information input"
 	>
@@ -183,9 +183,11 @@
 					'Accessories': ""
 				});
 			},
+			//removes a row from equipment table
 			removeElement(index) {
 				this.rows.splice(index, 1);
 			},
+			//exports the provided information to a PDF
 			exportPDF() {
 				let data = [
 					"Name: " + this.firstName + " " + this.lastName + "\n"
@@ -225,10 +227,64 @@
 				doc.text(data, 2, 2);
 				doc.save("return.pdf");
 			},
+			//for testing output
 			echoTest() {
 				let data = document.getElementById("returnType");
 				console.log(data.options[data.selectedIndex].text)
-			}
+			},
+			//converts information to JSON
+			toJSON(){
+				let equipmentData = "";
+				for (let i = 0 ; i <this.rows.length ; i++) {
+					equipmentData += "Device: " + this.rows[i].device;
+					equipmentData += "CMAC/SN: " + this.rows[i].equipmentNum;
+					equipmentData += "Accessories: ";
+					if (this.rows[i].remote) {
+						equipmentData += "Remote Included ";
+					}
+					if (this.rows[i].powerCord) {
+						equipmentData += "Power Cord included";
+					}
+				}
+				let reason =  document.getElementById("returnType");
+				reason =  reason.options[reason.selectedIndex].text;
+				let r = {"returns" : [
+						{"Name" : this.firstName + this.lastName,
+							"Service Address" : this.address,
+							"Account #" : this.account,
+							"Phone #" : this.phone,
+							"Email" : this.email,
+							"EquipmentData": equipmentData,
+							"Return Reason" : reason,
+							"Notes" : document.getElementById("explanation").value}
+					]};
+
+				r = JSON.stringify(r);
+				console.log(r);
+			},
+			//sends JSON to firebase
+			sendToFirebase(){
+				const firestoreService = require('firestore-export-import');
+				const firebaseConfig = require('../firebase_config/config.js');
+				const serviceAccount = require('../firebase_config/serviceAccount.json');
+
+				const jsonToFirestore = async () => {
+					try {
+						console.log('Initializing Firebase Connection...');
+						await firestoreService.initializeApp(serviceAccount, firebaseConfig.databaseURL);
+						console.log('Connected to Firebase');
+
+						await firestoreService.restore('src/firebase_config/firebase_data/equipment.json');
+						console.log('Upload Success');
+					}
+					catch (error) {
+						console.log(error);
+					}
+				};
+
+				jsonToFirestore();
+			},
+
 		}
 	};
 </script>
