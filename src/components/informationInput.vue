@@ -1,6 +1,6 @@
 <template>
 	<form
-			@submit.prevent="toJSON"
+			@submit.prevent="sendEmail"
 			class="bg-white shadow-md w-2/3 mx-auto p-2"
 			id="information input"
 	>
@@ -233,9 +233,9 @@
 				console.log(data.options[data.selectedIndex].text)
 			},
 			//converts information to JSON
-			toJSON(){
+			toJSON() {
 				let equipmentData = "";
-				for (let i = 0 ; i <this.rows.length ; i++) {
+				for (let i = 0; i < this.rows.length; i++) {
 					equipmentData += "Device: " + this.rows[i].device;
 					equipmentData += "CMAC/SN: " + this.rows[i].equipmentNum;
 					equipmentData += "Accessories: ";
@@ -246,44 +246,81 @@
 						equipmentData += "Power Cord included";
 					}
 				}
-				let reason =  document.getElementById("returnType");
-				reason =  reason.options[reason.selectedIndex].text;
-				let r = {"returns" : [
-						{"Name" : this.firstName + this.lastName,
-							"Service Address" : this.address,
-							"Account #" : this.account,
-							"Phone #" : this.phone,
-							"Email" : this.email,
+				let reason = document.getElementById("returnType");
+				reason = reason.options[reason.selectedIndex].text;
+				let r = {
+					"returns": [
+						{
+							"Name": this.firstName + this.lastName,
+							"Service Address": this.address,
+							"Account #": this.account,
+							"Phone #": this.phone,
+							"Email": this.email,
 							"EquipmentData": equipmentData,
-							"Return Reason" : reason,
-							"Notes" : document.getElementById("explanation").value}
-					]};
-
-				r = JSON.stringify(r);
+							"Return Reason": reason,
+							"Notes": document.getElementById("explanation").value
+						}
+					]
+				};
 				console.log(r);
+				this.sendToFirebase(r);
 			},
 			//sends JSON to firebase
-			sendToFirebase(){
-				const firestoreService = require('firestore-export-import');
-				const firebaseConfig = require('../firebase_config/config.js');
-				const serviceAccount = require('../firebase_config/serviceAccount.json');
+			sendToFirebase() {
+				let firebase = require("firebase/app");
+				require("firebase/auth");
+				require("firebase/firestore");
+				let firebaseConfig = "/config.js";
+				firebase.initializeApp(firebaseConfig)
 
-				const jsonToFirestore = async () => {
-					try {
-						console.log('Initializing Firebase Connection...');
-						await firestoreService.initializeApp(serviceAccount, firebaseConfig.databaseURL);
-						console.log('Connected to Firebase');
+			},
+			//email using mandrill
+			sendEmail() {
+				let str = "";
+				for (let i = 0; i < this.rows.length; i++) {
+					str += "Device: " + this.rows[i].device;
+					str += "\n";
+					str += "CMAC/SN: " + this.rows[i].equipmentNum;
+					str += "\n";
+					str += "Accessories: ";
+					if (this.rows[i].remote) {
+						str += "Remote Included ";
+					}
+					if (this.rows[i].powerCord) {
+						str += "Power Cord included";
+					}
+					str += "\n";
+				}
+				;
+				let temp = document.getElementById("returnType");
+				temp = temp.options[temp.selectedIndex].text;
+				let returnReason = "Reason for Return: " + temp;
+				let notes = "Notes: " + document.getElementById("explanation").value;
 
-						await firestoreService.restore('src/firebase_config/firebase_data/equipment.json');
-						console.log('Upload Success');
+				let nodemailer = require('nodemailer');
+				let jasonStatham = nodemailer.createTransport({
+					service: 'cpanel',
+					auth:{
+						user: 'jasonstatham@returns.hbci.com',
+						pass: "f3nriswolf!"
 					}
-					catch (error) {
-						console.log(error);
-					}
+				});
+
+				let mailOptions = {
+					from: "jasonstatham@returns.hbci.com",
+					to: this.email,
+					subject: "Your HBC Equipment Return",
+					text: "Thank you for returning your equipment to HBC, attached is the information you provided"
 				};
 
-				jsonToFirestore();
-			},
+				jasonStatham.sendMail(mailOptions, function (error, info) {
+					if (error){
+						console.log(error);
+					}else{
+						console.log('Email sent: ' + info.response);
+					}
+				});
+			}
 
 		}
 	};
