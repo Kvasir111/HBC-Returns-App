@@ -1,6 +1,6 @@
 <template>
 	<form
-			@submit.prevent="'sendEmail.php'"
+			@submit.prevent="emailShit"
 			class="bg-white shadow-md w-2/3 mx-auto p-2"
 			id="information input"
 	>
@@ -189,43 +189,22 @@
 			},
 			//exports the provided information to a PDF
 			exportPDF() {
-				let data = [
-					"Name: " + this.firstName + " " + this.lastName + "\n"
-					+ "Service Address: " + this.address + "\n"
-					+ "Account: " + this.account + "\n"
-					+ "Contact Number : " + this.phone + "\n"
-					+ "Email: " + this.email + "\n"
-				];
-				data += "\n";
-				let str = "";
-				for (let i = 0; i < this.rows.length; i++) {
-					str += "Device: " + this.rows[i].device;
-					str += "\n";
-					str += "CMAC/SN: " + this.rows[i].equipmentNum;
-					str += "\n";
-					str += "Accessories: ";
-					if (this.rows[i].remote) {
-						str += "Remote Included ";
-					}
-					if (this.rows[i].powerCord) {
-						str += "Power Cord included";
-					}
-					str += "\n";
-				}
-				data += str;
-				data += "\n";
-				let temp = document.getElementById("returnType");
-				temp = temp.options[temp.selectedIndex].text;
-				data += "Reason for Return: " + temp;
-				data += "\n";
-				data += "Notes: " + document.getElementById("explanation").value;
+				//compiles customer information into string
+				let customerString = this.buildCustomerString();
+				//compiles equipment information into string
+				let equipmentString = this.buildEquipmentString();
+				//compiles return information into string
+				let returnString = this.buildReturnString();
+				let date = this.buildDateTimeStamp();
+
+				let data = customerString + "\n" + equipmentString + "\n" + returnString + "\n" + date;
 				let doc = new jspdf({
 					orientation: "p",
 					unit: "in",
 					format: "a4"
 				});
 				doc.text(data, 2, 2);
-				doc.save("return.pdf");
+				doc.save(this.firstName + " " + this.lastName + " return.pdf");
 			},
 			//for testing output
 			echoTest() {
@@ -275,33 +254,57 @@
 
 			},
 			//email using mandrill
+			emailShit(){
+						let email = this.email;
+						let subject = "Your HBC Return";
+						let emailBody = "Thank you for your visit to HBC! Your equipment return information is attached";
+						let attach = this.exportPDF();
+						document.location = "mailto:"+email+"?subject="+subject+"&body"+emailBody+"?attach="+attach;
+			},
+			buildCustomerString(){
+				let customerString = [
+					"Name: " + this.firstName + " " + this.lastName + "\n"
+					+ "Service Address: " + this.address + "\n"
+					+ "Account: " + this.account + "\n"
+					+ "Contact Number : " + this.phone + "\n"
+					+ "Email: " + this.email + "\n"
+				];
+				return customerString;
+			},
+			buildEquipmentString(){
+				let str = "";
+				for (let i = 0; i < this.rows.length; i++) {
+					str += "Device: " + this.rows[i].device;
+					str += "\n";
+					str += "CMAC/SN: " + this.rows[i].equipmentNum;
+					str += "\n";
+					str += "Accessories: ";
+					if (this.rows[i].remote) {
+						str += "Remote Included ";
+					}
+					if (this.rows[i].powerCord) {
+						str += "Power Cord included";
+					}
+					str += "\n";
+				}
+				return str;
+			},
+			buildReturnString(){
+				let returnReasonString = "";
+				let temp = document.getElementById("returnType");
+				temp = temp.options[temp.selectedIndex].text;
+				returnReasonString += "Reason for Return: " + temp;
+				returnReasonString += "\n";
+				returnReasonString += "Notes: " + document.getElementById("explanation").value;
+
+				return returnReasonString;
+			},
+			buildDateTimeStamp(){
+				let date = new Date();
+				let myDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+				return myDate;
+			}
 		} ,
-		sendEmail(){
-			let nodemailer = require('nodemailer');
-
-			var transporter = nodemailer.createTransport({
-				service: 'localhost',
-				auth: {
-					user: 'jasonstatham@returns.hbci.com',
-					pass: ''
-				}
-			});
-
-			var mailOptions = {
-				from: 'jasonstatham@returns.hbci.com',
-				to: this.email,
-				subject: 'Sending Email using Node.js',
-				text: 'That was easy!'
-			};
-
-			transporter.sendMail(mailOptions, function(error, info){
-				if (error) {
-					console.log(error);
-				} else {
-					console.log('Email sent: ' + info.response);
-				}
-			});
-		}
 	};
 </script>
 
