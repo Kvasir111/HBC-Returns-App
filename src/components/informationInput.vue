@@ -1,6 +1,6 @@
 <template>
 	<form
-			@submit.prevent="sendEmail"
+			@submit.prevent="exportPDF"
 			class="bg-white shadow-md w-2/3 mx-auto p-2"
 			id="information input"
 	>
@@ -275,52 +275,6 @@
 
 			},
 			//email using mandrill
-			sendEmail() {
-				let str = "";
-				for (let i = 0; i < this.rows.length; i++) {
-					str += "Device: " + this.rows[i].device;
-					str += "\n";
-					str += "CMAC/SN: " + this.rows[i].equipmentNum;
-					str += "\n";
-					str += "Accessories: ";
-					if (this.rows[i].remote) {
-						str += "Remote Included ";
-					}
-					if (this.rows[i].powerCord) {
-						str += "Power Cord included";
-					}
-					str += "\n";
-				}
-				;
-				let temp = document.getElementById("returnType");
-				temp = temp.options[temp.selectedIndex].text;
-				let returnReason = "Reason for Return: " + temp;
-				let notes = "Notes: " + document.getElementById("explanation").value;
-
-				let nodemailer = require('nodemailer');
-				let jasonStatham = nodemailer.createTransport({
-					service: 'cpanel',
-					auth:{
-						user: 'jasonstatham@returns.hbci.com',
-						pass: "f3nriswolf!"
-					}
-				});
-
-				let mailOptions = {
-					from: "jasonstatham@returns.hbci.com",
-					to: this.email,
-					subject: "Your HBC Equipment Return",
-					text: "Thank you for returning your equipment to HBC, attached is the information you provided"
-				};
-
-				jasonStatham.sendMail(mailOptions, function (error, info) {
-					if (error){
-						console.log(error);
-					}else{
-						console.log('Email sent: ' + info.response);
-					}
-				});
-			}
 
 		}
 	};
