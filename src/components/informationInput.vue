@@ -1,6 +1,6 @@
 <template>
 	<form
-			@submit.prevent="exportPDF"
+			@submit.prevent="'sendEmail.php'"
 			class="bg-white shadow-md w-2/3 mx-auto p-2"
 			id="information input"
 	>
@@ -275,7 +275,32 @@
 
 			},
 			//email using mandrill
+		} ,
+		sendEmail(){
+			let nodemailer = require('nodemailer');
 
+			var transporter = nodemailer.createTransport({
+				service: 'localhost',
+				auth: {
+					user: 'jasonstatham@returns.hbci.com',
+					pass: ''
+				}
+			});
+
+			var mailOptions = {
+				from: 'jasonstatham@returns.hbci.com',
+				to: this.email,
+				subject: 'Sending Email using Node.js',
+				text: 'That was easy!'
+			};
+
+			transporter.sendMail(mailOptions, function(error, info){
+				if (error) {
+					console.log(error);
+				} else {
+					console.log('Email sent: ' + info.response);
+				}
+			});
 		}
 	};
 </script>
