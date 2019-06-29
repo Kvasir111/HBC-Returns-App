@@ -5,4 +5,6 @@ This is a small Vue.js app to take in customer information and export it as a PD
 eliminate the need for paper hand receipts. This will standardize the way HBC takes in returned equipment leading
 to less confusion and hassle for the customer and business.
 
-
+## Build instructions
+`npm run build`
+Copy contents of "dist" to the root of your web directory
