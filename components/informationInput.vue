@@ -1,20 +1,22 @@
 <template>
 	<div class="mt-2">
-		<form-header v-bind:card-title="title" v-bind:card-subtitle="subtitle"></form-header>
-		<form class="card">
+		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
+		<form class="card" @submit.prevent="exportPDF" id="informationInputForm">
 			<div class="text-center lg:block" id="customerInformation">
 				<div id="topCustomerRow">
-					<input class="customerInformationInput" type="text" id="firstName" placeholder="First Name">
-					<input class="customerInformationInput" type="text" id="lastName" placeholder="Last Name">
-					<input class="customerInformationInput" type="number" id="accountNumber" placeholder="Account #" min="0">
+					<input class="customerInformationInput" id="firstName" placeholder="First Name" type="text" v-model="firstName">
+					<input class="customerInformationInput" id="lastName" placeholder="Last Name" type="text" v-model="lastName">
+					<input class="customerInformationInput" id="accountNumber" min="0" placeholder="Account #"
+					       type="number" v-model="account">
 				</div>
 				<div id="bottomCustomerRow">
-					<input class="customerInformationInput" id="phoneNumber" type="tel" placeholder="Phone #">
-					<input class="customerInformationInput" id="serviceAddress" type="text" placeholder="Service Address">
-					<input class="customerInformationInput" id="email" type="email" placeholder="Email">
+					<input class="customerInformationInput" id="phoneNumber" placeholder="Phone #" type="tel" v-model="phone">
+					<input class="customerInformationInput" id="serviceAddress" placeholder="Service Address"
+					       type="text" v-model="address">
+					<input class="customerInformationInput" id="email" placeholder="Email" type="email" v-model="email">
 				</div>
 			</div>
-			<div id="equipmentInformation" class="text-center block">
+			<div class="text-center block" id="equipmentInformation">
 				<table class="mx-auto max-w-full md:text-center px-4">
 					<tr class="lg:invisible border-b-2 lg:border-transparent">
 						<td>Equipment Type</td>
@@ -24,17 +26,17 @@
 					<tbody class="">
 					<tr class="" v-for="(row, index) in rows">
 						<td class=""><select class="border-b-2 border-blue-500 px-2 py-2 m-2 focus:outline-none"
-						                             id="equipmentType"
-						                             required v-model="rows[index].device">
+						                     id="equipmentType"
+						                     required v-model="rows[index].device">
 							<option disabled selected>Select a device type</option>
 							<option :key="index" v-for="(equipmentType,index) in equipmentTypes">
 								{{ equipmentType.text }}
 							</option>
 						</select></td>
 						<td class=""><input autocomplete="off"
-						                            class="border-b-2 border-blue-500 m-2 p-2 focus:outline-none inline"
-						                            id="CMAC/SN input" placeholder="CMAC/SN" type="text"
-						                            v-model="rows[index].equipmentNum"></td>
+						                    class="border-b-2 border-blue-500 m-2 p-2 focus:outline-none inline"
+						                    id="CMAC/SN input" placeholder="CMAC/SN" type="text"
+						                    v-model="rows[index].equipmentNum"></td>
 						<td class="block m-2 p-2 align-text-bottom">
 							<label for="powerCord">Power Cord</label>
 							<input class="form-checkbox m-2 " id="powerCord" type="checkbox"
@@ -86,11 +88,13 @@
 
 <script>
     import FormHeader from "./formHeader";
+    import jspdf from 'jspdf';
+
     export default {
         name: "informationInput",
         components: {FormHeader},
-        data:function(){
-            return{
+        data: function () {
+            return {
                 //data for page
                 title: "Information Input",
                 subtitle: "Please enter information for return",
@@ -126,23 +130,114 @@
                 equipmentItem: [],
                 //data for headings
                 image: "https://www.hbci.com/wp-content/uploads/footer-logo.png",
+	            altImage: "https://bloximages.chicago2.vip.townnews.com/winonadailynews.com/content/tncms/assets/v3/editorial/4/44/4444c7a3-8473-5f32-be6e-c72a804dc6ee/59d7d6ed20146.image.jpg",
                 logoAlt: "Hiawatha Broadband Communications",
             }
-	    },
-	    methods :{
-        addRow() {
-            let elem = document.createElement('tr');
-            this.rows.push({
-                'Equipment Type': "",
-                'CMAC/SN': "",
-                'Accessories': ""
-            });
         },
-        //removes a row from equipment table
-        removeElement(index) {
-            this.rows.splice(index, 1);
-        },
-    }
+        methods: {
+
+            addRow() {
+                let elem = document.createElement('tr');
+                this.rows.push({
+                    'Equipment Type': "",
+                    'CMAC/SN': "",
+                    'Accessories': ""
+                });
+            },
+            //removes a row from equipment table
+            removeElement(index) {
+                this.rows.splice(index, 1);
+            },
+            exportPDF() {
+                let customerInfo = this.buildCustomerString();
+                let equipmentInfo = this.buildEquipmentString();
+                let returnInfo = this.buildReturnString();
+                let date = this.buildDateTimeStamp();
+
+                console.log(customerInfo);
+
+                let compiledString = customerInfo + "\n" + equipmentInfo + "\n" + returnInfo + "\n" + date;
+
+                let doc = new jspdf({
+	                orientation : "p",
+	                unit: "in",
+	                format: "a4"
+                });
+                //adds the HBCI logo to the top of the doc
+                //doc.addImage(this.altImage, 'JPEG', 15);
+                doc.text("Customer Information: ", 1, 1);
+	            let customerField = new TextField();
+/*                customerField.rect = [1.75 ,1, 5, 3]; //width of 5, height of 4
+	            customerField.multiline = true;
+	            customerField.value = customerInfo; //puts the customer information in the box
+	            customerField.fieldName = "Customer Information Box";
+	            */
+				customerField.value = customerInfo;
+	            doc.addField(customerField);
+
+	          /*  doc.text("Equipment Information: ", 1, 6.5);
+	            let equipmentField = new TextField();
+	            equipmentField.rect(1.75, 4.5, 5, 3);
+	            equipmentField.multiline = true;
+	            equipmentField.value = equipmentInfo;
+	            equipmentField.fieldName = "Equipment Information Box";
+	            doc.addField(equipmentField);
+
+	            doc.text("Return Information: " , 1, 9.5);
+	            let returnField = new TextField();
+	            returnField.rect = [1.75, 9.5, 5 , 3];
+	            returnField.multiline = true;
+	            returnField.value = returnInfo;
+	            returnField.fieldName = "Return Information Box";
+	            doc.addField(returnField);
+*/
+	          console.log("Starting save...");
+	          doc.save(this.firstName + "_" + this.lastName + "_return.pdf");
+	           console.log("Printed");
+            },
+            buildCustomerString() {
+                let customerString = [
+                    "Name: " + this.firstName + " " + this.lastName + "\n"
+                    + "Service Address: " + this.address + "\n"
+                    + "Account: " + this.account + "\n"
+                    + "Contact Number : " + this.phone + "\n"
+                    + "Email: " + this.email + "\n"
+                ];
+                return customerString;
+            },
+            buildEquipmentString() {
+                let str = "";
+                for (let i = 0; i < this.rows.length; i++) {
+                    str += "Device: " + this.rows[i].device;
+                    str += "\n";
+                    str += "CMAC/SN: " + this.rows[i].equipmentNum;
+                    str += "\n";
+                    str += "Accessories: ";
+                    if (this.rows[i].remote) {
+                        str += "Remote Included ";
+                    }
+                    if (this.rows[i].powerCord) {
+                        str += "Power Cord included";
+                    }
+                    str += "\n";
+                }
+                return str;
+            },
+            buildReturnString() {
+                let returnReasonString = "";
+                let temp = document.getElementById("returnType");
+                temp = temp.options[temp.selectedIndex].text;
+                returnReasonString += "Reason for Return: " + temp;
+                returnReasonString += "\n";
+                returnReasonString += "Notes: " + document.getElementById("explanation").value;
+                return returnReasonString;
+            },
+            buildDateTimeStamp() {
+                let date = new Date();
+                let myDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+                return myDate;
+            },
+        }
     }
 </script>
 

@@ -11,9 +11,10 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@tailwindcss/custom-forms": "^0.1.4",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^2.6.0",
+    "@tailwindcss/custom-forms": "^0.1.4",
+    "jspdf": "^1.5.3",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
