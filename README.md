@@ -1,10 +1,22 @@
-# HBC Equipment Return App
+# HBC-Equipment-Return
 
-## What the Hell is this
-This is a small Vue.js app to take in customer information and export it as a PDF as to 
-eliminate the need for paper hand receipts. This will standardize the way HBC takes in returned equipment leading
-to less confusion and hassle for the customer and business.
+> A nuxt refactor of the HBC returns vue app
 
-## Build instructions
-`npm run build`
-Copy contents of "dist" to the root of your web directory
+## Build Setup
+
+``` bash
+# install dependencies
+$ npm run install
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+
+# build for production and launch server
+$ npm run build
+$ npm run start
+
+# generate static project
+$ npm run generate
+```
+
+For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
