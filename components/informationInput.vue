@@ -241,7 +241,10 @@
             },
             writeDateTimeStamp(doc, fontSize) {
                 let date = new Date();
-                let myDate = "Date: " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+                let myDate = "Date: " + date.getDate() + "/" + monthNames[date.getMonth()] + 1 + "/" + date.getFullYear();
                 let centerPoint = doc.internal.pageSize.getWidth() / 2; //gets the internal page width
 	            let dateLength = doc.getStringUnitWidth(myDate) * 12;
 	            let leftAlign = centerPoint - (dateLength/2);
