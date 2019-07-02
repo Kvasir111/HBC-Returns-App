@@ -154,8 +154,6 @@
                 let returnInfo = this.buildReturnString();
                 let date = this.buildDateTimeStamp();
 
-                console.log(customerInfo);
-
                 let compiledString = customerInfo + "\n" + equipmentInfo + "\n" + returnInfo + "\n" + date;
 
                 let doc = new jspdf({
@@ -163,37 +161,9 @@
 	                unit: "in",
 	                format: "a4"
                 });
-                //adds the HBCI logo to the top of the doc
-                //doc.addImage(this.altImage, 'JPEG', 15);
-                doc.text("Customer Information: ", 1, 1);
-	            let customerField = new TextField();
-/*                customerField.rect = [1.75 ,1, 5, 3]; //width of 5, height of 4
-	            customerField.multiline = true;
-	            customerField.value = customerInfo; //puts the customer information in the box
-	            customerField.fieldName = "Customer Information Box";
-	            */
-				customerField.value = customerInfo;
-	            doc.addField(customerField);
 
-	          /*  doc.text("Equipment Information: ", 1, 6.5);
-	            let equipmentField = new TextField();
-	            equipmentField.rect(1.75, 4.5, 5, 3);
-	            equipmentField.multiline = true;
-	            equipmentField.value = equipmentInfo;
-	            equipmentField.fieldName = "Equipment Information Box";
-	            doc.addField(equipmentField);
-
-	            doc.text("Return Information: " , 1, 9.5);
-	            let returnField = new TextField();
-	            returnField.rect = [1.75, 9.5, 5 , 3];
-	            returnField.multiline = true;
-	            returnField.value = returnInfo;
-	            returnField.fieldName = "Return Information Box";
-	            doc.addField(returnField);
-*/
-	          console.log("Starting save...");
-	          doc.save(this.firstName + "_" + this.lastName + "_return.pdf");
-	           console.log("Printed");
+                doc.text(compiledString, 1, 1);
+                doc.save(this.firstName + "_" + this.lastName + "_return.pdf");
             },
             buildCustomerString() {
                 let customerString = [
