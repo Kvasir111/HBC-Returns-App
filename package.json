@@ -7,18 +7,23 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "start": "http-server",
+    "generate": "nuxt generate",
+    "babel": "babel --presets es2015 ./nuxt.config.js -o build/main.bundle.js",
+    "webpack": "webpack"
   },
   "dependencies": {
+    "@nuxt/webpack": "^2.8.1",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^2.6.0",
     "@tailwindcss/custom-forms": "^0.1.4",
     "jspdf": "^1.5.3",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "webpack": "^4.35.2"
   },
   "devDependencies": {
+    "nodemon": "^1.18.9",
     "tailwindcss": "^1.0.0",
-    "nodemon": "^1.18.9"
+    "webpack-cli": "^3.3.5"
   }
 }

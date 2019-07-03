@@ -1,6 +1,6 @@
 <template>
 	<div class="mt-2">
-		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
+		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title+version"></form-header>
 		<form class="card" @submit.prevent="exportPDF" id="informationInputForm">
 			<div class="text-center lg:block" id="customerInformation">
 				<div id="topCustomerRow">
@@ -96,7 +96,8 @@
         data: function () {
             return {
                 //data for page
-                title: "Information Input",
+                title: "HBC Returns WebApp",
+                version: " 1.0b",
                 subtitle: "Please enter information for return",
                 //data for customer information
                 firstName: "",
