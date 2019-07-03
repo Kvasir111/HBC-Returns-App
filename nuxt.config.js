@@ -1,5 +1,6 @@
 
 export default {
+    buildDir: '../functions/nuxt',
     mode: 'spa',
     /*
     ** Headers of the page
@@ -29,7 +30,8 @@ export default {
     ** Plugins to load before mounting the App
     */
     plugins: [
-        "~/plugins/jspdf"
+        "~/plugins/jspdf",
+        "~/plugins/fs"
     ],
     /*
     ** Nuxt.js modules
@@ -49,6 +51,9 @@ export default {
     ** Build configuration
     */
     build: {
+        publicPath: '/public/',
+        vendor: ['axios'],
+        extractCSS: true,
         postcss: {
             plugins: {
                 tailwindcss: './tailwind.config.js'

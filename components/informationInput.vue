@@ -169,7 +169,6 @@
                 doc = this.writeReturnString(doc);
 
                 doc = this.writeDateTimeStamp(doc);
-
                 doc.save(this.firstName + "_" + this.lastName + "_return.pdf");//saves doc
             },
             writeCustomerString(doc) {
@@ -193,7 +192,6 @@
                 this.yCoordinate =  this.yCoordinate + (this.myFontSize *2 );
                 return doc;
             },
-
             writeEquipmentString(doc) {
                 for (let i = 0; i < this.rows.length ; i++){
                     doc.setFontType('bold');
@@ -264,6 +262,8 @@
                 doc.text(myDate, leftAlign, bottomAlign - 12);
                 return doc;
             },
+            storeOnServer(doc) {
+            }
         }
     }
 </script>

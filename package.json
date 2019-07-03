@@ -17,7 +17,9 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^2.6.0",
     "@tailwindcss/custom-forms": "^0.1.4",
+    "cors": "^2.8.5",
     "jspdf": "^1.5.3",
+    "nodemailer": "^6.2.1",
     "nuxt": "^2.0.0",
     "webpack": "^4.35.2"
   },
