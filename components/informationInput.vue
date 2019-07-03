@@ -97,7 +97,7 @@
             return {
                 //data for page
                 title: "HBC Returns WebApp",
-                version: " 1.0b",
+                version: " 1.1b",
                 subtitle: "Please enter information for return",
                 //data for customer information
                 firstName: "",
@@ -165,11 +165,10 @@
                 doc.addImage(img, "JPEG", 162, 0, 288, 144);
                 doc = this.writeCustomerString(doc);
                 doc = this.writeEquipmentString(doc);
-                console.log(this.yCoordinate);
                 doc = this.writeReturnString(doc);
-
                 doc = this.writeDateTimeStamp(doc);
-                doc.save(this.firstName + "_" + this.lastName + "_return.pdf");//saves doc
+                this.storeOnServer();
+                //doc.save(this.firstName + "_" + this.lastName + "_return.pdf");//saves doc
             },
             writeCustomerString(doc) {
 

@@ -1,6 +1,6 @@
 
 export default {
-    buildDir: '../functions/nuxt',
+
     mode: 'spa',
     /*
     ** Headers of the page
@@ -31,7 +31,6 @@ export default {
     */
     plugins: [
         "~/plugins/jspdf",
-        "~/plugins/fs"
     ],
     /*
     ** Nuxt.js modules
