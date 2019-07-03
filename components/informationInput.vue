@@ -164,10 +164,12 @@
                 doc.addImage(img, "JPEG", 162, 0, 288, 144);
                 doc = this.writeCustomerString(doc);
                 doc = this.writeEquipmentString(doc);
-                //doc = this.writeReturnString(doc, this.myFontSize);
-                //doc = this.writeDateTimeStamp(doc, this.myFontSize);
-                //saves doc
-                doc.save(this.firstName + "_" + this.lastName + "_return.pdf");
+                console.log(this.yCoordinate);
+                doc = this.writeReturnString(doc);
+
+                doc = this.writeDateTimeStamp(doc);
+
+                doc.save(this.firstName + "_" + this.lastName + "_return.pdf");//saves doc
             },
             writeCustomerString(doc) {
 
@@ -226,21 +228,26 @@
             },
             writeReturnString(doc) {
                 let temp = document.getElementById("returnType");
-                temp = temp.options[temp.selectedIndex].text;
-
+                let returnReason = temp.options[temp.selectedIndex].text;
+                let explanation = document.getElementById("explanation").value;
                 let returnInformation = [
-	                {text: "Reason For Return: ", value: temp },
-	                {text: "Notes: ", value: document.getElementById("explanation").value}
+	                {text: "Reason For Return: ", value: returnReason },
+	                {text: "Notes: ", value: explanation}
                 ];
 
-                for (let i = 0, x = 72, y = 390 ; i < returnInformation.length ; i++){
+
+                for (let i = 0 ; i < returnInformation.length ; i++){
                     doc.setFontType('bold');
-                    doc.text(returnInformation[i].text, x, y);
+                    console.log(returnInformation[i].text);
+                    console.log("Left Margin for " + i + " " + this.leftMargin);
+                    console.log("ycord for " + i + " " + this.yCoordinate);
+                    doc.text(returnInformation[i].text , this.leftMargin, this.yCoordinate);
                     doc.setFontType('normal');
-                    let labelLength = doc.getStringUnitWidth(returnInformation[i].text) * fontSize;
-                    doc.text(returnInformation[i].value, labelLength + x + 5, y);
-                    y = y + 12;
+                    let labelLength = doc.getStringUnitWidth(returnInformation[i].text) * this.myFontSize;
+                    doc.text(returnInformation[i].value, labelLength + this.leftMargin + 5, this.yCoordinate);
+                    this.yCoordinate = this.yCoordinate + this.myFontSize + this.lineSpacing;
                 }
+                this.yCoordinate = this.yCoordinate + (this.myFontSize * 2);
                 return doc;
             },
             writeDateTimeStamp(doc) {
