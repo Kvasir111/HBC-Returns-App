@@ -1,18 +1,18 @@
 <template>
 	<div class="mt-2">
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title+version"></form-header>
-		<form class="card" @submit.prevent="exportPDF" id="informationInputForm">
+		<form class="card" @submit.prevent="exportPDF" id="informationInputForm" autocomplete="off">
 			<div class="text-center lg:block" id="customerInformation">
 				<div id="topCustomerRow">
-					<input class="customerInformationInput" id="firstName" placeholder="First Name" type="text" v-model="firstName" autocomplete="off">
-					<input class="customerInformationInput" id="lastName" placeholder="Last Name" type="text" v-model="lastName" autocomplete="off">
+					<input class="customerInformationInput" id="firstName" placeholder="First Name" type="text" v-model="firstName">
+					<input class="customerInformationInput" id="lastName" placeholder="Last Name" type="text" v-model="lastName">
 					<input class="customerInformationInput" id="accountNumber" min="0" placeholder="Account #"
-					       type="number" v-model="account" autocomplete="off">
+					       type="number" v-model="account">
 				</div>
 				<div id="bottomCustomerRow">
-					<input class="customerInformationInput" id="phoneNumber" placeholder="Phone #" type="tel" v-model="phone" minlength="10" maxlength="11" autocomplete="off">
+					<input class="customerInformationInput" id="phoneNumber" placeholder="Phone #" type="tel" v-model="phone" minlength="10" maxlength="11">
 					<input class="customerInformationInput" id="serviceAddress" placeholder="Service Address"
-					       type="text" v-model="address" autocomplete="off">
+					       type="text" v-model="address">
 					<input class="customerInformationInput" id="email" placeholder="Email" type="email" v-model="email">
 				</div>
 			</div>
