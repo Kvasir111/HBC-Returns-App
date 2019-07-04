@@ -97,7 +97,7 @@
             return {
                 //data for page
                 title: "HBC Returns WebApp",
-                version: " 1.1b",
+                version: " 1.2b",
                 subtitle: "Please enter information for return",
                 //data for customer information
                 firstName: "",
@@ -236,11 +236,11 @@
 
                 for (let i = 0 ; i < returnInformation.length ; i++){
                     doc.setFontType('bold');
-                    console.log(returnInformation[i].text);
+                    //console.log(returnInformation[i].text);
                     doc.text(returnInformation[i].text , this.leftMargin, this.yCoordinate);
                     doc.setFontType('normal');
                     let labelLength = doc.getStringUnitWidth(returnInformation[i].text) * this.myFontSize;
-                    console.log(labelLength);
+                    //console.log(labelLength);
                     doc.text(returnInformation[i].value, labelLength + this.leftMargin + 10, this.yCoordinate);
                     this.yCoordinate = this.yCoordinate + this.myFontSize + this.lineSpacing;
                 }
