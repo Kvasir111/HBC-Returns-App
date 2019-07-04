@@ -167,8 +167,8 @@
                 doc = this.writeEquipmentString(doc);
                 doc = this.writeReturnString(doc);
                 doc = this.writeDateTimeStamp(doc);
-                this.storeOnServer();
-                //doc.save(this.firstName + "_" + this.lastName + "_return.pdf");//saves doc
+                //this.storeOnServer();
+                doc.save(this.firstName + "_" + this.lastName + "_return.pdf");//saves doc
             },
             writeCustomerString(doc) {
 
@@ -230,19 +230,18 @@
                 let explanation = document.getElementById("explanation").value;
                 let returnInformation = [
 	                {text: "Reason For Return: ", value: returnReason },
-	                {text: "Notes: ", value: explanation}
+	                {text: this.returnType + ": ", value: explanation}
                 ];
 
 
                 for (let i = 0 ; i < returnInformation.length ; i++){
                     doc.setFontType('bold');
                     console.log(returnInformation[i].text);
-                    console.log("Left Margin for " + i + " " + this.leftMargin);
-                    console.log("ycord for " + i + " " + this.yCoordinate);
                     doc.text(returnInformation[i].text , this.leftMargin, this.yCoordinate);
                     doc.setFontType('normal');
                     let labelLength = doc.getStringUnitWidth(returnInformation[i].text) * this.myFontSize;
-                    doc.text(returnInformation[i].value, labelLength + this.leftMargin + 5, this.yCoordinate);
+                    console.log(labelLength);
+                    doc.text(returnInformation[i].value, labelLength + this.leftMargin + 10, this.yCoordinate);
                     this.yCoordinate = this.yCoordinate + this.myFontSize + this.lineSpacing;
                 }
                 this.yCoordinate = this.yCoordinate + (this.myFontSize * 2);
