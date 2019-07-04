@@ -36,7 +36,7 @@
 						<td class=""><input autocomplete="off"
 						                    class="border-b-2 border-blue-500 m-2 p-2 focus:outline-none inline"
 						                    id="CMAC/SN input" placeholder="CMAC" type="text" maxlength="12" minlength="12"
-						                    v-model="rows[index].equipmentNum"></td>
+						                    v-model="rows[index].equipmentNum" autocapitalize="characters"></td>
 						<td class="block m-2 p-2 align-text-bottom">
 							<label for="powerCord">Power Cord</label>
 							<input class="form-checkbox m-2 " id="powerCord" type="checkbox"
@@ -89,6 +89,10 @@
 <script>
     import FormHeader from "./formHeader";
     import jspdf from 'jspdf';
+    import  firebase from 'firebase/app';
+    import 'firebase/firestore';
+    import 'firebase/auth';
+    import 'firebase/storage';
 
     export default {
         name: "informationInput",
@@ -137,6 +141,7 @@
 	            leftMargin: 72,
 	            myFontSize: 12,
 	            lineSpacing: 1,
+	            fileName : this.fileName + "_" + this.lastName + "_return.pdf"
             }
         },
         methods: {
@@ -169,7 +174,7 @@
                 doc = this.writeReturnString(doc);
                 doc = this.writeDateTimeStamp(doc);
                 //this.storeOnServer();
-                doc.save(this.firstName + "_" + this.lastName + "_return.pdf");//saves doc
+                this.storeOnServer(doc);
             },
             writeCustomerString(doc) {
 
@@ -262,8 +267,28 @@
                 doc.text(myDate, leftAlign, bottomAlign - 12);
                 return doc;
             },
-	        //unused function to store the data someplace else
+	        //writes data to firestore
             storeOnServer(doc) {
+                const firebaseConfig = {
+                    apiKey: "AIzaSyA3LtyZvHmSe2ZGTa5AceFdpd7y-iBs16s",
+                    authDomain: "hbc-equipment-return.firebaseapp.com",
+                    databaseURL: "https://hbc-equipment-return.firebaseio.com",
+                    projectId: "hbc-equipment-return",
+                    storageBucket: "hbc-equipment-return.appspot.com",
+                    messagingSenderId: "131179393473",
+                    appId: "1:131179393473:web:161d1f444f71507c"
+                };
+
+                firebase.initializeApp(firebaseConfig);
+
+                const database = firebase.firestore();
+
+                let data = {
+                    "Customer Name": this.firstName + " " + this.lastName,
+                    "Account": this.account,
+                    "Service Address": this.address,
+                };
+                database.collection('returns').add(data)
             },
 	        //function to format MAC address for output
             formatMAC(macString){
@@ -280,7 +305,22 @@
                     }
 	            }
                 return splitString;
-            }
+            },
+            createDataObject(data){
+	            data = [{
+                    "Customer Name" : this.firstName + " " + this.lastName,
+		           "Account #" : this.account,
+		           "Service Address" : this.address,
+		            "Phone Number" : this.phoneNumber,
+		            "Email" : this.email,
+                }]
+            },
+	        buildEquipmentObject(){
+                let equipmentData = "";
+                for (let i = 0 ; i < this.rows.length ; i++){
+
+                }
+	        }
         }
     }
 </script>
