@@ -10,7 +10,7 @@
 					       type="number" v-model="account">
 				</div>
 				<div id="bottomCustomerRow">
-					<input class="customerInformationInput" id="phoneNumber" placeholder="Phone #" type="tel" v-model="phone">
+					<input class="customerInformationInput" id="phoneNumber" placeholder="Phone #" type="tel" v-model="phone" minlength="10" maxlength="11">
 					<input class="customerInformationInput" id="serviceAddress" placeholder="Service Address"
 					       type="text" v-model="address">
 					<input class="customerInformationInput" id="email" placeholder="Email" type="email" v-model="email">
@@ -35,7 +35,7 @@
 						</select></td>
 						<td class=""><input autocomplete="off"
 						                    class="border-b-2 border-blue-500 m-2 p-2 focus:outline-none inline"
-						                    id="CMAC/SN input" placeholder="CMAC/SN" type="text"
+						                    id="CMAC/SN input" placeholder="CMAC" type="text" maxlength="12" minlength="12"
 						                    v-model="rows[index].equipmentNum"></td>
 						<td class="block m-2 p-2 align-text-bottom">
 							<label for="powerCord">Power Cord</label>
@@ -75,7 +75,7 @@
 					</div>
 					<div class="text-center" id="notes">
 						<textarea class="mx-auto border-2 border-blue-500 text-center  p-2 m-4 max-w-full" cols="50"
-						          id="explanation" required
+						          id="explanation"
 						          rows="4"
 						          v-bind:placeholder="returnType"></textarea>
 					</div>
@@ -140,7 +140,7 @@
             }
         },
         methods: {
-
+            //ads row to equipment table
             addRow() {
                 let elem = document.createElement('tr');
                 this.rows.push({
@@ -153,6 +153,7 @@
             removeElement(index) {
                 this.rows.splice(index, 1);
             },
+	        //top level function to making the PDF, calls the 4 write functions to help improve sanity of making the output
             exportPDF() {
                 let doc = new jspdf({
                     orientation : "p",
@@ -203,7 +204,8 @@
                     doc.text("CMAC/SN: ", this.leftMargin, this.yCoordinate);
                     doc.setFontType('normal');
                     let labelLength2 = doc.getStringUnitWidth("CMAC/SN: ")  * this.myFontSize;
-                    doc.text(this.rows[i].equipmentNum, labelLength2 + this.leftMargin + 5, this.yCoordinate);
+                    let equipmentMAC = this.formatMAC(this.rows[i].equipmentNum);
+                    doc.text(equipmentMAC, labelLength2 + this.leftMargin + 5, this.yCoordinate);
                     this.yCoordinate = this.yCoordinate + this.myFontSize + this.lineSpacing; //increments y for spacing
                     if (this.rows[i].powerCord || this.rows[i].remote){
                         doc.setFontType('bold');
@@ -260,7 +262,24 @@
                 doc.text(myDate, leftAlign, bottomAlign - 12);
                 return doc;
             },
+	        //unused function to store the data someplace else
             storeOnServer(doc) {
+            },
+	        //function to format MAC address for output
+            formatMAC(macString){
+                macString = macString.toUpperCase(); //caps the whole string
+	            let str = macString.split("");
+	            let splitString = "";
+	            for (let i = 0 ; i < macString.length ; i+=2){
+	                if (i === (macString.length - 2)){
+                        console.log(str[i]+str[i+1]);
+	                    splitString += str[i] + str[i+1];
+	                }else {
+                        console.log(str[i]+str[i+1]);
+                        splitString += str[i] + str[i + 1] + ":";
+                    }
+	            }
+                return splitString;
             }
         }
     }
