@@ -283,7 +283,7 @@
                 firebase.initializeApp(firebaseConfig);
 
                 const database = firebase.firestore();
-
+                let writtenID = ""; //this is to hold the id of the record we just wrote
                 let data = {
                     "Customer Name": this.firstName + " " + this.lastName,
                     "Account": this.account,
@@ -294,13 +294,25 @@
                 database.collection('returns').add(data).then(function (docRef) {
 	                console.log("Wrote Document with ID: " + docRef.id);
 	                let myID = docRef.id;
+
                     for (let i = 0 ; i < myRows.length ; i++){
+                        console.log(myRows[i].device);
+                        console.log(myRows[i].equipmentNum);
+                        console.log(myRows[i].remote);
+                        console.log(myRows[i].powerCord);
+                        if (myRows[i].powerCord === undefined){
+                            myRows[i].powerCord = false;
+                        }
+                        if (myRows[i].remote === undefined){
+                            myRows[i].remote = false;
+                        }
                         let eData ={
                             "Device Type" : myRows[i].device,
                             "CMAC" : myRows[i].equipmentNum,
                             "Remote Included" : myRows[i].remote,
                             "Power Cord Included" : myRows[i].powerCord
                         };
+                        console.log("id = " +myID);
                         database.collection('returns').doc(myID).collection('Equipment').add(eData);
                     }
                 });
@@ -314,10 +326,8 @@
 	            let splitString = "";
 	            for (let i = 0 ; i < macString.length ; i+=2){
 	                if (i === (macString.length - 2)){
-                        console.log(str[i]+str[i+1]);
 	                    splitString += str[i] + str[i+1];
 	                }else {
-                        console.log(str[i]+str[i+1]);
                         splitString += str[i] + str[i + 1] + ":";
                     }
 	            }
