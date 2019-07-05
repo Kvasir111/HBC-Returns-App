@@ -173,8 +173,8 @@
                 doc = this.writeEquipmentString(doc);
                 doc = this.writeReturnString(doc);
                 doc = this.writeDateTimeStamp(doc);
-                //this.storeOnServer();
-                this.storeOnServer(doc);
+                //this.writeToFirestore();
+                this.writeToFirestore(doc);
             },
             writeCustomerString(doc) {
 
@@ -268,7 +268,7 @@
                 return doc;
             },
 	        //writes data to firestore
-            storeOnServer(doc) {
+            writeToFirestore(doc) {
                 let myRows = this.rows;
                 const firebaseConfig = {
                     apiKey: "AIzaSyA3LtyZvHmSe2ZGTa5AceFdpd7y-iBs16s",
@@ -329,34 +329,6 @@
 	            }
                 return splitString;
             },
-            createDataObject(data){
-	            data = [{
-                    "Customer Name" : this.firstName + " " + this.lastName,
-		           "Account #" : this.account,
-		           "Service Address" : this.address,
-		            "Phone Number" : this.phoneNumber,
-		            "Email" : this.email,
-                }]
-            },
-	        buildEquipmentObject(){
-                let topLevelData = [];
-                let data = [];
-                for (let i = 0 ; i < this.rows.length; i++){
-                    data += {key : "Device Type" , value : this.rows[i].device}
-                    data += {key: "CMAC" , value : this.formatMAC(this.rows[i].equipmentNum)}
-                    if (this.rows[i].powerCord){
-                        data += {key: "Remote Included" , value: "Remote Included"}
-                    } else if (this.rows[i].remote){
-                        data += {key: "Power Cord Included" , value: "Power Cord Included"}
-                    }
-                    topLevelData += data;
-                }
-                return topLevelData;
-	        },
-	        sendEquipmentData(database, id){
-
-	        }
-
         }
     }
 </script>
