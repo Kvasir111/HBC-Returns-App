@@ -296,23 +296,19 @@
 	                let myID = docRef.id;
 
                     for (let i = 0 ; i < myRows.length ; i++){
-                        console.log(myRows[i].device);
-                        console.log(myRows[i].equipmentNum);
-                        console.log(myRows[i].remote);
-                        console.log(myRows[i].powerCord);
                         if (myRows[i].powerCord === undefined){
                             myRows[i].powerCord = false;
                         }
                         if (myRows[i].remote === undefined){
                             myRows[i].remote = false;
                         }
+                        myRows[i].equipmentNum = this.formatMAC(myRows[i].equipmentNum);
                         let eData ={
                             "Device Type" : myRows[i].device,
                             "CMAC" : myRows[i].equipmentNum,
                             "Remote Included" : myRows[i].remote,
                             "Power Cord Included" : myRows[i].powerCord
                         };
-                        console.log("id = " +myID);
                         database.collection('returns').doc(myID).collection('Equipment').add(eData);
                     }
                 });
