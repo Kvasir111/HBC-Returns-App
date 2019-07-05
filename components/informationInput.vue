@@ -101,7 +101,7 @@
             return {
                 //data for page
                 title: "HBC Returns WebApp",
-                version: " 1.2b",
+                version: " 1.4b",
                 subtitle: "Please enter information for return",
                 //data for customer information
                 firstName: "",
@@ -269,6 +269,7 @@
             },
 	        //writes data to firestore
             storeOnServer(doc) {
+                let myRows = this.rows;
                 const firebaseConfig = {
                     apiKey: "AIzaSyA3LtyZvHmSe2ZGTa5AceFdpd7y-iBs16s",
                     authDomain: "hbc-equipment-return.firebaseapp.com",
@@ -287,8 +288,24 @@
                     "Customer Name": this.firstName + " " + this.lastName,
                     "Account": this.account,
                     "Service Address": this.address,
+	                "Email" : this.email,
+	                "Phone Number" : this.phone
                 };
-                database.collection('returns').add(data)
+                database.collection('returns').add(data).then(function (docRef) {
+	                console.log("Wrote Document with ID: " + docRef.id);
+	                let myID = docRef.id;
+                    for (let i = 0 ; i < myRows.length ; i++){
+                        let eData ={
+                            "Device Type" : myRows[i].device,
+                            "CMAC" : myRows[i].equipmentNum,
+                            "Remote Included" : myRows[i].remote,
+                            "Power Cord Included" : myRows[i].powerCord
+                        };
+                        database.collection('returns').doc(myID).collection('Equipment').add(eData);
+                    }
+                });
+
+	            //database.collection('returns').doc(id).collection('Equipment').add(this.buildEquipmentObject());
             },
 	        //function to format MAC address for output
             formatMAC(macString){
@@ -316,11 +333,24 @@
                 }]
             },
 	        buildEquipmentObject(){
-                let equipmentData = "";
-                for (let i = 0 ; i < this.rows.length ; i++){
-
+                let topLevelData = [];
+                let data = [];
+                for (let i = 0 ; i < this.rows.length; i++){
+                    data += {key : "Device Type" , value : this.rows[i].device}
+                    data += {key: "CMAC" , value : this.formatMAC(this.rows[i].equipmentNum)}
+                    if (this.rows[i].powerCord){
+                        data += {key: "Remote Included" , value: "Remote Included"}
+                    } else if (this.rows[i].remote){
+                        data += {key: "Power Cord Included" , value: "Power Cord Included"}
+                    }
+                    topLevelData += data;
                 }
+                return topLevelData;
+	        },
+	        sendEquipmentData(database, id){
+
 	        }
+
         }
     }
 </script>
