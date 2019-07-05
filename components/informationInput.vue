@@ -298,7 +298,7 @@
 	                "Email" : this.email,
 	                "Phone Number" : this.phone,
 	                "Reason For Return" : returnReason,
-	                rEEEE : explanation
+	                "Notes" : explanation
                 };
                 database.collection('returns').add(data).then(function (docRef) {
 	                console.log("Wrote Document with ID: " + docRef.id);
@@ -311,7 +311,6 @@
                         if (myRows[i].remote === undefined){
                             myRows[i].remote = false;
                         }
-                        myRows[i].equipmentNum = this.formatMAC(myRows[i].equipmentNum);
                         let eData ={
                             "Device Type" : myRows[i].device,
                             "CMAC" : myRows[i].equipmentNum,
