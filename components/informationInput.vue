@@ -283,13 +283,22 @@
                 firebase.initializeApp(firebaseConfig);
 
                 const database = firebase.firestore();
-                let writtenID = ""; //this is to hold the id of the record we just wrote
+                //let writtenID = ""; //this is to hold the id of the record we just wrote
+
+                let temp = document.getElementById("returnType");
+                let returnReason = temp.options[temp.selectedIndex].text;
+                let explanation = document.getElementById("explanation").value;
+
+                let rEEEE = this.returnType;
+
                 let data = {
                     "Customer Name": this.firstName + " " + this.lastName,
                     "Account": this.account,
                     "Service Address": this.address,
 	                "Email" : this.email,
-	                "Phone Number" : this.phone
+	                "Phone Number" : this.phone,
+	                "Reason For Return" : returnReason,
+	                rEEEE : explanation
                 };
                 database.collection('returns').add(data).then(function (docRef) {
 	                console.log("Wrote Document with ID: " + docRef.id);
