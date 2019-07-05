@@ -93,6 +93,7 @@
     import 'firebase/firestore';
     import 'firebase/auth';
     import 'firebase/storage';
+    import 'firebase/firebase-functions'
 
     export default {
         name: "informationInput",
@@ -337,6 +338,11 @@
 	            }
                 return splitString;
             },
+	        //funtion to fire off email
+	        fireOffEmail(){
+                const gmailEmail = firebase.functions.gmail.email;
+
+	        }
         }
     }
 </script>
