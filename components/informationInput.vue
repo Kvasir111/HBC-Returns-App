@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-2">
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title+version"></form-header>
-		<form class="card" @submit.prevent="fireOffEmail" id="informationInputForm" autocomplete="off">
+		<form @submit.prevent="exportPDF" autocomplete="off" class="card" id="informationInputForm">
 			<div class="text-center lg:block" id="customerInformation">
 				<div id="topCustomerRow">
 					<input class="customerInformationInput" id="firstName" placeholder="First Name" type="text" v-model="firstName">
@@ -89,7 +89,7 @@
 <script>
     import FormHeader from "./formHeader";
     import jspdf from 'jspdf';
-    import  firebase from 'firebase/app';
+    import firebase from 'firebase/app';
     import 'firebase/firestore';
     import 'firebase/auth';
     import 'firebase/storage';
@@ -174,8 +174,9 @@
                 doc = this.writeEquipmentString(doc);
                 doc = this.writeReturnString(doc);
                 doc = this.writeDateTimeStamp(doc);
-                //this.writeToFirestore();
+
                 this.writeToFirestore(doc);
+                doc.save(this.firstName + "_" + this.lastName + "_return.pdf")
             },
             writeCustomerString(doc) {
 
@@ -282,15 +283,11 @@
                 };
 
                 firebase.initializeApp(firebaseConfig);
-
                 const database = firebase.firestore();
                 //let writtenID = ""; //this is to hold the id of the record we just wrote
-
                 let temp = document.getElementById("returnType");
                 let returnReason = temp.options[temp.selectedIndex].text;
                 let explanation = document.getElementById("explanation").value;
-
-                let rEEEE = this.returnType;
 
                 let data = {
                     "Customer Name": this.firstName + " " + this.lastName,
@@ -340,7 +337,7 @@
             },
 	        //funtion to fire off email
 	        fireOffEmail(){
-               return "https://us-central1-hbc-equipment-return.cloudfunctions.net/sendmail?destination=rrowe222@gmail.com";
+                return "https://us-central1-hbc-equipment-return.cloudfunctions.net/sendmail?destination" + this.email;
 	        }
         }
     }
