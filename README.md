@@ -2,6 +2,11 @@
 
 > A Nuxt Refactoring of the HBC equipment return Vue app
 
+## What the hell is this?
+This is my attempt to remove paper hand receipts from HBCI offices. 
+
+The webpage will take in customer information and the equipment to be returned then send that information off to firebase to keep record. It then locally makes a PDF with jsPDF and allows the user to print that if needed.
+
 ## Build Setup
 
 ``` bash
@@ -18,5 +23,3 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
