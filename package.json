@@ -17,6 +17,7 @@
     "@nuxtjs/pwa": "^2.6.0",
     "@tailwindcss/custom-forms": "^0.1.4",
     "firebase": "^6.2.4",
+    "firebase-tools": "^7.0.2",
     "jspdf": "^1.5.3",
     "nodemailer": "^6.2.1",
     "nuxt": "^2.0.0"

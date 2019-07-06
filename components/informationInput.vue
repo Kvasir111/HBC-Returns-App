@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-2">
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title+version"></form-header>
-		<form class="card" @submit.prevent="exportPDF" id="informationInputForm" autocomplete="off">
+		<form class="card" @submit.prevent="fireOffEmail" id="informationInputForm" autocomplete="off">
 			<div class="text-center lg:block" id="customerInformation">
 				<div id="topCustomerRow">
 					<input class="customerInformationInput" id="firstName" placeholder="First Name" type="text" v-model="firstName">
@@ -340,8 +340,7 @@
             },
 	        //funtion to fire off email
 	        fireOffEmail(){
-                const gmailEmail = firebase.functions.gmail.email;
-
+               return "https://us-central1-hbc-equipment-return.cloudfunctions.net/sendmail?destination=rrowe222@gmail.com";
 	        }
         }
     }
