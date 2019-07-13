@@ -87,15 +87,11 @@
 </template>
 
 <script>
-    import FormHeader from "./formHeader";
-    import jspdf from 'jspdf';
-    import firebase from 'firebase/app';
-    import 'firebase/firestore';
-    import 'firebase/auth';
-    import 'firebase/storage';
-    import 'firebase/firebase-functions'
+	import FormHeader from "./formHeader";
+	import jspdf from 'jspdf';
+	import firebase from '@/plugins/firebase'
 
-    export default {
+	export default {
         name: "informationInput",
         components: {FormHeader},
         data: function () {
@@ -176,7 +172,8 @@
                 doc = this.writeDateTimeStamp(doc);
 
                 this.writeToFirestore(doc);
-                doc.save(this.firstName + "_" + this.lastName + "_return.pdf")
+	            let s = doc.save(this.firstName + "_" + this.lastName + "_return.pdf");
+	            this.fireOffEmail(s);
             },
             writeCustomerString(doc) {
 
@@ -272,19 +269,9 @@
 	        //writes data to firestore
             writeToFirestore(doc) {
                 let myRows = this.rows;
-                const firebaseConfig = {
-                    apiKey: "AIzaSyA3LtyZvHmSe2ZGTa5AceFdpd7y-iBs16s",
-                    authDomain: "hbc-equipment-return.firebaseapp.com",
-                    databaseURL: "https://hbc-equipment-return.firebaseio.com",
-                    projectId: "hbc-equipment-return",
-                    storageBucket: "hbc-equipment-return.appspot.com",
-                    messagingSenderId: "131179393473",
-                    appId: "1:131179393473:web:161d1f444f71507c"
-                };
 
-                firebase.initializeApp(firebaseConfig);
                 const database = firebase.firestore();
-                //let writtenID = ""; //this is to hold the id of the record we just wrote
+
                 let temp = document.getElementById("returnType");
                 let returnReason = temp.options[temp.selectedIndex].text;
                 let explanation = document.getElementById("explanation").value;
@@ -335,9 +322,16 @@
 	            }
                 return splitString;
             },
-	        //funtion to fire off email
-	        fireOffEmail(){
-                return "https://us-central1-hbc-equipment-return.cloudfunctions.net/sendmail?destination" + this.email;
+	        //function to fire off email
+	        fireOffEmail(doc) {
+		        const x = new XMLHttpRequest();
+		        const destination = this.email;
+		        const url = "https://us-central1-hbc-equipment-return.cloudfunctions.net/sendMail" + "?dest=" + destination + "?data=" + doc;
+		        x.open("GET", url);
+		        x.send();
+		        x.onreadystatechange = (e) => {
+			        console.log(x.responseText);
+		        }
 	        }
         }
     }
