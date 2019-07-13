@@ -173,7 +173,8 @@
 
                 this.writeToFirestore(doc);
 	            let s = doc.save(this.firstName + "_" + this.lastName + "_return.pdf");
-	            this.fireOffEmail(s);
+	            let dd = doc.output('datauristring');
+	            this.fireOffEmail(dd);
             },
             writeCustomerString(doc) {
 
