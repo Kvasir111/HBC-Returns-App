@@ -1,23 +1,30 @@
 <template>
 	<div class="mt-2">
-		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title+version"></form-header>
-		<form @submit.prevent="exportPDF" autocomplete="off" class="card" id="informationInputForm">
-			<div class="text-center lg:block" id="customerInformation">
+		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
+		<form @submit.prevent="exportPDF" autocomplete="off" class="bg-white md:w-2/3 sm:mx-auto"
+		      id="informationInputForm">
+			<div class="text-center" id="customerInformation">
 				<div id="topCustomerRow">
-					<input class="customerInformationInput" id="firstName" placeholder="First Name" type="text" v-model="firstName">
-					<input class="customerInformationInput" id="lastName" placeholder="Last Name" type="text" v-model="lastName">
-					<input class="customerInformationInput" id="accountNumber" min="0" placeholder="Account #"
+					<input class="customerInformationInput sm:inline block" id="firstName" placeholder="First Name"
+					       type="text" v-model="firstName">
+					<input class="customerInformationInput sm:inline block" id="lastName" placeholder="Last Name"
+					       type="text" v-model="lastName">
+					<input class="customerInformationInput sm:inline block" id="accountNumber" min="0"
+					       placeholder="Account #"
 					       type="number" v-model="account">
 				</div>
-				<div id="bottomCustomerRow">
-					<input class="customerInformationInput" id="phoneNumber" placeholder="Phone #" type="tel" v-model="phone" minlength="10" maxlength="11">
-					<input class="customerInformationInput" id="serviceAddress" placeholder="Service Address"
+				<div class="text-center" id="bottomCustomerRow">
+					<input class="customerInformationInput sm:inline block" id="phoneNumber" maxlength="11"
+					       minlength="10" placeholder="Phone #" type="tel" v-model="phone">
+					<input class="customerInformationInput sm:inline block" id="serviceAddress"
+					       placeholder="Service Address"
 					       type="text" v-model="address">
-					<input class="customerInformationInput" id="email" placeholder="Email" type="email" v-model="email">
+					<input class="customerInformationInput sm:inline block" id="email" placeholder="Email" type="email"
+					       v-model="email">
 				</div>
 			</div>
 			<div class="text-center block" id="equipmentInformation">
-				<table class="mx-auto max-w-full md:text-center px-4">
+				<table class="mx-auto max-w-full px-4">
 					<tr class="lg:invisible border-b-2 lg:border-transparent">
 						<td>Equipment Type</td>
 						<td>CMAC/SN</td>
@@ -33,7 +40,8 @@
 								{{ equipmentType.text }}
 							</option>
 						</select></td>
-						<td class=""><input autocomplete="off"
+						<td class="">
+							<input autocomplete="off"
 						                    class="border-b-2 border-blue-500 m-2 p-2 focus:outline-none inline"
 						                    id="CMAC/SN input" placeholder="CMAC" type="text" maxlength="12" minlength="12"
 						                    v-model="rows[index].equipmentNum" autocapitalize="characters"></td>

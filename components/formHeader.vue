@@ -1,5 +1,5 @@
 <template>
-	<div class="cardHeader">
+	<div class="cardHeader sm:w-2/3">
 		<h1 class="cardHeaderTitle">{{cardTitle}}</h1>
 		<h2 class="cardHeaderSubtitle">{{cardSubtitle}}</h2>
 	</div>
