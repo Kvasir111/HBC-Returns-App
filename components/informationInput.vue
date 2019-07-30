@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-2">
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
-		<form @submit.prevent="exportPDF" autocomplete="off" class="bg-white md:w-2/3 sm:mx-auto"
+		<form @submit.prevent="exportPDF" autocomplete="off" class="bg-white gradientCard md:w-2/3 sm:mx-auto"
 		      id="informationInputForm">
 			<div class="mx-auto text-center mb-2" id="customerInformation">
 				<input :key="index" :placeholder="customerDataInputs.text"
@@ -11,16 +11,17 @@
 			</div>
 			<div class="text-center block" id="equipmentInformation">
 				<table class="mx-auto max-w-full px-4">
-					<tr class="lg:invisible border-b-2 lg:border-transparent">
+					<tr class="lg:visible lg:border-b-2 border-none invisible">
 						<td>Equipment Type</td>
 						<td>CMAC/SN</td>
 						<td>Accessories</td>
 					</tr>
 					<tbody class="">
 					<tr class="" v-for="(row, index) in rows">
-						<td class=""><select class="border-b-2 border-blue-500 px-2 py-2 m-2 focus:outline-none"
-						                     id="equipmentType"
-						                     required v-model="rows[index].device">
+						<td class=""><select
+								class="border-b-2 border-blue-500 px-2 py-2 m-2 focus:outline-none bg-transparent"
+								id="equipmentType"
+								required v-model="rows[index].device">
 							<option disabled selected>Select a device type</option>
 							<option :key="index" v-for="(equipmentType,index) in equipmentTypes">
 								{{ equipmentType.text }}
@@ -28,9 +29,9 @@
 						</select></td>
 						<td class="">
 							<input autocomplete="off"
-						                    class="border-b-2 border-blue-500 m-2 p-2 focus:outline-none inline"
-						                    id="CMAC/SN input" placeholder="CMAC" type="text" maxlength="12" minlength="12"
-						                    v-model="rows[index].equipmentNum" autocapitalize="characters"></td>
+							       class="border-b-2 border-blue-500 m-2 p-2 focus:outline-none inline bg-transparent"
+							       id="CMAC/SN input" placeholder="CMAC" type="text" maxlength="12" minlength="12"
+							       v-model="rows[index].equipmentNum" autocapitalize="characters"></td>
 						<td class="block m-2 p-2 align-text-bottom">
 							<label for="powerCord">Power Cord</label>
 							<input class="form-checkbox m-2 " id="powerCord" type="checkbox"
@@ -73,7 +74,7 @@
 						          rows="4"
 						          v-bind:placeholder="returnType"></textarea>
 					</div>
-					<input class="submitButton hover:cursor-pointer" type="submit" value="Submit">
+					<input class="hover:cursor-pointer" id="sButton" type="submit" value="Submit">
 				</div>
 			</div>
 		</form>
@@ -346,5 +347,10 @@
 	input[type=number]::-webkit-outer-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
+	}
+
+	#sButton {
+		background: rgb(23, 145, 224);
+		background: linear-gradient(335deg, rgba(23, 145, 224, 1) 0%, rgba(219, 241, 0, 1) 100%);
 	}
 </style>
