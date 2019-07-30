@@ -1,11 +1,12 @@
 <template>
 	<div class="mt-2">
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
-		<form @submit.prevent="exportPDF" autocomplete="off" class="bg-white gradientCard md:w-2/3 sm:mx-auto"
+		<form @submit.prevent="exportPDF" autocomplete="off"
+		      class="rounded-b-lg gradientCard md:w-2/3 sm:mx-auto shadow-lg"
 		      id="informationInputForm">
 			<div class="mx-auto text-center mb-2" id="customerInformation">
 				<input :key="index" :placeholder="customerDataInputs.text"
-				       class=" text-center block mx-auto border-b-2 border-blue-500 p-2 sm:inline-block sm:m-2"
+				       class="gradientInput sm:inline-block sm:m-2"
 				       type="text" v-for="(customerDataInputs, index) in customerDataInputs"
 				       v-model="customerDataInputs.value">
 			</div>
@@ -74,7 +75,7 @@
 						          rows="4"
 						          v-bind:placeholder="returnType"></textarea>
 					</div>
-					<input class="hover:cursor-pointer" id="sButton" type="submit" value="Submit">
+					<input class="submitButton hover:cursor-pointer" id="sButton" type="submit" value="Submit">
 				</div>
 			</div>
 		</form>
@@ -349,7 +350,7 @@
 		margin: 0;
 	}
 
-	#sButton {
+	.gradientCard {
 		background: rgb(23, 145, 224);
 		background: linear-gradient(335deg, rgba(23, 145, 224, 1) 0%, rgba(219, 241, 0, 1) 100%);
 	}
