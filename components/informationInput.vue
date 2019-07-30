@@ -3,25 +3,11 @@
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
 		<form @submit.prevent="exportPDF" autocomplete="off" class="bg-white md:w-2/3 sm:mx-auto"
 		      id="informationInputForm">
-			<div class="text-center" id="customerInformation">
-				<div id="topCustomerRow">
-					<input class="customerInformationInput sm:inline block" id="firstName" placeholder="First Name"
-					       type="text" v-model="firstName">
-					<input class="customerInformationInput sm:inline block" id="lastName" placeholder="Last Name"
-					       type="text" v-model="lastName">
-					<input class="customerInformationInput sm:inline block" id="accountNumber" min="0"
-					       placeholder="Account #"
-					       type="number" v-model="account">
-				</div>
-				<div class="text-center" id="bottomCustomerRow">
-					<input class="customerInformationInput sm:inline block" id="phoneNumber" maxlength="11"
-					       minlength="10" placeholder="Phone #" type="tel" v-model="phone">
-					<input class="customerInformationInput sm:inline block" id="serviceAddress"
-					       placeholder="Service Address"
-					       type="text" v-model="address">
-					<input class="customerInformationInput sm:inline block" id="email" placeholder="Email" type="email"
-					       v-model="email">
-				</div>
+			<div class="mx-auto text-center mb-2" id="customerInformation">
+				<input :key="index" :placeholder="customerDataInputs.text"
+				       class=" text-center block mx-auto border-b-2 border-blue-500 p-2 sm:inline-block sm:m-2"
+				       type="text" v-for="(customerDataInputs, index) in customerDataInputs"
+				       v-model="customerDataInputs.value">
 			</div>
 			<div class="text-center block" id="equipmentInformation">
 				<table class="mx-auto max-w-full px-4">
@@ -106,15 +92,23 @@
             return {
                 //data for page
                 title: "HBC Returns WebApp",
-                version: " 1.4b",
                 subtitle: "Please enter information for return",
                 //data for customer information
-                firstName: "",
-                lastName: "",
-                address: "",
-                phone: "",
-                account: "",
-                email: "",
+	            /*                firstName: "",
+								lastName: "",
+								address: "",
+								phone: "",
+								account: "",
+								email: "",*/
+	            customerDataInputs: [
+		            {text: "First Name", value: ""},
+		            {text: "Last Name", value: ""},
+		            {text: "Account #", value: ""},
+		            {text: "Phone #", value: ""},
+		            {text: "Service Address", value: ""},
+		            {text: "Email", value: ""},
+
+	            ],
                 //data for return reasons
                 returnType: 'Select Reason',
                 returnOptions: [
@@ -180,18 +174,19 @@
                 doc = this.writeDateTimeStamp(doc);
 
                 this.writeToFirestore(doc);
-	            let s = doc.save(this.firstName + "_" + this.lastName + "_return.pdf");
-	            let dd = doc.output('datauristring');
-	            this.fireOffEmail(dd);
+	            let s = doc.save(this.customerDataInputs[0].value + "_" + this.customerDataInputs[1].value + "_return.pdf");
             },
             writeCustomerString(doc) {
 
                 let customerInformation = [
-		            {text: "Customer Name: " , value: this.firstName + " " + this.lastName},
-	                {text: "Account #: " , value: this.account},
-	                {text: "Phone #: " , value: this.phone},
-	                {text: "Address: " , value: this.address},
-	                {text: "Email: ", value: this.email},
+	                {
+		                text: "Customer Name: ",
+		                value: this.customerDataInputs[0].value + " " + this.customerDataInputs[1].value
+	                },
+	                {text: "Account #: ", value: this.customerDataInputs[2].value},
+	                {text: "Phone #: ", value: this.customerDataInputs[3].value},
+	                {text: "Address: ", value: this.customerDataInputs[4].value},
+	                {text: "Email: ", value: this.customerDataInputs[5].value},
 	            ];
 
                 for (let i = 0 ; i < customerInformation.length ; i++){
@@ -286,11 +281,11 @@
                 let explanation = document.getElementById("explanation").value;
 
                 let data = {
-                    "Customer Name": this.firstName + " " + this.lastName,
-                    "Account": this.account,
-                    "Service Address": this.address,
-	                "Email" : this.email,
-	                "Phone Number" : this.phone,
+	                "Customer Name": this.customerDataInputs[0].value + " " + this.customerDataInputs[1].value,
+	                "Account": this.customerDataInputs[2].value,
+	                "Phone Number": this.customerDataInputs[3].value,
+	                "Service Address": this.customerDataInputs[4].value,
+	                "Email": this.customerDataInputs[5].value,
 	                "Reason For Return" : returnReason,
 	                "Notes" : explanation
                 };

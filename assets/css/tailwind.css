@@ -8,9 +8,6 @@ html{
 	font-family: 'Open Sans', sans-serif;
 	background-color: #00a0df;
 }
-.cardInput{
-	@apply block px-4 py-2 mx-auto m-1 border border-gray-400 rounded mx-auto text-center
-}
 .equipmentInput{
 	@apply px-4 py-2 mx-auto m-1 border border-gray-400 rounded mx-auto text-center
 }
@@ -30,7 +27,7 @@ html{
 	@apply block mx-auto px-4 py-2 rounded font-bold text-white
 }
 .customerInformationInput{
-	@apply border-b-2 border-blue-500 m-4 px-2
+	@apply border-b-2 border-blue-500
 }
 .card{
 	font-family: 'Open Sans', sans-serif;
@@ -38,7 +35,7 @@ html{
 }
 .cardHeader{
 	font-family: 'Open Sans', sans-serif;
-	@apply text-left text-black p-4 bg-gray-300 w-full mx-auto
+	@apply text-left text-black p-4 bg-gray-300 w-full
 }
 .cardHeaderTitle{
 	@apply text-2xl font-bold
