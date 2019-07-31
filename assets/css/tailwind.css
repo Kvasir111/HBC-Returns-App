@@ -6,13 +6,7 @@
 @tailwind utilities;
 html{
 	font-family: 'Open Sans', sans-serif;
-}
-
-.gradientInput {
-	@apply text-white bg-transparent border-white border-2 rounded-full text-center block mx-auto p-2
-}
-.equipmentInput{
-	@apply px-4 py-2 mx-auto m-1 border border-gray-400 rounded mx-auto text-center
+	background: #28BFDB;
 }
 .removeEquipmentButton{
 	color: #EF424C;
@@ -23,22 +17,27 @@ html{
 }
 .submitButton{
 	background-color: #28BFDB;
-	@apply mx-auto block py-2 px-4 rounded text-white
+	@apply mx-auto block py-2 px-4 rounded text-white font-bold
 }
 .addEquipmentButton{
 	background-color: #9C27B0;
 	@apply block mx-auto px-4 py-2 rounded font-bold text-white
 }
-.customerInformationInput{
-	@apply border-b-2 border-blue-500
+
+.cardInput {
+	@apply border-b-2 border-blue-500 px-4 py-2
 }
 .card{
 	font-family: 'Open Sans', sans-serif;
-	@apply bg-white shadow-md w-2/3 mx-auto p-2
+	@apply bg-white shadow-md mx-auto p-2 rounded-b-lg
+}
+
+.cardSelect {
+	@apply border-b-2 border-blue-500 px-4 py-2
 }
 .cardHeader{
 	font-family: 'Open Sans', sans-serif;
-	@apply text-left text-black p-4 bg-gray-300 w-full
+	@apply text-left rounded-t-lg text-black p-4 bg-gray-300 w-full
 }
 .cardHeaderTitle{
 	@apply text-2xl font-bold
