@@ -31,6 +31,7 @@ export default {
     */
     plugins: [
         "~/plugins/jspdf",
+        {src: '@/plugins/firebase.js'}
     ],
     /*
     ** Nuxt.js modules
