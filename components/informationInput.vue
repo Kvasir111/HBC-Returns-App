@@ -35,11 +35,13 @@
 							       maxlength="12" minlength="12" placeholder="CMAC"
 							       type="text" v-model="rows[index].equipmentNum"></td>
 						<td class="block m-2 p-2 align-text-bottom">
-							<label for="powerCord">Power Cord</label>
-							<input class="form-checkbox m-2 " id="powerCord" type="checkbox"
-							       v-model="rows[index].powerCord">
+							<div class="checkbox-wrapper">
+								<label for="powerCord">Power Cord</label>
+								<input class="m-2 form-checkbox" id="powerCord" type="checkbox"
+								       v-model="rows[index].powerCord">
+							</div>
 							<label for="remote">Remote</label>
-							<input class="form-checkbox m-2" id="remote" type="checkbox"
+							<input class="m-2 form-checkbox" id="remote" type="checkbox"
 							       v-model="rows[index].remote">
 						</td>
 						<td class="">
