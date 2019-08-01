@@ -6,7 +6,7 @@
 		      id="informationInputForm">
 			<div class="mx-auto text-center mb-2" id="customerInformation">
 				<input :key="index" :placeholder="customerDataInputs.text"
-				       class=" cardInput sm:inline-block sm:m-2 focus:outline-none focus:text-black focus:bg-white"
+				       class=" cardInput sm:inline-block sm:m-2 focus:outline-none focus:text-black focus:border-blue-800"
 				       type="text" v-for="(customerDataInputs, index) in customerDataInputs"
 				       v-model="customerDataInputs.value">
 			</div>
@@ -31,17 +31,18 @@
 						<td class="">
 							<input autocapitalize="characters"
 							       autocomplete="off"
-							       class="cardInput inline-flex m-2 focus:outline-none" id="CMAC/SN input"
+							       class="cardInput inline-flex m-2 focus:outline-none focus:border-blue-800"
+							       id="CMAC/SN input"
 							       maxlength="12" minlength="12" placeholder="CMAC"
 							       type="text" v-model="rows[index].equipmentNum"></td>
 						<td class="block m-2 p-2 align-text-bottom">
 							<div class="checkbox-wrapper">
 								<label for="powerCord">Power Cord</label>
-								<input class="m-2 form-checkbox" id="powerCord" type="checkbox"
+								<input class="m-2 form-checkbox text-blue-400" id="powerCord" type="checkbox"
 								       v-model="rows[index].powerCord">
 							</div>
 							<label for="remote">Remote</label>
-							<input class="m-2 form-checkbox" id="remote" type="checkbox"
+							<input class="m-2 form-checkbox text-blue-400" id="remote" type="checkbox"
 							       v-model="rows[index].remote">
 						</td>
 						<td class="">
