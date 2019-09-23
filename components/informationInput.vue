@@ -1,12 +1,12 @@
 <template>
 	<div class="mt-2">
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
-		<form @submit.prevent="exportPDF" autocomplete="off"
+		<form onsubmit="exportPDF" autocomplete="off"
 		      class="card md:w-2/3 md:mx-auto"
 		      id="informationInputForm">
 			<div class="mx-auto text-center mb-2" id="customerInformation">
 				<input :key="index" :placeholder="customerDataInputs.text"
-				       class=" cardInput sm:inline-block sm:m-2 focus:outline-none focus:text-black focus:border-blue-800"
+				       class="cardInput block mx-auto sm:inline-block sm:m-2 focus:outline-none focus:text-black focus:border-blue-800"
 				       type="text" v-for="(customerDataInputs, index) in customerDataInputs"
 				       v-model="customerDataInputs.value">
 			</div>
