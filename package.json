@@ -15,16 +15,16 @@
 	"@nuxt/webpack": "^2.8.1",
 	"@nuxtjs/axios": "^5.3.6",
 	"@nuxtjs/pwa": "^2.6.0",
-	"@tailwindcss/custom-forms": "^0.1.4",
-	"firebase": "^6.2.4",
-	"firebase-tools": "^7.0.2",
+	"firebase": "^6.3.3",
+	"firebase-tools": "^7.2.2",
 	"jspdf": "^1.5.3",
-	"nodemailer": "^6.2.1",
+	"nodemailer": "^6.3.0",
 	"nuxt": "^2.0.0"
   },
   "devDependencies": {
+	"@tailwindcss/custom-forms": "^0.1.4",
 	"nodemon": "^1.18.9",
-	"tailwindcss": "^1.0.0",
-	"webpack-cli": "^3.3.5"
+	"tailwindcss": "^1.0.6",
+	"webpack-cli": "^3.3.6"
   }
 }
