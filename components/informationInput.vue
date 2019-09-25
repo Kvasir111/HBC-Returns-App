@@ -12,7 +12,7 @@
 				>
 			</div>
 			<div class="text-center mx-auto" id="equipmentInformation">
-				<div class="bg-red-200" v-for="(row, index) in rows">
+				<div v-for="(row, index) in rows">
 					<select
 							id="equipmentType" required v-model="rows[index].device"
 					        class="cardInput text-black bg-white focus:outline-none">
