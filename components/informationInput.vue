@@ -2,16 +2,16 @@
 	<div class="mt-2">
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
 		<form onsubmit="exportPDF" autocomplete="off"
-		      class="card md:w-2/3 md:mx-auto"
+		      class="card w-full md:w-2/3 md:mx-auto"
 		      id="informationInputForm">
 			<div class="mx-auto text-center mb-2" id="customerInformation">
 				<input :key="index" :placeholder="customerDataInputs.text"
-				       class="cardInput block mx-auto sm:inline-block sm:m-2 focus:outline-none focus:text-black focus:border-blue-800"
+				       class="cardInput flex mx-auto sm:inline-block sm:m-2 focus:outline-none focus:text-black focus:border-blue-800"
 				       type="text" v-for="(customerDataInputs, index) in customerDataInputs"
 				       v-model="customerDataInputs.value">
 			</div>
 			<div class="text-center block" id="equipmentInformation">
-				<table class="mx-auto max-w-full px-4">
+				<table class="mx-auto table max-w-full px-4">
 					<tr class="lg:visible lg:border-b-2 border-none invisible">
 						<td>Equipment Type</td>
 						<td>CMAC/SN</td>
@@ -20,7 +20,7 @@
 					<tbody class="">
 					<tr class="" v-for="(row, index) in rows">
 						<td class=""><select
-								class="cardInput text-black bg-white focus:outline-none"
+								class="cardInput block text-black bg-white focus:outline-none"
 								id="equipmentType"
 								required v-model="rows[index].device">
 							<option disabled selected>Select a device type</option>
