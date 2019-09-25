@@ -5,57 +5,41 @@
 		      class="card w-full md:w-2/3 md:mx-auto"
 		      id="informationInputForm">
 			<div class="mx-auto text-center mb-2" id="customerInformation">
-				<input :key="index" :placeholder="customerDataInputs.text"
+				<input :key="index" autocomplete="off" :placeholder="customerDataInputs.text"
 				       class="cardInput flex mx-auto sm:inline-block sm:m-2 focus:outline-none focus:text-black focus:border-blue-800"
 				       type="text" v-for="(customerDataInputs, index) in customerDataInputs"
-				       v-model="customerDataInputs.value">
+				       v-model="customerDataInputs.value"
+				>
 			</div>
-			<div class="text-center block" id="equipmentInformation">
-				<table class="mx-auto table max-w-full px-4">
-					<tr class="lg:visible lg:border-b-2 border-none invisible">
-						<td>Equipment Type</td>
-						<td>CMAC/SN</td>
-						<td>Accessories</td>
-					</tr>
-					<tbody class="">
-					<tr class="" v-for="(row, index) in rows">
-						<td class=""><select
-								class="cardInput block text-black bg-white focus:outline-none"
-								id="equipmentType"
-								required v-model="rows[index].device">
-							<option disabled selected>Select a device type</option>
-							<option :key="index" v-for="(equipmentType,index) in equipmentTypes">
-								{{ equipmentType.text }}
-							</option>
-						</select></td>
-						<td class="">
-							<input autocapitalize="characters"
-							       autocomplete="off"
-							       class="cardInput inline-flex m-2 focus:outline-none focus:border-blue-800"
-							       id="CMAC/SN input"
-							       maxlength="12" minlength="12" placeholder="CMAC"
-							       type="text" v-model="rows[index].equipmentNum"></td>
-						<td class="block m-2 p-2 align-text-bottom">
-							<div class="">
-								<label for="powerCord">Power Cord</label>
-								<input class="m-2 form-checkbox text-blue-400" id="powerCord" type="checkbox"
-								       v-model="rows[index].powerCord">
-								<label for="remote">Remote</label>
-								<input class="m-2 form-checkbox text-blue-400" id="remote" type="checkbox"
-								       v-model="rows[index].remote">
-							</div>
-
-						</td>
-						<td class="">
-							<input class="removeEquipmentButton "
-							       style="cursor: pointer"
-							       type="button"
-							       v-on:click="removeElement(index)"
-							       value="X">
-						</td>
-					</tr>
-					</tbody>
-				</table>
+			<div class="text-center mx-auto" id="equipmentInformation">
+				<div class="bg-red-200" v-for="(row, index) in rows">
+					<select
+							id="equipmentType" required v-model="rows[index].device"
+					        class="cardInput text-black bg-white focus:outline-none">
+						<option disabled selected> Select a Device Type</option>
+						<option :key="index" v-for="(equipmentType, index) in equipmentTypes">
+							{{equipmentType.text}}
+						</option>
+					</select>
+					<input autocapitalize="characters" autocomplete="off" class="cardInput inline-flex m-2 focus:outline-none focus:border-blue-800"
+					id="CMAC/SN input"
+					maxlength="12"
+					minlength="12"
+					placeholder="CMAC"
+					type="text"
+					v-model="rows[index].equipmentNum">
+					<label for="powerCord">Power Cord</label>
+					<input class="m-2 form-checkbox text-blue-400" id="powerCord" type="checkbox"
+					       v-model="rows[index].powerCord">
+					<label for="remote">Remote</label>
+					<input class="m-2 form-checkbox text-blue-400" id="remote" type="checkbox"
+					       v-model="rows[index].remote">
+					<input class="removeEquipmentButton"
+					       style="cursor: pointer"
+					       type="button"
+					       v-on:click="removeElement(index)"
+					       value="X">
+				</div>
 				<div>
 					<button class="addEquipmentButton"
 					        v-on:click.prevent="addRow">Add +
@@ -75,7 +59,7 @@
 						</select>
 					</div>
 					<div class="text-center" id="notes">
-						<textarea class="cardInput border-2 mx-auto text-center  focus:outline-none p-2 m-4 max-w-full"
+						<textarea class="myTextInput focus:outline-none"
 						          cols="50"
 						          id="explanation"
 						          rows="4"
