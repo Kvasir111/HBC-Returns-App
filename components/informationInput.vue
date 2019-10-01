@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-2">
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
-		<form onsubmit="exportPDF" autocomplete="off"
+		<form v-on:submit="exportPDF" autocomplete="off"
 		      class="card w-full md:w-2/3 md:mx-auto"
 		      id="informationInputForm">
 			<div class="mx-auto text-center mb-2" id="customerInformation">
@@ -80,6 +80,9 @@
 	export default {
 		name: "informationInput",
 		components: {FormHeader},
+		created(){
+		this.addRow();
+		},
 		data: function () {
 			return {
 				//data for page
@@ -112,10 +115,6 @@
 					{text: "DVR/STB", value: "DVT/STB"}
 				],
 				rows: [
-					{device: ""},
-					{powerCord: ""},
-					{remote: ""},
-					{equipmentNum: "",}
 				],
 				equipmentItem: [],
 				//data for headings
@@ -145,6 +144,7 @@
 			},
 			//top level function to making the PDF, calls the 4 write functions to help improve sanity of making the output
 			exportPDF() {
+
 				let doc = new jspdf({
 					orientation: "p",
 					unit: "pt",
