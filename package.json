@@ -1,43 +1,30 @@
 {
-  "name": "equipment-returns",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "babel": "babel --presets es2015 js/main.js -o build/main.bundle.js",
-    "start": "http-server",
-    "webpack": "webpack"
-  },
-  "dependencies": {
-    "@tailwindcss/custom-forms": "^0.1.4",
-    "firebase": "^6.2.3",
-    "firestore-export-import": "^0.2.3",
-    "jquery": "^3.4.1",
-    "vue": "^2.6.10",
-    "vue-head": "^2.1.1",
-    "vue-router": "^3.0.6"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "@vue/cli-service": "^3.7.0",
-    "babel-loader": "^8.0.6",
-    "glob-all": "^3.1.0",
-    "jspdf": "^1.5.3",
-    "purgecss-webpack-plugin": "^1.5.0",
-    "tailwindcss": "^1.0.1",
-    "vue-template-compiler": "^2.5.21",
-    "webpack": "^4.35.0",
-    "webpack-cli": "^3.3.5"
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+	"name": "HBC-Equipment-Return",
+	"version": "1.0.0",
+	"description": "A Nuxt Refactoring of the HBC equipment return Vue app",
+	"author": "varangian111",
+	"private": true,
+	"scripts": {
+		"dev": "nuxt",
+		"build": "nuxt build",
+		"start": "npm run shell",
+		"generate": "nuxt generate",
+		"webpack": "webpack"
+	},
+	"dependencies": {
+		"@nuxt/webpack": "^2.8.1",
+		"@nuxtjs/axios": "^5.3.6",
+		"@nuxtjs/pwa": "^2.6.0",
+		"firebase": "^6.3.3",
+		"firebase-tools": "^7.2.2",
+		"jspdf": "^1.5.3",
+		"nodemailer": "^6.3.0",
+		"nuxt": "^2.0.0"
+	},
+	"devDependencies": {
+		"@tailwindcss/custom-forms": "^0.1.4",
+		"nodemon": "^1.18.9",
+		"tailwindcss": "^1.0.6",
+		"webpack-cli": "^3.3.6"
+	}
 }

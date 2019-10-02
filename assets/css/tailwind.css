@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html{
+	font-family: 'Open Sans', sans-serif;
+	background: #28BFDB;
+}
+.removeEquipmentButton{
+	color: #EF424C;
+	background-color: transparent;
+	font-family: 'Fredoka One', cursive;
+	font-weight: 300;
+	@apply mx-auto py-2 px-4 rounded text-xl
+}
+.submitButton{
+	background-color: #28BFDB;
+	@apply mx-auto block py-2 px-4 rounded text-white font-bold
+}
+.addEquipmentButton{
+	background-color: #9C27B0;
+	@apply block mx-auto px-4 py-2 rounded font-bold text-white
+}
+
+.cardInput {
+	@apply border-b-2 border-blue-500 px-4 py-2 bg-transparent
+}
+.myTextInput{
+	@apply border-2 mx-auto text-center border-blue-500 p-2 m-4 max-w-full bg-transparent rounded
+}
+.card{
+	font-family: 'Open Sans', sans-serif;
+	background: #f6f5f1;
+	@apply shadow-md mx-auto p-2 rounded-b-lg
+}
+
+.cardSelect {
+	@apply border-b-2 border-blue-500 px-4 py-2
+}
+.cardHeader{
+	font-family: 'Open Sans', sans-serif;
+	@apply text-left rounded-t-lg text-black p-4 bg-gray-300 w-full
+}
+.cardHeaderTitle{
+	@apply text-2xl font-bold
+}
+.cardHeaderSubtitle{
+	@apply font-bold text-gray-600
+}

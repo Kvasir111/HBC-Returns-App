@@ -1,10 +1,25 @@
-# HBC Equipment Return App
+# HBC-Equipment-Return
 
-## What the Hell is this
-This is a small Vue.js app to take in customer information and export it as a PDF as to 
-eliminate the need for paper hand receipts. This will standardize the way HBC takes in returned equipment leading
-to less confusion and hassle for the customer and business.
+> A Nuxt Refactoring of the HBC equipment return Vue app
 
-## Build instructions
-`npm run build`
-Copy contents of "dist" to the root of your web directory
+## What the hell is this?
+This is my attempt to remove paper hand receipts from HBCI offices. 
+
+The webpage will take in customer information and the equipment to be returned then send that information off to firebase to keep record. It then locally makes a PDF with jsPDF and allows the user to print that if needed.
+
+## Build Setup
+
+``` bash
+# install dependencies
+$ npm run install
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+
+# build for production and launch server
+$ npm run build
+$ npm run start
+
+# generate static project
+$ npm run generate
+```
