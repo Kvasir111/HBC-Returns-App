@@ -4,9 +4,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 html{
 	font-family: 'Open Sans', sans-serif;
-	background: #28BFDB;
+	background: #212121;
 }
 .removeEquipmentButton{
 	color: #EF424C;
