@@ -129,7 +129,7 @@
 			}
 		},
 		methods: {
-			//ads row to equipment table
+			//adds row to equipment table
 			addRow() {
 				let elem = document.createElement('tr');
 				this.rows.push({
@@ -144,7 +144,6 @@
 			},
 			//top level function to making the PDF, calls the 4 write functions to help improve sanity of making the output
 			exportPDF() {
-
 				let doc = new jspdf({
 					orientation: "p",
 					unit: "pt",
@@ -159,8 +158,8 @@
 				doc = this.writeReturnString(doc);
 				doc = this.writeDateTimeStamp(doc);
 
-				this.writeToFirestore(doc);
-				let s = doc.save(this.customerDataInputs[0].value + "_" + this.customerDataInputs[1].value + "_return.pdf");
+				//this.writeToFirestore(doc);
+				let s = doc.output('dataurlnewwindow');
 			},
 			writeCustomerString(doc) {
 
@@ -235,9 +234,10 @@
 					//console.log(returnInformation[i].text);
 					doc.text(returnInformation[i].text, this.leftMargin, this.yCoordinate);
 					doc.setFontType('normal');
-					let labelLength = doc.getStringUnitWidth(returnInformation[i].text) * this.myFontSize;
+					//let labelLength = doc.getStringUnitWidth(returnInformation[i].text) * this.myFontSize;
 					//console.log(labelLength);
-					doc.text(returnInformation[i].value, labelLength + this.leftMargin + 10, this.yCoordinate);
+					this.yCoordinate = this.yCoordinate + this.myFontSize;
+					doc.text(returnInformation[i].value, this.leftMargin , this.yCoordinate);
 					this.yCoordinate = this.yCoordinate + this.myFontSize + this.lineSpacing;
 				}
 				this.yCoordinate = this.yCoordinate + (this.myFontSize * 2);

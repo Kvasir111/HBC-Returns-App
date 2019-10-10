@@ -16,9 +16,7 @@
 		"@nuxtjs/axios": "^5.3.6",
 		"@nuxtjs/pwa": "^2.6.0",
 		"firebase": "^6.3.3",
-		"firebase-tools": "^7.2.2",
 		"jspdf": "^1.5.3",
-		"nodemailer": "^6.3.0",
 		"nuxt": "^2.0.0"
 	},
 	"devDependencies": {
