@@ -158,7 +158,7 @@
 				doc = this.writeReturnString(doc);
 				doc = this.writeDateTimeStamp(doc);
 
-				//this.writeToFirestore(doc);
+				this.writeToFirestore(doc);
 				let s = doc.output('dataurlnewwindow');
 			},
 			writeCustomerString(doc) {
@@ -232,12 +232,19 @@
 				for (let i = 0; i < returnInformation.length; i++) {
 					doc.setFontType('bold');
 					//console.log(returnInformation[i].text);
+					//this writes the label "Return reason"
 					doc.text(returnInformation[i].text, this.leftMargin, this.yCoordinate);
 					doc.setFontType('normal');
-					//let labelLength = doc.getStringUnitWidth(returnInformation[i].text) * this.myFontSize;
-					//console.log(labelLength);
+					//this makes a new line for the entered return reason
 					this.yCoordinate = this.yCoordinate + this.myFontSize;
-					doc.text(returnInformation[i].value, this.leftMargin , this.yCoordinate);
+					// multiline
+					let ptsPerInch = 72;
+					let oneLineHeight = this.myFontSize * this. myFontSize/ ptsPerInch;
+					let maxlineWidth = 595 - this.leftMargin * 2;
+					let reason = returnInformation[i].value;
+					let reasonlines = doc.splitTextToSize(reason, maxlineWidth);
+
+					doc.text(reasonlines, this.leftMargin , this.yCoordinate);
 					this.yCoordinate = this.yCoordinate + this.myFontSize + this.lineSpacing;
 				}
 				this.yCoordinate = this.yCoordinate + (this.myFontSize * 2);
