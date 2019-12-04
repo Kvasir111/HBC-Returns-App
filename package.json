@@ -1,31 +1,41 @@
 {
-	"name": "HBC-Equipment-Return",
-	"version": "1.0.0",
-	"description": "A Nuxt Refactoring of the HBC equipment return Vue app",
-	"author": "varangian111",
-	"private": true,
-	"scripts": {
-		"dev": "nuxt",
-		"build": "nuxt build",
-		"start": "npm run shell",
-		"generate": "nuxt generate",
-		"webpack": "webpack"
-	},
-	"dependencies": {
-		"@nuxt/webpack": "^2.10.2",
-		"@nuxtjs/axios": "^5.8.0",
-		"@nuxtjs/pwa": "^2.6.0",
-		"firebase": "^6.6.2",
-		"jspdf": "^1.5.3",
-		"nuxt": "^2.10.2"
-	},
-	"devDependencies": {
-		"@tailwindcss/custom-forms": "^0.1.4",
-		"firebase-admin": "^8.8.0",
-		"firebase-functions": "^3.3.0",
-		"node-fetch": "^2.6.0",
-		"nodemon": "^1.19.4",
-		"tailwindcss": "^1.1.4",
-		"webpack-cli": "^3.3.10"
-	}
+  "name": "sutting",
+  "version": "2.0.0",
+  "description": "A Nuxt Refactoring of the HBC equipment return Vue app",
+  "author": "varangian111",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "npm run shell",
+    "generate": "nuxt generate",
+    "webpack": "webpack"
+  },
+  "dependencies": {
+    "@nuxt/webpack": "^2.10.2",
+    "@nuxtjs/axios": "^5.8.0",
+    "@nuxtjs/pwa": "^2.6.0",
+    "firebase": "^6.6.2",
+    "jspdf": "^1.5.3",
+    "nuxt": "^2.10.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/custom-forms": "^0.1.4",
+    "firebase-admin": "^8.8.0",
+    "firebase-functions": "^3.3.0",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^1.19.4",
+    "tailwindcss": "^1.1.4",
+    "webpack-cli": "^3.3.10"
+  },
+  "main": "nuxt.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kvasir111/HBC-Returns-App.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kvasir111/HBC-Returns-App/issues"
+  },
+  "homepage": "https://github.com/Kvasir111/HBC-Returns-App#readme"
 }
