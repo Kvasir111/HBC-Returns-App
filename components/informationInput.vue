@@ -157,7 +157,23 @@
 				doc = this.writeEquipmentString(doc);
 				doc = this.writeReturnString(doc);
 				doc = this.writeDateTimeStamp(doc);
+				//storage testing
+				/*
+				let storage = firebase.storage();
+				let storageRef = storage.ref();
+				let root = storageRef.root;
+				let name = this.customerDataInputs[0].value + "_" + this.customerDataInputs[1].value + ".pdf";
+				let pdfRef = storageRef.child(this.name);
+				let pdfStorageRef = pdfRef.child('pdfs/' + this.name);
 
+				pdfRef.name = pdfStorageRef.name;
+				pdfRef.fullPath = pdfStorageRef.fullPath;
+				let myBlob = new Blob(doc);
+				pdfRef.put(myBlob).then(function (snapshot) {
+					console.log("Uploaded!")
+				});
+
+				 */
 				this.writeToFirestore(doc);
 				let s = doc.output('dataurlnewwindow');
 			},
