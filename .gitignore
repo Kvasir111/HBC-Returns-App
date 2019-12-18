@@ -89,3 +89,5 @@ sw.*
 
 #secrets
 serviceAccountKey.json
+
+package-lock.json

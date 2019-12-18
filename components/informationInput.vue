@@ -85,9 +85,10 @@
 		},
 		data: function () {
 			return {
-				//data for page
+				//data for page heading
 				title: "HBC Returns WebApp",
 				subtitle: "Please enter information for return",
+
 				//array for data inputs
 				customerDataInputs: [
 					{text: "First Name", value: ""},
@@ -114,9 +115,12 @@
 					{text: "Gateway", value: "Gateway"},
 					{text: "DVR/STB", value: "DVT/STB"}
 				],
+				//contains the rows of data entered for the equipment
 				rows: [
 				],
+				//for looping
 				equipmentItem: [],
+
 				//data for headings
 				image: "https://www.hbci.com/wp-content/uploads/footer-logo.png",
 				altImage: "https://bloximages.chicago2.vip.townnews.com/winonadailynews.com/content/tncms/assets/v3/editorial/4/44/4444c7a3-8473-5f32-be6e-c72a804dc6ee/59d7d6ed20146.image.jpg",
@@ -125,7 +129,7 @@
 				leftMargin: 72,
 				myFontSize: 12,
 				lineSpacing: 1,
-				fileName: this.fileName + "_" + this.lastName + "_return.pdf"
+				fileName: this.fileName + "_return.pdf"
 			}
 		},
 		methods: {
@@ -174,7 +178,7 @@
 				});
 
 				 */
-				this.writeToFirestore(doc);
+				//this.writeToFirestore(doc);
 				let s = doc.output('dataurlnewwindow');
 			},
 			writeCustomerString(doc) {
@@ -191,24 +195,41 @@
 				];
 
 				for (let i = 0; i < customerInformation.length; i++) {
+					//sets the font type to bold for the label
 					doc.setFontType('bold');
+
+					//writes the value with the offset of the left margin
 					doc.text(customerInformation[i].text, this.leftMargin, this.yCoordinate);
 					doc.setFontType('normal');
+
+					//gets the length of the label by getting the length of the string written * the font size in points
 					let labelLength = doc.getStringUnitWidth(customerInformation[i].text) * this.myFontSize;
 					doc.text(customerInformation[i].value, labelLength + this.leftMargin + 5, this.yCoordinate);
-					this.yCoordinate = this.yCoordinate + this.myFontSize + this.lineSpacing; //increments y by text size + 1 for better spacing
+
+					//increments y by text size + 1 for better spacing
+					this.yCoordinate = this.yCoordinate + this.myFontSize + this.lineSpacing;
 				}
 				this.yCoordinate = this.yCoordinate + (this.myFontSize * 2);
 				return doc;
 			},
 			writeEquipmentString(doc) {
 				for (let i = 0; i < this.rows.length; i++) {
+					//sets the font to bold for the label
 					doc.setFontType('bold');
+
+					//writes the label with the offset of the margin
 					doc.text("Device Type: ", this.leftMargin, this.yCoordinate);
+
+					//resets the font type for writing a value
 					doc.setFontType('normal');
+
+					//sets the length of the label by getting the length of the label * the font size in pts
 					let labelLength = doc.getStringUnitWidth("Device: type: ") * this.myFontSize;
+					//writes the device information to the doc + the offset
 					doc.text(this.rows[i].device, labelLength + this.leftMargin + 5, this.yCoordinate);
-					this.yCoordinate = this.yCoordinate + this.myFontSize + this.lineSpacing; //increments y for spacing
+
+					//increments y for spacing
+					this.yCoordinate = this.yCoordinate + this.myFontSize + this.lineSpacing;
 					doc.setFontType('bold');
 					doc.text("CMAC/SN: ", this.leftMargin, this.yCoordinate);
 					doc.setFontType('normal');
