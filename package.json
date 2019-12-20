@@ -2,7 +2,7 @@
   "name": "suttung",
   "version": "2.0.0",
   "description": "A Nuxt Refactoring of the HBC equipment return Vue app",
-  "author": "varangian111",
+  "author": "Ryan Rowe",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -14,17 +14,18 @@
   "dependencies": {
     "@nuxt/webpack": "^2.10.2",
     "@nuxtjs/axios": "^5.8.0",
-    "@nuxtjs/pwa": "^2.6.0",
-    "firebase": "^6.6.2",
+    "@nuxtjs/pwa": "^3.0.0-beta.19",
+    "axios": "^0.19.0",
+    "firebase": "^7.6.1",
     "jspdf": "^1.5.3",
     "nuxt": "^2.10.2"
   },
   "devDependencies": {
-    "@tailwindcss/custom-forms": "^0.1.4",
-    "firebase-admin": "^8.8.0",
+    "@tailwindcss/custom-forms": "^0.2.1",
+    "firebase-admin": "^8.9.0",
     "firebase-functions": "^3.3.0",
     "node-fetch": "^2.6.0",
-    "nodemon": "^1.19.4",
+    "nodemon": "^2.0.2",
     "tailwindcss": "^1.1.4",
     "webpack-cli": "^3.3.10"
   },

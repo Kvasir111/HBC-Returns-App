@@ -76,6 +76,7 @@
 	import FormHeader from "./formHeader";
 	import jspdf from 'jspdf';
 	import firebase from '@/plugins/firebase'
+	import axios from 'axios'
 
 	export default {
 		name: "informationInput",
@@ -185,24 +186,25 @@
 				//let s = doc.output('dataurlnewwindow');
 			},
 			sendMail(mailDoc){
-			const Http = new XMLHttpRequest();
-			let URL = 'http://us-central1-hbc-equipment-return.cloudfunctions.net/sendMail';
-			//gets the destination to send to the customer and appends to the request
-			URL += "?dest=" + this.customerDataInputs[5].value;
+				//the URL for the cloud function
+				let mailFunction = 'http://us-central1-hbc-equipment-return.cloudfunctions.net/sendMail';
 
-			//appends the data URI to the request, generated above
-			URL += "?data=" + mailDoc.output('blob');
-			//prints the URL for testing
-			console.log("URL = " + URL);
+				if (this.customerDataInputs[5].value == null){
+					//if the customer does not have an email or doesn't want to provide one, the destination will default to the sending email
+					mailFunction += "?dest=" + "hbcireturns@gmail.com"
+				}else{
+					//gets the input from the form and sets the destination to the customers email
+					mailFunction += "?dest=" + this.customerDataInputs[5].value;
+				}
+				//appends the generated PDF to the function call
+				mailFunction += "?data="+ mailDoc;
 
-			//fires off the request
-			Http.open("GET", URL);
-			Http.send();
-
-			Http.onreadystatechange=(e) => {
-				console.log(Http.responseText)
-			}
-
+				//axios request to the cloud function
+				axios.get(mailFunction).then( function (response) {
+					console.log(response);
+				}).catch(function (error) {
+					console.log(error)
+				})
 			},
 			writeCustomerString(doc) {
 
@@ -380,16 +382,6 @@
 				return splitString;
 			},
 			//function to fire off email
-			fireOffEmail(doc) {
-				const x = new XMLHttpRequest();
-				const destination = this.email;
-				const url = "https://us-central1-hbc-equipment-return.cloudfunctions.net/sendMail" + "?dest=" + destination + "?data=" + doc;
-				x.open("GET", url);
-				x.send();
-				x.onreadystatechange = (e) => {
-					console.log(x.responseText);
-				}
-			}
 		}
 	}
 </script>
@@ -399,10 +391,5 @@
 	input[type=number]::-webkit-outer-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
-	}
-
-	.gradientCard {
-		background: rgb(23, 145, 224);
-		background: linear-gradient(335deg, rgba(23, 145, 224, 1) 0%, rgba(219, 241, 0, 1) 100%);
 	}
 </style>
