@@ -179,7 +179,30 @@
 
 				 */
 				//this.writeToFirestore(doc);
-				let s = doc.output('dataurlnewwindow');
+				let mailDoc = doc;
+				console.log(mailDoc);
+				this.sendMail(mailDoc);
+				//let s = doc.output('dataurlnewwindow');
+			},
+			sendMail(mailDoc){
+			const Http = new XMLHttpRequest();
+			let URL = 'http://us-central1-hbc-equipment-return.cloudfunctions.net/sendMail';
+			//gets the destination to send to the customer and appends to the request
+			URL += "?dest=" + this.customerDataInputs[5].value;
+
+			//appends the data URI to the request, generated above
+			URL += "?data=" + mailDoc.output('blob');
+			//prints the URL for testing
+			console.log("URL = " + URL);
+
+			//fires off the request
+			Http.open("GET", URL);
+			Http.send();
+
+			Http.onreadystatechange=(e) => {
+				console.log(Http.responseText)
+			}
+
 			},
 			writeCustomerString(doc) {
 
