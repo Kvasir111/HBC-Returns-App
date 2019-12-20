@@ -197,7 +197,7 @@
 					mailFunction += "?dest=" + this.customerDataInputs[5].value;
 				}
 				//appends the generated PDF to the function call
-				mailFunction += "?data="+ mailDoc;
+				//mailFunction += "?data="+ mailDoc;
 
 				//axios request to the cloud function
 				axios.get(mailFunction).then( function (response) {
