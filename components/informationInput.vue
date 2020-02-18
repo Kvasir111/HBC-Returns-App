@@ -1,17 +1,20 @@
 <template>
-	<div class="mt-2">
+	<div class="flex h-screen">
+	<div class="m-auto">
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
 		<form v-on:submit="exportPDF" autocomplete="off"
 		      class="card"
 		      id="informationInputForm">
-			<div class="mx-auto text-center mb-2" id="customerInformation">
+			<div class="mx-auto flex-wrap mb-2 text-center" id="customerInformation">
+				<h1 class="font-bold border-b-2 border-black">Enter Customer Information</h1>
 				<input :key="index" autocomplete="off" :placeholder="customerDataInputs.text"
-				       class="cardInput flex mx-auto sm:inline-block sm:m-2 focus:outline-none focus:text-black focus:border-blue-800"
+				       class="w-full text-center md:w-1/4 m-2 mx-auto md:mx-2 md:text-left border-blue-500 p-2 bg-transparent border-b-2 focus:outline-none focus:text-black focus:border-blue-800"
 				       type="text" v-for="(customerDataInputs, index) in customerDataInputs"
 				       v-model="customerDataInputs.value"
 				>
 			</div>
 			<div class="text-center mx-auto" id="equipmentInformation">
+				<h1 class="font-bold border-b-2 border-black mb-2 ">Enter Equipment Information</h1>
 				<div v-for="(row, index) in rows">
 					<select
 							id="equipmentType" required v-model="rows[index].device"
@@ -28,6 +31,7 @@
 					placeholder="CMAC"
 					type="text"
 					v-model="rows[index].equipmentNum">
+					<div>
 					<label for="powerCord">Power Cord</label>
 					<input class="m-2 form-checkbox text-blue-400" id="powerCord" type="checkbox"
 					       v-model="rows[index].powerCord">
@@ -40,6 +44,7 @@
 					       v-on:click="removeElement(index)"
 					       value="X">
 				</div>
+				</div>
 				<div>
 					<button class="addEquipmentButton"
 					        v-on:click.prevent="addRow">Add +
@@ -49,7 +54,7 @@
 			<div id="returnInformation">
 				<div>
 					<div class="text-center" id="return-information">
-						<select class="cardInput focus:outline-none" id="returnType" required
+						<select class="cardInput mb-2 focus:outline-none" id="returnType" required
 						        v-model="returnType">
 							<option disabled selected>Select Reason</option>
 							<option :key="index" v-bind:value="returnOption.value"
@@ -58,9 +63,8 @@
 							</option>
 						</select>
 					</div>
-					<div class="text-center" id="notes">
-						<textarea class="myTextInput focus:outline-none"
-						          cols="50"
+					<div class="text-center mx-auto" id="notes">
+						<textarea class="w-full text-center md:text-left md:w-2/3 p-2 border-2 border-blue-500 rounded bg-transparent focus:outline-none"
 						          id="explanation"
 						          rows="4"
 						          v-bind:placeholder="returnType"></textarea>
@@ -69,6 +73,7 @@
 				</div>
 			</div>
 		</form>
+	</div>
 	</div>
 </template>
 
@@ -166,49 +171,34 @@
 				doc = this.writeReturnString(doc);
 				//calls some time functions to write the time/data stamp on the bottom of the doc
 				doc = this.writeDateTimeStamp(doc);
-				//storage testing
-				/*
-				let storage = firebase.storage();
-				let storageRef = storage.ref();
-				let root = storageRef.root;
-				let name = this.customerDataInputs[0].value + "_" + this.customerDataInputs[1].value + ".pdf";
-				let pdfRef = storageRef.child(this.name);
-				let pdfStorageRef = pdfRef.child('pdfs/' + this.name);
-
-				pdfRef.name = pdfStorageRef.name;
-				pdfRef.fullPath = pdfStorageRef.fullPath;
-				let myBlob = new Blob(doc);
-				pdfRef.put(myBlob).then(function (snapshot) {
-					console.log("Uploaded!")
-				});
-
-				 */
-				//this.writeToFirestore(doc);
-				let mailDoc = doc;
-				this.sendMail(mailDoc);
-				//let s = doc.output('dataurlnewwindow');
+				let s = doc.output('dataurlnewwindow');
+				this.saveToFirebase()
 			},
-			sendMail(mailDoc){
-				//the URL for the cloud function
-				let mailFunction = 'http://us-central1-hbc-equipment-return.cloudfunctions.net/sendMail';
+			saveToFirebase(){
+				let database = firebase.firestore();
+				let data = this.createDataObject();
 
-				if (this.customerDataInputs[5].value == null){
-					//if the customer does not have an email or doesn't want to provide one, the destination will default to the sending email
-					mailFunction += "?dest=" + "hbcireturns@gmail.com"
-				}else{
-					//gets the input from the form and sets the destination to the customers email
-					mailFunction += "?dest=" + this.customerDataInputs[5].value;
+			},
+			createDataObject(){
+				let customer = {
+					'First Name' : this.customerDataInputs['First Name'],
+					'Last Name' : this.customerDataInputs['Last Name'],
+					'Account #': this.customerDataInputs['Account #'],
+					'Phone #' : this.customerDataInputs['Phone #'],
+					'Service Address': this.customerDataInputs['Service Address'],
+					'Email': this.customerDataInputs['Email']
+				};
+				let equipment = this.rows;
+
+				let temp = document.getElementById('returnType');
+				let rr = temp.options[temp.selectedIndex].text;
+				let explanation = document.getElementById('explanation').value;
+				let return_information = {
+					'Return Type' : rr,
+					'Return Explanation' : explanation
 				}
 
-				mailDoc = mailDoc.output('dataurlnewwindow');
-				mailFunction += "&?data=" + mailDoc;
-
-				//axios request to the cloud function
-				axios.get(mailFunction).then( function (response) {
-					console.log(response);
-				}).catch(function (error) {
-					console.log(error)
-				})
+				return {customer, equipment, return_information};
 			},
 			writeCustomerString(doc) {
 
@@ -329,48 +319,6 @@
 				doc.text(myDate, leftAlign, bottomAlign - 12);
 				return doc;
 			},
-			//writes data to firestore
-			writeToFirestore(doc) {
-				let myRows = this.rows;
-
-				const database = firebase.firestore();
-
-				let temp = document.getElementById("returnType");
-				let returnReason = temp.options[temp.selectedIndex].text;
-				let explanation = document.getElementById("explanation").value;
-
-				let data = {
-					"Customer Name": this.customerDataInputs[0].value + " " + this.customerDataInputs[1].value,
-					"Account": this.customerDataInputs[2].value,
-					"Phone Number": this.customerDataInputs[3].value,
-					"Service Address": this.customerDataInputs[4].value,
-					"Email": this.customerDataInputs[5].value,
-					"Reason For Return": returnReason,
-					"Notes": explanation
-				};
-				database.collection('returns').add(data).then(function (docRef) {
-					console.log("Wrote Document with ID: " + docRef.id);
-					let myID = docRef.id;
-
-					for (let i = 0; i < myRows.length; i++) {
-						if (myRows[i].powerCord === undefined) {
-							myRows[i].powerCord = false;
-						}
-						if (myRows[i].remote === undefined) {
-							myRows[i].remote = false;
-						}
-						let eData = {
-							"Device Type": myRows[i].device,
-							"CMAC": myRows[i].equipmentNum,
-							"Remote Included": myRows[i].remote,
-							"Power Cord Included": myRows[i].powerCord
-						};
-						database.collection('returns').doc(myID).collection('Equipment').add(eData);
-					}
-				});
-
-				//database.collection('returns').doc(id).collection('Equipment').add(this.buildEquipmentObject());
-			},
 			//function to format MAC address for output
 			formatMAC(macString) {
 				macString = macString.toUpperCase(); //caps the whole string
@@ -385,7 +333,6 @@
 				}
 				return splitString;
 			},
-			//function to fire off email
 		}
 	}
 </script>
@@ -395,5 +342,12 @@
 	input[type=number]::-webkit-outer-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
+	}
+
+	.myTextInput{
+		@apply border-2 border-blue-500 p-2 m-4 max-w-full bg-transparent rounded
+	}
+	.myTextArea{
+		@apply border-2 border-blue-500 bg-transparent rounded
 	}
 </style>
