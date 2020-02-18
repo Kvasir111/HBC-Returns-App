@@ -2,7 +2,7 @@
 	<div class="mt-2">
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
 		<form v-on:submit="exportPDF" autocomplete="off"
-		      class="card w-full md:w-2/3 md:mx-auto"
+		      class="card"
 		      id="informationInputForm">
 			<div class="mx-auto text-center mb-2" id="customerInformation">
 				<input :key="index" autocomplete="off" :placeholder="customerDataInputs.text"

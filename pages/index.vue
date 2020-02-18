@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 	<img class="mx-auto mb-2" v-bind:alt="logoAlt" v-bind:src="image" width="200px">
-    <information-input></information-input>
+    <information-input class="w-10/12 md:w-2/3 mx-auto"></information-input>
 	</div>
 </template>
 
