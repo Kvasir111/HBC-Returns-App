@@ -341,7 +341,8 @@
 		-webkit-appearance: none;
 		margin: 0;
 	}
-	h1{
+	h1 {
+		@apply mb-3 text-center text-2xl;
 		font-family: 'Montserrat', sans-serif;
 	}
 
