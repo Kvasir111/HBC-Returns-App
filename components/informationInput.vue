@@ -1,6 +1,6 @@
 <template>
-	<div class="flex h-screen">
-	<div class="m-auto">
+	<div class="">
+	<div class="">
 		<form-header v-bind:card-subtitle="subtitle" v-bind:card-title="title"></form-header>
 		<form v-on:submit="exportPDF" autocomplete="off"
 		      class="card"
@@ -18,43 +18,40 @@
 				<div v-for="(row, index) in rows">
 					<select
 							id="equipmentType" required v-model="rows[index].device"
-					        class="cardInput text-black bg-white focus:outline-none">
+					        class="mb-2 border-b-2 border-blue-500 p-2 bg-transparent focus:outline-none">
 						<option disabled selected> Select a Device Type</option>
 						<option :key="index" v-for="(equipmentType, index) in equipmentTypes">
 							{{equipmentType.text}}
 						</option>
 					</select>
-					<input autocapitalize="characters" autocomplete="off" class="cardInput inline-flex m-2 focus:outline-none focus:border-blue-800"
+					<input autocapitalize="characters" autocomplete="off" class="mb-2 border-b-2 border-blue-500 p-2 bg-transparent inline-flex m-2 focus:outline-none focus:border-blue-800"
 					id="CMAC/SN input"
 					maxlength="12"
 					minlength="12"
 					placeholder="CMAC"
 					type="text"
 					v-model="rows[index].equipmentNum">
-					<div>
+					<div class="md:inline align-baseline">
 					<label for="powerCord">Power Cord</label>
 					<input class="m-2 form-checkbox text-blue-400" id="powerCord" type="checkbox"
 					       v-model="rows[index].powerCord">
 					<label for="remote">Remote</label>
 					<input class="m-2 form-checkbox text-blue-400" id="remote" type="checkbox"
 					       v-model="rows[index].remote">
-					<input class="removeEquipmentButton"
-					       style="cursor: pointer"
-					       type="button"
-					       v-on:click="removeElement(index)"
-					       value="X">
+						<button v-on:click="removeElement(index)" type="button"><x_button class="inline" color="#E81123" size="28"/></button>
 				</div>
 				</div>
 				<div>
-					<button class="addEquipmentButton"
-					        v-on:click.prevent="addRow">Add +
+					<button class="" v-on:click.prevent="addRow">
+						<add-button color="#00CC6A" size="28"/>
 					</button>
 				</div>
 			</div>
 			<div id="returnInformation">
 				<div>
+					<h1 class="font-bold border-b-2 border-black mb-2 text-center ">Return Information</h1>
 					<div class="text-center" id="return-information">
-						<select class="cardInput mb-2 focus:outline-none" id="returnType" required
+						<select class="mb-2 border-b-2 border-blue-500 p-2 bg-transparent focus:outline-none" id="returnType" required
 						        v-model="returnType">
 							<option disabled selected>Select Reason</option>
 							<option :key="index" v-bind:value="returnOption.value"
@@ -81,11 +78,12 @@
 	import FormHeader from "./formHeader";
 	import jspdf from 'jspdf';
 	import firebase from '@/plugins/firebase'
-	import axios from 'axios'
+	import X_button from "./x_button";
+	import AddButton from "./addButton";
 
 	export default {
 		name: "informationInput",
-		components: {FormHeader},
+		components: {AddButton, X_button, FormHeader},
 		created(){
 		this.addRow();
 		},
@@ -348,6 +346,9 @@
 		@apply border-2 border-blue-500 p-2 m-4 max-w-full bg-transparent rounded
 	}
 	.myTextArea{
-		@apply border-2 border-blue-500 bg-transparent rounded
+		@apply border-2 border-blue-500 bg-transparent rounded;
+	}
+	.dropdown{
+		@apply border-b-2 border-blue-500 p-2 bg-transparent;
 	}
 </style>
