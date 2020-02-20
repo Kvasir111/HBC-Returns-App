@@ -6,7 +6,7 @@
 		      class="card"
 		      id="informationInputForm">
 			<div class="mx-auto flex-wrap mb-2 text-center" id="customerInformation">
-				<h1 class="font-bold border-b-2 border-black">Enter Customer Information</h1>
+				<h1 class="font-bold text-xl text-left p-2">Customer</h1>
 				<input :key="index" autocomplete="off" :placeholder="customerDataInputs.text"
 				       class="w-full text-center md:w-1/4 m-2 mx-auto md:mx-2 md:text-left border-blue-500 p-2 bg-transparent border-b-2 focus:outline-none focus:text-black focus:border-blue-800"
 				       type="text" v-for="(customerDataInputs, index) in customerDataInputs"
@@ -14,7 +14,7 @@
 				>
 			</div>
 			<div class="text-center mx-auto" id="equipmentInformation">
-				<h1 class="font-bold border-b-2 border-black mb-2 ">Enter Equipment Information</h1>
+				<h1 class="font-bold text-xl text-left p-2">Equipment</h1>
 				<div v-for="(row, index) in rows">
 					<select
 							id="equipmentType" required v-model="rows[index].device"
@@ -48,8 +48,8 @@
 				</div>
 			</div>
 			<div id="returnInformation">
+				<h1 class="font-bold text-xl text-left p-2">Return</h1>
 				<div>
-					<h1 class="font-bold border-b-2 border-black mb-2 text-center ">Return Information</h1>
 					<div class="text-center" id="return-information">
 						<select class="mb-2 border-b-2 border-blue-500 p-2 bg-transparent focus:outline-none" id="returnType" required
 						        v-model="returnType">
@@ -90,7 +90,7 @@
 		data: function () {
 			return {
 				//data for page heading
-				title: "HBC Returns WebApp",
+				title: "HBCI returns",
 				subtitle: "Please enter information for return",
 
 				//array for data inputs
@@ -341,14 +341,8 @@
 		-webkit-appearance: none;
 		margin: 0;
 	}
+	h1{
+		font-family: 'Montserrat', sans-serif;
+	}
 
-	.myTextInput{
-		@apply border-2 border-blue-500 p-2 m-4 max-w-full bg-transparent rounded
-	}
-	.myTextArea{
-		@apply border-2 border-blue-500 bg-transparent rounded;
-	}
-	.dropdown{
-		@apply border-b-2 border-blue-500 p-2 bg-transparent;
-	}
 </style>

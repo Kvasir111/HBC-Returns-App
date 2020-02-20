@@ -1,7 +1,7 @@
 <template>
 	<div class="cardHeader">
-		<h1 class="cardHeaderTitle">{{cardTitle}}</h1>
-		<h2 class="cardHeaderSubtitle">{{cardSubtitle}}</h2>
+		<h1 class="cardHeaderTitle fontMont font-bold">{{cardTitle}}</h1>
+		<h2 class="cardHeaderSubtitle fontMont">{{cardSubtitle}}</h2>
 	</div>
 </template>
 

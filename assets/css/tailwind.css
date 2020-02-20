@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500,500i,700,700i&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html{
 	font-family: 'Open Sans', sans-serif;
-	background: #212121;
+}
+.fontMont{
+	font-family: 'Montserrat', sans-serif;
 }
 .removeEquipmentButton{
 	color: #EF424C;
@@ -39,7 +40,7 @@ html{
 	@apply text-left rounded-t-lg text-black p-4 bg-gray-300 w-full
 }
 .cardHeaderTitle{
-	@apply text-2xl font-bold
+	@apply text-2xl font-bold;
 }
 .cardHeaderSubtitle{
 	@apply font-bold text-gray-600
